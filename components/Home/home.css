@@ -1,6 +1,6 @@
 #home {
   background: linear-gradient(#000000d5, #0000008f),
-    url("../../public/landing.png");
+    url("/landing.png");
   background-attachment: fixed;
   width: 100%;
   height: calc(100vh + 150px);

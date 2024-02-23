@@ -42,7 +42,7 @@ export const LoginScreen = () =>{
                     
                     else {navigate('/homeUser')}  
                 }
-                else alert("Invalid email or password")
+                else console.log("Invalid email or password")
                 
             } catch (error) {
                 console.error('Error al obtener los datos:', error)

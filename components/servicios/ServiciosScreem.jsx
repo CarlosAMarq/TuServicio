@@ -28,9 +28,9 @@ export const ServiciosScreen = () =>{
 
     return(
         <>
-            <div className="container p-5 mt-5 bg-b">
+            <div className="container p-5 mt-5 bg-b     ">
             <div className="">
-                <div className="container ">
+                <div className="container d-flex ">
                     <h1 className="text-dark fw-bold display-5 text-center">Servicios</h1>
                     <p className="lead text-body-secondary fst-italic text-center">
                     Aqui podra interactuar con las servicios.

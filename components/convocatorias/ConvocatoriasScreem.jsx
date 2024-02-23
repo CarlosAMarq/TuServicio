@@ -38,7 +38,7 @@ export const CovocatoriasScreen = () => {
                 <div className="">
                     <div className="container ">
                         <h1 className="text-dark fw-bold display-5 text-center">Convocatorias</h1>
-                        <p className="lead text-body-secondary fst-italic text-center">
+                        <p className="lead text-body-secondary fst-italic text-center ">
                             Aqui podra interactuar con las covocatorias.
                         </p>
 
