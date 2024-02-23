@@ -3,6 +3,7 @@ import "./home.css";
 import PageServices from "./PageServices";
 import { IoMdOpen } from "react-icons/io";
 import Wave from "./Wave";
+import Logo from "../Logo";
 
 export const HomeScreen = () => {
   return (
@@ -10,11 +11,12 @@ export const HomeScreen = () => {
       <section id="home" className="background-center bg-fixed ">
         <div className="blur"></div>
         <div className="container py-5  home-content">
+          <Logo size={'1'}/>
           <h1
             className="display-5 fw-bold text-center text-white home-title"
             style={{ fontSize: "4rem" }}
           >
-            Argencia <span>Tu Servicio</span>
+            Agencia <span>Tu Servicio</span>
           </h1>
           <p className=" fs-4 text-center text-white">
             Si necesita ayuda para sacar a frente su negocio aqui podra
