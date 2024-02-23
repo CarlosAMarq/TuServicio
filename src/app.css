@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: fixed !important;
+  top: 0;
+  width: 100vw;
+  display: none;
+  z-index: 10;
+}
+
+.backgrond-center {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+section {
+  min-height: 100vh;
+  position: relative;
+}
+
+.wave {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: black;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d6efd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0653c7;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* transition: scroll 1s ease-out; */
+}

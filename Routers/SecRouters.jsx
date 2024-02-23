@@ -15,7 +15,7 @@ export const SecRouters = () => {
   return (
     <>
       <NavbarAdm/>
-        <div className="container  ">
+        <div>
         <Routes>
             <Route path="/" element={<HomeScreen/>} />
             <Route path="/Servicios" element={<ServiciosUser/>} />

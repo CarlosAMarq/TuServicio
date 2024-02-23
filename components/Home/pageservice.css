@@ -1,0 +1,9 @@
+#page-service {
+    display: flex;
+    justify-content: center;
+}
+
+#page-service  h1 {
+    color: #797979;
+    font-size: 64px;
+}
