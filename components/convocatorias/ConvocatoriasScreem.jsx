@@ -42,6 +42,7 @@ export const CovocatoriasScreen = () => {
                             Aqui podra interactuar con las covocatorias.
                         </p>
 
+
                     </div>
                 </div>
             </div>
