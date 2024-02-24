@@ -16,17 +16,18 @@ export const CreateConvocatoria = () => {
         event.preventDefault();
 
         const convocatoriaData = {
-        id:30,
-        title: name,
-        targets: asesores,
-        expiration: fechaVencimiento,
-        requirements: requisitos,
+            title: name,
+            targets: asesores,
+            expiration: fechaVencimiento,
+            requirements: requisitos,
         };
 
         try {
             const response = await axios.post('https://tu-servicio.onrender.com/convocatory', convocatoriaData);
             if (response.status ===  200) {
+                console.log('se ha creado con exito')
             navigate('/convocatoria', { replace: true });
+
             } else {
             // Manejar errores de la respuesta
             console.error('Error al crear la convocatoria:', response.status);
@@ -52,7 +53,7 @@ return(
                 
                 
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
-                <form onSubmit={handleSubmit}>
+                    
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
                 onChange={(e) => setName(e.target.value)}/>
@@ -80,7 +81,6 @@ return(
                     <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
                 Create
             </button>
-            </form>
                     
                     
                 </div>

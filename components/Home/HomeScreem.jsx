@@ -11,7 +11,7 @@ export const HomeScreen = () => {
       <section id="home" className="background-center bg-fixed ">
         <div className="blur"></div>
         <div className="container py-5  home-content">
-          <Logo size={'1'}/>
+          <Logo size={'1'} />
           <h1
             className="display-5 fw-bold text-center text-white home-title"
             style={{ fontSize: "4rem" }}

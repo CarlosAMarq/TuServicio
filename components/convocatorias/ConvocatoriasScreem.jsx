@@ -2,21 +2,26 @@
 import { useEffect, useState } from "react";
 import { ConvocatoriaCard } from "./ConvocatoriaCard";
 import { useNavigate } from "react-router-dom"
-
 import axios from 'axios';
 
 
 
 export const CovocatoriasScreen = () => {
-    
+    const [conv, setConv] = useState([]);
+    const [search, setSearch] = useState([]);
+
+
 
     const navigate = useNavigate();
     const HandleCreateConvocatoria = () => {
         navigate("/convocatoria/createconvoactoria", { replace: true });
     }
+    const handleSearch = (event) => {
+        setSearch(event.target.value);}
 
+    const filterConv = conv.filter(convocatory=>
+        convocatory.title.includes(search))
 
-    const [conv, setConv] = useState([]);
 
     useEffect(() => {
         const obtenerDatos = async () => {
@@ -48,7 +53,13 @@ export const CovocatoriasScreen = () => {
             </div>
 
             <div className="d-flex " role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <input className="form-control me-2"
+                  type="search"
+                  placeholder="Search" 
+                  aria-label="Search" 
+                  value={search}
+                  onChange={handleSearch}
+                  />
 
                 <button className="btn btn-outline-secondary rounded-start" type="submit">
                     Search</button>
@@ -62,12 +73,12 @@ export const CovocatoriasScreen = () => {
                 </button>
             </div>
             
-            <div className="album p-5 bg-body-tertiary">
+            <div className="album p-5 bg-body-tertiary ">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                         {
 
-                            conv && conv.map(convocatory => (
+                            filterConv && filterConv.map(convocatory => (
                                 <ConvocatoriaCard
                                     key={convocatory.id}
                                     {...convocatory}
