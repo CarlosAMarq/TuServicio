@@ -12,7 +12,7 @@ export const RouterUser = () => {
   return (
     <>
       <NavbarUser/>
-        <div className="container  ">
+        <div className="">
         <Routes>
             <Route path="/" element={<HomeUser/>} />
             <Route path="/ServiciosUser" element={<ServiciosUser/>} />

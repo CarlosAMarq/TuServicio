@@ -30,7 +30,7 @@ export const HomeScreen = () => {
                 <IoMdOpen />
               </span>
             </Link>
-            <a type="button" class="btn btn-outline-primary home-btn" href="#page-service">
+            <a type="button" className="btn btn-outline-primary home-btn" href="#page-service">
               Explorar
             </a>
           </div>

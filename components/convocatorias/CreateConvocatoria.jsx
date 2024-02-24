@@ -53,7 +53,6 @@ return(
                 
                 
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
-                    
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
                 onChange={(e) => setName(e.target.value)}/>

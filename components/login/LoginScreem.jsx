@@ -36,11 +36,17 @@ export const LoginScreen = () =>{
         }) => {
             try {
                 if (mail === email && storedPassword === password) {
-                    if (usertype === 'admin') {navigate('/')}
+                    if (usertype === 'admin') {
+                        console.log('Admin')
+                        navigate('/')}
     
-                    else if (usertype === 'asesor') {navigate('/homeAsesor')}
+                    else if (usertype === 'asesor') {
+                        console.log('asesor')
+                        navigate('/homeAsesor')}
                     
-                    else {navigate('/homeUser')}  
+                    else {
+                        console.log('user')
+                        navigate('/homeUser')}  
                 }
                 else console.log("Invalid email or password")
                 

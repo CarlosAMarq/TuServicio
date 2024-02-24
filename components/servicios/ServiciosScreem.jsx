@@ -28,9 +28,10 @@ export const ServiciosScreen = () =>{
 
     return(
         <>
-            <div className="container p-5 mt-5 bg-b     ">
+        <div className="container ">
+        <div className="container p-5 mt-5 bg-b     ">
             <div className="">
-                <div className="container d-flex ">
+                <div className="container ">
                     <h1 className="text-dark fw-bold display-5 text-center">Servicios</h1>
                     <p className="lead text-body-secondary fst-italic text-center">
                     Aqui podra interactuar con las servicios.
@@ -44,7 +45,7 @@ export const ServiciosScreen = () =>{
 
         
 
-        <div className="d-flex" role="search">
+        <div className="d-flex container" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button className="btn btn-outline-dark" type="submit">Search</button>
                 <button className="btn btn-primary   ">
@@ -74,6 +75,8 @@ export const ServiciosScreen = () =>{
             </div>
         </div>
     </div>
-        </>
+    </div>
+        
+</>
     )
 }
