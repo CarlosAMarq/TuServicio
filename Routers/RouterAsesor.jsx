@@ -15,9 +15,9 @@ export const RouterAsesor = () => {
         <div className="">
         <Routes>
             <Route path="/" element={<HomeScreen/>} />
-            <Route path="/Servicios" element={<ServiciosScreen/>} />
+            <Route path="/ServiciosAsesor" element={<ServiciosScreen/>} />
             <Route path="/cuenta" element={<CuentaScream/>} />
-            <Route path="/CrearServicios" element={<CreateServicios/>} />
+            <Route path="/ServiciosAsesor/CrearServicios" element={<CreateServicios/>} />
         </Routes>
         </div>
     </>

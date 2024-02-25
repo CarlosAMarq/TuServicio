@@ -8,7 +8,7 @@ const CreateServicios = () => {
     const handleClose = () => {navigate('/servicios')}
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
-    //const id= user.id;
+    const id=30
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -16,15 +16,15 @@ const CreateServicios = () => {
         const serviciosData = {
             title,
             description,
-            id_advicer: id,
+            advicer_id: id,
         };
         console.log(serviciosData);
 
         try {
-            const response = await axios.post('https://tu-servicio.onrender.com/advice', serviciosData);
+            const response = await axios.post('https://tu-servicio.onrender.com/advice/', serviciosData);
             if (response.status ===  201) {
                 console.log('se ha creado el servicios con exito')
-            navigate('/servicios', { replace: true });
+            navigate('/ServiciosAsesor', { replace: true });
 
             } else {
             // Manejar errores de la respuesta
@@ -43,7 +43,7 @@ const CreateServicios = () => {
                 
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
                 <div className="modal-header p-5 pb-4 border-bottom-0 bg-secondary rounded-4 shadow border-dark ">
-                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
+                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
                     <button type="button" className="btn-close"  onClick={handleClose}
                     ></button>
                 </div>

@@ -46,7 +46,8 @@ export const LoginScreen = () =>{
                     
                     else {
                         console.log('user')
-                        navigate('/homeUser')}  
+                        navigate('/homeUser')}
+                          
                 }
                 else console.log("Invalid email or password")
                 

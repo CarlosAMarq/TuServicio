@@ -26,7 +26,7 @@ export const NavbarAsesor = () => {
 
           <NavLink
             className="navbar-brand text-light font-weight-bold navbar-expand-lg "
-            to="/homeAsesor/servicios"
+            to="/homeAsesor/ServiciosAsesor"
           >
             Servicios
           </NavLink>

@@ -61,8 +61,7 @@ export const CovocatoriasScreen = () => {
                   onChange={handleSearch}
                   />
 
-                <button className="btn btn-outline-secondary rounded-start" type="submit">
-                    Search</button>
+                
 
 
                 <button className="btn btn-primary "

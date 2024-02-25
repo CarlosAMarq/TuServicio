@@ -4,8 +4,8 @@
 
 
 export const ServiciosCard = ({
-    name,
-    info
+    title,
+    description
 
 }) => {
 
@@ -16,16 +16,19 @@ export const ServiciosCard = ({
         <>
             <div className="col">
                 <div className="card shadow-sm" key="{servicios.id}">
-                <svg className="bd-placeholder-img card-img-top" width="100%" height="225" 
-            xmlns="http://www.w3.org/2000/svg" role="img" 
-            aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" 
-            focusable="false"><title>Placeholder</title><rect width="100%" 
-            height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" 
-            dy=".3em">servicios</text></svg>
+                <svg className="bd-placeholder-img card-img-top" width="100%" height="280" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <defs>
+                        <pattern id="image-pattern" x="0" y="0" width="1" height="1">
+                        <image href="https://th.bing.com/th/id/OIP.ZdziyvJZTRCkta6kFx0xBQHaD4?rs=1&pid=ImgDetMain"
+                        width="100%" height="100%" />
+                        </pattern>
+                    </defs>
+                    <rect width="110%" height="100%" fill="url(#image-pattern)" />
+                </svg>
                     <div className="card-body">
                         <div className="card-info">
-                            <h4 className="card-text ">{name}</h4>
-                            <p className="card-text">{info}</p>
+                            <h4 className="card-text ">{title}</h4>
+                            <p className="card-text">{description}</p>
                         </div>
 
                         <div className="btn-group">
