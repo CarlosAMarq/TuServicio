@@ -18,20 +18,21 @@ const CreateServicios = () => {
             description,
             id_advicer: id,
         };
+        console.log(serviciosData);
 
         try {
-            const response = await axios.post('https://tu-servicio.onrender.com/convocatory', serviciosData);
-            if (response.status ===  200) {
-                console.log('se ha creado con exito')
-            navigate('/convocatoria', { replace: true });
+            const response = await axios.post('https://tu-servicio.onrender.com/advice', serviciosData);
+            if (response.status ===  201) {
+                console.log('se ha creado el servicios con exito')
+            navigate('/servicios', { replace: true });
 
             } else {
             // Manejar errores de la respuesta
-            console.error('Error al crear la convocatoria:', response.status);
+            console.error('Error al crear el servicio:', response.status);
             }
         } catch (error) {
             // Manejar errores de la solicitud
-            console.error('Error al crear la convocatoria:', error);
+            console.error('Error al crear el servicio:', error);
         }
     };
 

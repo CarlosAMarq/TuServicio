@@ -26,7 +26,7 @@ export const CovocatoriasScreen = () => {
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
-                const response = await axios.get('https://tu-servicio.onrender.com/convocatory');
+                const response = await axios.get('https://tu-servicio.onrender.com/convocatory/');
                 setConv(response.data);
             } catch (error) {
                 console.error('Error al obtener los datos:', error);
@@ -52,7 +52,7 @@ export const CovocatoriasScreen = () => {
                 </div>
             </div>
 
-            <div className="d-flex " role="search">
+            <div className="d-flex container " role="search">
                 <input className="form-control me-2"
                   type="search"
                   placeholder="Search" 
@@ -73,7 +73,7 @@ export const CovocatoriasScreen = () => {
                 </button>
             </div>
             
-            <div className="album p-5 bg-body-tertiary ">
+            <div className="album p-5 bg-body-tertiary container">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                         {
