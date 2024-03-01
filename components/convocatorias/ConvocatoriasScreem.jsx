@@ -2,26 +2,31 @@
 import { useEffect, useState } from "react";
 import { ConvocatoriaCard } from "./ConvocatoriaCard";
 import { useNavigate } from "react-router-dom"
-
 import axios from 'axios';
 
 
 
 export const CovocatoriasScreen = () => {
-    
+    const [conv, setConv] = useState([]);
+    const [search, setSearch] = useState([]);
+
+
 
     const navigate = useNavigate();
     const HandleCreateConvocatoria = () => {
         navigate("/convocatoria/createconvoactoria", { replace: true });
     }
+    const handleSearch = (event) => {
+        setSearch(event.target.value);}
 
+    const filterConv = conv.filter(convocatory=>
+        convocatory.title.includes(search))
 
-    const [conv, setConv] = useState([]);
 
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
-                const response = await axios.get('https://tu-servicio.onrender.com/convocatory');
+                const response = await axios.get('https://tu-servicio.onrender.com/convocatory/');
                 setConv(response.data);
             } catch (error) {
                 console.error('Error al obtener los datos:', error);
@@ -38,7 +43,7 @@ export const CovocatoriasScreen = () => {
                 <div className="">
                     <div className="container ">
                         <h1 className="text-dark fw-bold display-5 text-center">Convocatorias</h1>
-                        <p className="lead text-body-secondary fst-italic text-center">
+                        <p className="lead text-body-secondary fst-italic text-center ">
                             Aqui podra interactuar con las covocatorias.
                         </p>
 
@@ -47,11 +52,16 @@ export const CovocatoriasScreen = () => {
                 </div>
             </div>
 
-            <div className="d-flex " role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <div className="d-flex container " role="search">
+                <input className="form-control me-2"
+                  type="search"
+                  placeholder="Search" 
+                  aria-label="Search" 
+                  value={search}
+                  onChange={handleSearch}
+                  />
 
-                <button className="btn btn-outline-secondary rounded-start" type="submit">
-                    Search</button>
+                
 
 
                 <button className="btn btn-primary "
@@ -62,12 +72,12 @@ export const CovocatoriasScreen = () => {
                 </button>
             </div>
             
-            <div className="album p-5 bg-body-tertiary">
+            <div className="album p-5 bg-body-tertiary container">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                         {
 
-                            conv && conv.map(convocatory => (
+                            filterConv && filterConv.map(convocatory => (
                                 <ConvocatoriaCard
                                     key={convocatory.id}
                                     {...convocatory}

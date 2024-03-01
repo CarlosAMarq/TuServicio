@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { ServiciosCard } from "./ServiciosCard"
 import  axios  from "axios";
 
+import {useNavigate} from "react-router-dom"
 
 export const ServiciosScreen = () =>{
+    const navigate=useNavigate()
     
-        const [datos, setDatos] = useState([]);
-      
+    const [datos, setDatos] = useState([]);
+    const [serch,setSearch] = useState('');  
         useEffect(() => {
           const obtenerDatos = async () => {
             try {
@@ -21,14 +23,20 @@ export const ServiciosScreen = () =>{
           obtenerDatos();
         }, []);
       
-        console.log('cargando servicios')
-      
+        console.log('cargando servicios');
+
+        const handleSearch = (event) => {
+            setSearch(event.target.value);}
+    
+        const filterServ = datos.filter(serv=>
+            serv.title.includes(serch))
 
 
 
     return(
         <>
-            <div className="container p-5 mt-5 bg-b">
+        <div className="container ">
+        <div className="container p-5 mt-5 bg-b     ">
             <div className="">
                 <div className="container ">
                     <h1 className="text-dark fw-bold display-5 text-center">Servicios</h1>
@@ -44,14 +52,21 @@ export const ServiciosScreen = () =>{
 
         
 
-        <div className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-outline-dark" type="submit">Search</button>
-                <button className="btn btn-primary   ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                </svg> 
-            </button>
+        <div className="d-flex container" role="search">
+                <input className="form-control me-2" 
+                type="search" 
+                placeholder="Search" 
+                aria-label="Search"
+                value={serch}
+                onChange={handleSearch}/>
+                
+                
+                <button className="btn btn-primary ">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                    </svg>
+                </button>
         </div>
 
 
@@ -61,9 +76,9 @@ export const ServiciosScreen = () =>{
 
                 
                 {
-                    datos && datos.map(advice=>(
+                    filterServ && filterServ.map(advice=>(
                     <ServiciosCard
-                        key={advice.name}
+                        key={advice.id}
                         {...advice}
                     />))
                 
@@ -74,6 +89,8 @@ export const ServiciosScreen = () =>{
             </div>
         </div>
     </div>
-        </>
+    </div>
+        
+</>
     )
 }

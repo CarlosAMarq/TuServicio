@@ -14,20 +14,20 @@ export const NavbarAdm = () => {
     <Navbar>
       <div className="navbar-collapse collapse  ">
         <div className="navbar-nav ">
-          <div className="ml-5 mr-5">
-            <NavLink className="nav-item nav-link text-light md-5" to="/">
+          
+            <NavLink className="navbar-brand text-light font-weight-bold navbar-expand-lg" to="/">
               Home
             </NavLink>
-          </div>
+          
 
           <NavLink
-            className="nav-item nav-link text-light mr-5 "
+            className="navbar-brand text-light font-weight-bold navbar-expand-lg "
             to="/servicios"
           >
             Servicios
           </NavLink>
 
-          <NavLink className="nav-item nav-link text-light" to="/convocatoria">
+          <NavLink className="navbar-brand text-light font-weight-bold navbar-expand-lg" to="/convocatoria">
             Convocatorias
           </NavLink>
         </div>
