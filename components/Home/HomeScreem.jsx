@@ -14,7 +14,7 @@ export const HomeScreen = () => {
           <Logo size={'1'} />
           <h1
             className="display-5 fw-bold text-center text-white home-title"
-            style={{ fontSize: "4rem" }}
+            style={{ fontSize: "3rem" }}
           >
             Agencia <span>Tu Servicio</span>
           </h1>
