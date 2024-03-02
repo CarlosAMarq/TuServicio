@@ -1,11 +1,11 @@
 import { NavbarAdm } from "../components/navbar/NavbarAdm"
 import { Route, Routes } from "react-router-dom"
 
-import { CovocatoriasScreen } from "../components/convocatorias/ConvocatoriasScreem"
 import CuentaScream from "../components/User/CuentaScream"
 import { HomeScreen } from "../components/Home/HomeScreem"
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria"
 import { ServiciosUser } from "../components/servicios/ServiciosUser"
+import { CovocatoriasScreen } from "../components/convocatorias/CovocatoriasScreen"
 
 
 export const SecRouters = () => {

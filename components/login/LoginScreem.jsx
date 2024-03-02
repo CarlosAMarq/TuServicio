@@ -1,74 +1,76 @@
 import { Link, useNavigate } from "react-router-dom"
 import {useEffect, useState} from "react"
 import axios from 'axios';
+import { useUser } from "../../hooks/useUser";
 
 
 
 export const LoginScreen = () =>{
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [user, setUser] = useState([]);
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [user, setUser] = useState([]);
     const navigate = useNavigate();
+    const {currentUser, setCurrentUser} = useUser();
 
-    useEffect(() => {
-        const obtenerDatos = async () => {
-            try {
-                const response = await axios.get('https://tu-servicio.onrender.com/appusers');
-                setUser(response.data);
-            } catch (error) {
-                console.error('Error al obtener los datos:', error);
-            }
-        };
-        obtenerDatos();
-    }, []);
+    // useEffect(() => {
+    //     const obtenerDatos = async () => {
+    //         try {
+    //             const response = await axios.get('https://tu-servicio.onrender.com/appusers');
+    //             setUser(response.data);
+    //         } catch (error) {
+    //             console.error('Error al obtener los datos:', error);
+    //         }
+    //     };
+    //     obtenerDatos();
+    // }, []);
 
 
     
-    const HandleLogin = () => {
+    // const HandleLogin = () => {
         
-        const authenticate = ({
-            id,
-            username,
-            mail,
-            password: storedPassword, 
-            usertype,
-            rating
-        }) => {
-            try {
-                if (mail === email && storedPassword === password) {
-                    if (usertype === 'admin') {
-                        console.log('Admin')
+    //     const authenticate = ({
+    //         id,
+    //         username,
+    //         mail,
+    //         password: storedPassword, 
+    //         usertype,
+    //         rating
+    //     }) => {
+    //         try {
+    //             if (mail === email && storedPassword === password) {
+    //                 if (usertype === 'admin') {
+    //                     console.log('Admin')
                        
-                        navigate('/')}
+    //                     navigate('/')}
     
-                    else if (usertype === 'asesor') {
-                        console.log('asesor')
+    //                 else if (usertype === 'asesor') {
+    //                     console.log('asesor')
                         
-                        navigate('/homeAsesor')}
+    //                     navigate('/homeAsesor')}
                     
-                    else {
-                        console.log('user')
+    //                 else {
+    //                     console.log('user')
                         
-                        navigate('/homeUser')}
+    //                     navigate('/homeUser')}
                           
-                }
-                else console.log("Invalid email or password")
+    //             }
+    //             else console.log("Invalid email or password")
                 
-            } catch (error) {
-                console.error('Error al obtener los datos:', error)
+    //         } catch (error) {
+    //             console.error('Error al obtener los datos:', error)
                 
-            }
+    //         }
             
-        } 
+    //     } 
 
         
         
         
         
-        user && user.map(usuario => authenticate(usuario))
+    //     user && user.map(usuario => authenticate(usuario))
         
    
-    }
+    // }
 
     
     return(
@@ -86,14 +88,14 @@ export const LoginScreen = () =>{
             <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                 
                 <div className="form-floating mb-3">
-                    <input type="email" className="form-control rounded-3" id="floatingInput" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" className="form-control rounded-3" id="floatingInput" placeholder="name@example.com" />
                     <label form="floatingInput">Email address</label>
                 </div>
                 <div className="form-floating mb-3">
-                    <input type="password" className="form-control rounded-3" id="floatingPassword" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" className="form-control rounded-3" id="floatingPassword" placeholder="Password" />
                     <label form="floatingPassword">Password</label>
                 </div>
-                <button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" onClick={HandleLogin}>Sign up</button>
+                <button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
                 <small className="text-body-secondary">en caso de no tener cuenta haga clik </small>
                 <Link to="/register">
                     aqui</Link>
