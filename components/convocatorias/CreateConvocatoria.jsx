@@ -41,11 +41,12 @@ export const CreateConvocatoria = () => {
 
 return(
 
-        <>
-        <div className="modal modal-sheet position-static d-block p-4 py-md-5 "   id="modalSignin">
+    <>
+        <form className="was-validated pt-5">
+        <div className="modal modal-sheet position-static d-block pt-5 py-md-5 "   >
             <div className="modal-dialog" role="document">
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
-                <div className="modal-header p-5 pb-4 border-bottom-0 bg-secondary rounded-4 shadow border-dark ">
+                <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
                     <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
                     <button type="button" className="btn-close"  onClick={handleClose}
                     ></button>
@@ -53,24 +54,24 @@ return(
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
-                onChange={(e) => setName(e.target.value)}/>
+                onChange={(e) => setName(e.target.value)} required/>
                         <label form="floatingInput">Name</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <input type="email" className="form-control rounded-3" id="floatingInput" placeholder="asesores" value={asesores}
-                onChange={(e) => setAsesores(e.target.value)}/>
+                        <input type="email" className="form-control rounded-3" id="floatingInput " placeholder="asesores" value={asesores}
+                onChange={(e) => setAsesores(e.target.value)} required/>
                         <label form="floatingInput">Asesores objetivos</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="date" className="form-control rounded-3" id="floatingPassword" placeholder="Password" value={fechaVencimiento}
-                onChange={(e) => setFechaVencimiento(e.target.value)}/>
+                onChange={(e) => setFechaVencimiento(e.target.value)} required/>
                         <label form="floatingPassword">Fecha de vencimiento</label>
                     </div>
                     
                     <div className="input-group">
                         <span className="input-group-text">Requisitos</span>
                         <textarea className="form-control" value={requisitos}
-                onChange={(e) => setRequisitos(e.target.value)}></textarea>
+                onChange={(e) => setRequisitos(e.target.value)} required></textarea>
                     </div>
                     <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
                 Create
@@ -79,7 +80,8 @@ return(
                 </div>
             </div>
             </div>
-        </>
+        </form>
+    </>
 )
 
   }

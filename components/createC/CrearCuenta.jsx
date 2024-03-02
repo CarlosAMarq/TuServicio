@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 export const CrearCuenta = () => {
-        console.log('CrearCuenta')
+        
     const navigate= useNavigate();
     const salida= () =>{
         navigate('/login',{relative:true});
@@ -42,15 +42,18 @@ export const CrearCuenta = () => {
         }
     };
 
+
+    
+
     
 
   return (
     <>
-
+    <form className='was-validated'>
         <div className="modal modal-sheet position-static d-block p-4 py-md-5 "   id="modalSignin">
         <div className="modal-dialog" role="document">
-            <div className="modal-content rounded-4 shadow bg-body-secondary">
-            <div className="modal-header p-5 pb-4 border-bottom-0 bg-secondary rounded-4 shadow border-dark ">
+            <div className="modal-content rounded-4 shadow bg-body-secondary ">
+            <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
                 <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Register</h1>
                 <button type="button" className="btn-close" onClick={salida} 
                 ></button>
@@ -59,26 +62,25 @@ export const CrearCuenta = () => {
 
             <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                 <div className="form-floating mb-3">
-                    <input type="user" className="form-control rounded-3" id="UserName" placeholder="name" name='username' value={username}
-      onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="user" className="form-control rounded-3" id="name" placeholder="name" name='username' value={username}
+      onChange={(e) => setUsername(e.target.value)} required/>
                     <label form="floatingInput">Username</label>
                 </div>
                 
                 <div className="form-floating mb-3">
-                    <input type="email" className="form-control rounded-3" id="Email" placeholder="name@gmail.com " name='email' value={email}
-      onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="email" className="form-control rounded-3" id="validationCustomUsername " placeholder="name@gmail.com " name='email' value={email}
+      onChange={(e) => setEmail(e.target.value)} required/>
                     <label form="floatingInput">Email address</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input type="password" className="form-control rounded-3" id="Password" placeholder="Password" name='password' value={password}
-      onChange={(e) => setPassword(e.target.value)}/>
+      onChange={(e) => setPassword(e.target.value)} required/>
                     <label form="floatingPassword">Password</label>
                 </div>
                 
-                <label form="country" className="form-label" name='accountType' value={accountType}
-      onChange={(e) => setAccountType(e.target.value)}>Tipo de Cuenta</label>
-                <select className="form-select" id="Type" >
-                  <option>...</option>
+                <label form="country" className="form-label"  >Tipo de Cuenta</label>
+                <select className="form-select" id="Type" value={accountType}
+      onChange={(e) => setAccountType(e.target.value)} required >
                   <option>Usuario</option>
                   <option>Ascesor</option>
                   <option>Adminisrador</option>
@@ -98,6 +100,7 @@ export const CrearCuenta = () => {
             </div>
         </div>
         </div>
+        </form>
         </>
   )
       

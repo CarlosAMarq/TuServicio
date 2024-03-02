@@ -4,9 +4,12 @@ import { ServiciosCard } from "./ServiciosCard"
 import  axios  from "axios";
 import {useNavigate} from "react-router-dom"
 import {IoMdAddCircleOutline} from "react-icons/io"
+
 export const ServiciosScreen = () =>{
     const navigate=useNavigate()
+    const handlecreate =() =>{navigate("/createService")}
     
+
     const [datos, setDatos] = useState([]);
     const [serch,setSearch] = useState('');  
         useEffect(() => {
@@ -57,9 +60,9 @@ export const ServiciosScreen = () =>{
                 
                 
                 <button className="btn btn-primary d-flex"
-                
+                onClick={handlecreate}
                 >
-                    <IoMdAddCircleOutline/>
+                    +
                     
                 </button>
         </div>
