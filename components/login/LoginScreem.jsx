@@ -38,14 +38,17 @@ export const LoginScreen = () =>{
                 if (mail === email && storedPassword === password) {
                     if (usertype === 'admin') {
                         console.log('Admin')
+                       
                         navigate('/')}
     
                     else if (usertype === 'asesor') {
                         console.log('asesor')
+                        
                         navigate('/homeAsesor')}
                     
                     else {
                         console.log('user')
+                        
                         navigate('/homeUser')}
                           
                 }

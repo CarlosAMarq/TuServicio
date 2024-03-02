@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { ConvocatoriaCard } from "./ConvocatoriaCard";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 
 
 
@@ -15,12 +15,12 @@ export const CovocatoriasScreen = () => {
     const navigate = useNavigate();
     const HandleCreateConvocatoria = () => {
         navigate("/convocatoria/createconvoactoria", { replace: true });
-    }
+    };
     const handleSearch = (event) => {
-        setSearch(event.target.value);}
+        setSearch(event.target.value);
+    };
 
-    const filterConv = conv.filter(convocatory=>
-        convocatory.title.includes(search))
+    const filterConv = conv.filter(convocatory => convocatory.title.includes(search));
 
 
     useEffect(() => {
@@ -32,21 +32,17 @@ export const CovocatoriasScreen = () => {
                 console.error('Error al obtener los datos:', error);
             }
         };
-        console.log("effect loaded")
+        console.log("effect loaded");
         obtenerDatos();
     }, []);
 
 
     return (
-        <> 
-            <div className="container p-5 mt-5 bg-b">
+        <>
+            <div className="container pt-5 mt-5 bg-b">
                 <div className="">
                     <div className="container ">
-                        <h1 className="text-dark fw-bold display-5 text-center">Convocatorias</h1>
-                        <p className="lead text-body-secondary fst-italic text-center ">
-                            Aqui podra interactuar con las covocatorias.
-                        </p>
-
+                        <h1 className="text-dark fw-bold display-5 ">Convocatorias</h1>
 
                     </div>
                 </div>
@@ -54,14 +50,13 @@ export const CovocatoriasScreen = () => {
 
             <div className="d-flex container " role="search">
                 <input className="form-control me-2"
-                  type="search"
-                  placeholder="Search" 
-                  aria-label="Search" 
-                  value={search}
-                  onChange={handleSearch}
-                  />
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    value={search}
+                    onChange={handleSearch} />
 
-                
+
 
 
                 <button className="btn btn-primary "
@@ -71,21 +66,17 @@ export const CovocatoriasScreen = () => {
                     </svg>
                 </button>
             </div>
-            
+
             <div className="album p-5 bg-body-tertiary container">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-                        {
-
-                            filterConv && filterConv.map(convocatory => (
-                                <ConvocatoriaCard
-                                    key={convocatory.id}
-                                    {...convocatory}
-                                />))
-                        }
+                        {filterConv && filterConv.map(convocatory => (
+                            <ConvocatoriaCard
+                                key={convocatory.id}
+                                {...convocatory} />))}
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};

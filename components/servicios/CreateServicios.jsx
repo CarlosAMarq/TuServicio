@@ -8,7 +8,7 @@ const CreateServicios = () => {
     const handleClose = () => {navigate('/servicios')}
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const id=30
+    const id= "30"
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -55,14 +55,13 @@ const CreateServicios = () => {
                 onChange={(e) => setTitle(e.target.value)}/>
                         <label form="floatingInput">Titulo</label>
                     </div>
+
                     <div className="input-group">
                         <span className="input-group-text">Descripcion</span>
                         <textarea className="form-control" value={description}
                 onChange={(e) => setDescription(e.target.value)}></textarea>
                     </div>
-                    <div className="form-floating mb-3">
-                        <p>se utilizara sus datos</p>
-                    </div>
+                    
                     
                     
                     <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >

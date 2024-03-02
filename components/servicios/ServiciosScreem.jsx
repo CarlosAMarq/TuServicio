@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import { ServiciosCard } from "./ServiciosCard"
 import  axios  from "axios";
-
 import {useNavigate} from "react-router-dom"
-
+import {IoMdAddCircleOutline} from "react-icons/io"
 export const ServiciosScreen = () =>{
     const navigate=useNavigate()
     
@@ -36,14 +35,10 @@ export const ServiciosScreen = () =>{
     return(
         <>
         <div className="container ">
-        <div className="container p-5 mt-5 bg-b     ">
+        <div className="container pt-5 mt-5 bg-b     ">
             <div className="">
                 <div className="container ">
-                    <h1 className="text-dark fw-bold display-5 text-center">Servicios</h1>
-                    <p className="lead text-body-secondary fst-italic text-center">
-                    Aqui podra interactuar con las servicios.
-                    </p>
-                    
+                    <h1 className="text-dark fw-bold display-5 ">Servicios</h1>  
                 </div>
             </div>
         </div>
@@ -61,11 +56,11 @@ export const ServiciosScreen = () =>{
                 onChange={handleSearch}/>
                 
                 
-                <button className="btn btn-primary ">
+                <button className="btn btn-primary d-flex"
+                
+                >
+                    <IoMdAddCircleOutline/>
                     
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                    </svg>
                 </button>
         </div>
 
