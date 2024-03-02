@@ -11,6 +11,11 @@ nav {
   z-index: 10;
 }
 
+.no-scroll {
+  position: fixed;
+  width: 100%;
+}
+
 .backgrond-center {
   background-position: center;
   background-repeat: no-repeat;
@@ -96,7 +101,6 @@ html {
   aspect-ratio: 1/ 1;
   background-color: #19c2d8;
   border-radius: 50%;
-
 }
 
 .logo::before {

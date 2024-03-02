@@ -1,0 +1,81 @@
+.cmodal {
+  padding: 0.75rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+}
+.cmodal-panel {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.548);
+  position: absolute;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+}
+
+.cmodal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal-closed {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.1s, opacity 0.1s linear;
+}
+
+.modal-open {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s linear 0s, opacity 0.1s linear;
+}
+
+.modal-closed .cmodal-content {
+  animation: slideOut 0.2s;
+}
+
+.modal-open .cmodal-content {
+  animation: slideIn 0.2s;
+}
+.cmodal-close-button {
+  position: absolute;
+  background-color: white;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: black;
+  transition: 0.1s;
+}
+
+.cmodal-close-button:hover {
+  color: white;
+  background-color: rgb(255, 110, 110);
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-50%, -60%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, -60%);
+  }
+}

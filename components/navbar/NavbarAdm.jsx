@@ -38,21 +38,6 @@ export const NavbarAdm = () => {
           </NavLink>
         </div>
       </div>
-
-      <div className=" order-3  d-flex justify-content-end">
-        <ul className="navbar-nav ml-auto">
-          <Link className="nav-item nav-link text-info md-5   " to="/cuenta">
-            {currentUser?.username ?? ''}
-          </Link>
-
-          <button
-            className="nav-item nav-link btn text-light  rounded "
-            onClick={HandleLogOut}
-          >
-            Logout
-          </button>
-        </ul>
-      </div>
     </Navbar>
   );
 };

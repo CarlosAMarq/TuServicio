@@ -4,8 +4,11 @@ import PageServices from "./PageServices";
 import { IoMdOpen } from "react-icons/io";
 import Wave from "./Wave";
 import Logo from "../Logo";
+import { useContext } from "react";
+import { ModalContext } from "../../context/ModalContext";
 
 export const HomeScreen = () => {
+  const {onOpenRegister} = useContext(ModalContext);
   return (
     <>
       <section id="home" className="background-center bg-fixed ">
@@ -24,12 +27,12 @@ export const HomeScreen = () => {
             negocio
           </p>
           <div className="home-button-section">
-            <Link className="btn btn-primary home-btn" to="/login">
+            <button className="btn btn-primary home-btn"  onClick={onOpenRegister}>
               Get Started{" "}
               <span>
                 <IoMdOpen />
               </span>
-            </Link>
+            </button>
             <a type="button" className="btn btn-outline-primary home-btn" href="#page-service">
               Explorar
             </a>

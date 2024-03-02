@@ -2,7 +2,17 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 export const useUser = () => {
-  const { currentUser, setCurrentUser } = useContext(GlobalContext);
+  const { currentUser: user, setCurrentUser } = useContext(GlobalContext);
 
-  return { currentUser, setCurrentUser };
+  const isLogin = () => {
+    return user != null;
+  };
+  const logout = () => {
+    setCurrentUser(null);
+  };
+  const login = ({ username, password, email, userType }) => {
+    setCurrentUser({ username, password, email, userType });
+  };
+
+  return { user, isLogin, logout, login };
 };

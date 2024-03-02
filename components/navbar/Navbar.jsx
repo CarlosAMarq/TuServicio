@@ -1,6 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../Logo";
+import NavbarAccount from "./NavbarAccount";
 
 export default function Navbar({ children }) {
   return (
@@ -11,12 +12,13 @@ export default function Navbar({ children }) {
           to="/"
           style={{ fontSize: "1.7rem" }}
         >
-          <div className="flex gap-2" style={{maxHeight:'50px'}}>
-            <Logo size={"0.5"} className={'logo-animated'}/>
+          <div className="flex gap-2" style={{ maxHeight: "50px" }}>
+            <Logo size={"0.5"} className={"logo-animated"} />
           </div>
         </NavLink>
       </div>
       {children}
+      <NavbarAccount />
     </nav>
   );
 }
