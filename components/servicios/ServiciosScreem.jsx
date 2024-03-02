@@ -1,17 +1,19 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ServiciosCard } from "./ServiciosCard"
 import  axios  from "axios";
 import {useNavigate} from "react-router-dom"
 import {IoMdAddCircleOutline} from "react-icons/io"
+import { useUser } from "../../hooks/useUser";
+import { ModalContext } from "../../context/ModalContext";
 
 export const ServiciosScreen = () =>{
     const navigate=useNavigate()
     const handlecreate =() =>{navigate("/createService")}
-    
-
+    const { user, isLogin, logout } = useUser();
     const [datos, setDatos] = useState([]);
     const [serch,setSearch] = useState('');  
+    const {onOpenCrearServicios} = useContext(ModalContext);
         useEffect(() => {
           const obtenerDatos = async () => {
             try {
@@ -32,6 +34,20 @@ export const ServiciosScreen = () =>{
     
         const filterServ = datos.filter(serv=>
             serv.title.includes(serch))
+
+        const paraAsesor=()=>{
+            if(user.userType === 'advicer')
+            return(
+            <>
+                <button className="btn btn-primary d-flex"
+                onClick={onOpenCrearServicios}
+                >
+                    +
+                    
+                </button>
+            </>
+        )
+        }
 
 
 
@@ -59,12 +75,17 @@ export const ServiciosScreen = () =>{
                 onChange={handleSearch}/>
                 
                 
-                <button className="btn btn-primary d-flex"
-                onClick={handlecreate}
+                {isLogin()?(
+                    paraAsesor() 
+                ):(
+                    <button className="btn btn-primary d-flex"
+                onClick={onOpenCrearServicios}
                 >
                     +
                     
                 </button>
+                )
+                }
         </div>
 
 

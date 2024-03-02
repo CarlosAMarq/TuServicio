@@ -1,16 +1,26 @@
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useUser } from "../../hooks/useUser";
 
 export const NavbarAdm = () => {
   const navigate = useNavigate();
-  const { currentUser } = useUser();
-  const HandleLogOut = () => {
-    navigate("/login", { replace: true });
+  const { user, isLogin, logout } = useUser();
+  const FConvovatoria = () => {
+    if(user.userType=="admin") 
+    return(
+      <NavLink
+        className="navbar-brand text-light font-weight-bold navbar-expand-lg"
+        to="/convocatoria"
+      >
+        Convocatorias
+      </NavLink>
+      )
+   }
+  
 
-    console.log("log out");
-  };
+  console.log("log out");
+  
 
   return (
     <Navbar>
@@ -30,12 +40,23 @@ export const NavbarAdm = () => {
             Servicios
           </NavLink>
 
-          <NavLink
+          {isLogin()?(
+            <>
+            {FConvovatoria()}
+            </>
+          ):(
+            <>
+            <NavLink
             className="navbar-brand text-light font-weight-bold navbar-expand-lg"
             to="/convocatoria"
           >
             Convocatorias
           </NavLink>
+          </>
+          )
+          
+          }
+          
         </div>
       </div>
     </Navbar>

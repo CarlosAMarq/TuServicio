@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom"
+
 import { useState } from 'react';
 import axios from 'axios';
+import Logo from '../Logo';
 
 export const CreateConvocatoria = () => {
-    const navigate = useNavigate();
-    const handleClose = () => {navigate('/convocatoria')}
+    
     
 
     const [name, setName] = useState('');
@@ -27,7 +27,7 @@ export const CreateConvocatoria = () => {
             const response = await axios.post('https://tu-servicio.onrender.com/convocatory/', convocatoriaData);
             if (response.status ===  201) {
                 console.log('se ha creado la convocatoria con exito')
-            navigate('/convocatoria', { replace: true });
+            
 
             } else {
             // Manejar errores de la respuesta
@@ -42,14 +42,14 @@ export const CreateConvocatoria = () => {
 return(
 
     <>
-        <form className="was-validated pt-5">
-        <div className="modal modal-sheet position-static d-block pt-5 py-md-5 "   >
+        <form className="was-validated ">
+        <div className="modal modal-sheet position-static d-block "   >
             <div className="modal-dialog" role="document">
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
                 <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
+                    <Logo/>
                     <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
-                    <button type="button" className="btn-close"  onClick={handleClose}
-                    ></button>
+                    
                 </div>
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">

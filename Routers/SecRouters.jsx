@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom"
 import CuentaScream from "../components/User/CuentaScream"
 import { HomeScreen } from "../components/Home/HomeScreem"
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria"
-import { ServiciosUser } from "../components/servicios/ServiciosUser"
+
 import { CovocatoriasScreen } from "../components/convocatorias/CovocatoriasScreen"
 import CreateServicios from "../components/servicios/CreateServicios"
 import { ServiciosScreen } from "../components/servicios/ServiciosScreem"

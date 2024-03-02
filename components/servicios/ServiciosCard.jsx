@@ -1,3 +1,4 @@
+import { useUser } from "../../hooks/useUser";
 
 
 
@@ -8,6 +9,17 @@ export const ServiciosCard = ({
     description
 
 }) => {
+    const { user, isLogin } = useUser();
+
+    const paraAsesor=()=>{
+        if(user.userType === 'advicer')
+        return(
+        <div className="btn-group">
+        <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm ">Eliminar</button>
+        <button type="button" className="btn btn-sm  btn-success text-light shadow-sm">Editar</button>
+        </div>
+    )
+    }
 
     
 
@@ -31,10 +43,15 @@ export const ServiciosCard = ({
                             <p className="card-text">{description}</p>
                         </div>
 
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm ">Eliminar</button>
-                            <button type="button" className="btn btn-sm  btn-success text-light shadow-sm">Editar</button>
-                        </div>
+                        {isLogin()?(
+                            paraAsesor()
+                        ):(
+                            <div className="btn-group">
+        <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm ">Eliminar</button>
+        <button type="button" className="btn btn-sm  btn-success text-light shadow-sm">Editar</button>
+        </div>
+                        )
+                        }
                     </div>
                 </div>
             </div>

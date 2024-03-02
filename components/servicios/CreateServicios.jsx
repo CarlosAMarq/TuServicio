@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react';
 import axios from 'axios';
+import { useUser } from "../../hooks/useUser";
 
 
 const CreateServicios = () => {
-    const navigate = useNavigate();
-    const handleClose=()=>{navigate('/servicios')}
     
+    
+    const {user} = useUser()
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const id= "30"
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,7 +18,7 @@ const CreateServicios = () => {
         const serviciosData = {
             title,
             description,
-            advicer_id: id,
+            advicer_id: user.username,
         };
         console.log(serviciosData);
 
@@ -25,7 +26,7 @@ const CreateServicios = () => {
             const response = await axios.post('https://tu-servicio.onrender.com/advice/', serviciosData);
             if (response.status ===  201) {
                 console.log('se ha creado el servicios con exito')
-            navigate('/servicios', { replace: true });
+            
 
             } else {
             // Manejar errores de la respuesta
@@ -39,21 +40,20 @@ const CreateServicios = () => {
 
   return (
     <>
-    <form className="was-validated pt-5">
+    <form className="was-validated ">
         <div className="modal modal-sheet position-static d-block p-4 py-md-5 "   id="modalSignin">
             <div className="modal-dialog" role="document">
                 
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
                 <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
                     <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
-                    <button type="button" className="btn-close"  onClick={handleClose}
-                    ></button>
+                    
                 </div>
                 
                 
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">
-                        <input type="user" className="form-control rounded-3" id="floatingInput"  value={title}
+                        <input type="user" className="form-control rounded-3"   value={title}
                 onChange={(e) => setTitle(e.target.value)} required/>
                         <label form="floatingInput">Titulo</label>
                     </div>

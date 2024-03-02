@@ -1,8 +1,5 @@
 {
-  "testUser": {
-    "username": "Invitado",
-    "userType": "user"
-  },
+  
   "users": [
     {
       "id": "1",

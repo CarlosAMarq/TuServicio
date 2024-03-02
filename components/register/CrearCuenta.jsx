@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import Logo from "../Logo";
 
 export const CrearCuenta = () => {
-  // const navigate= useNavigate();
-  const salida = () => {
-    navigate("/login", { relative: true });
-  };
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,12 +22,12 @@ export const CrearCuenta = () => {
 
     try {
       const response = await axios.post(
-        "https://tu-servicio.onrender.com/appusers",
+        "https://tu-servicio.onrender.com/appusers/",
         accountData
       );
       if (response.status === 200) {
         // Navega a la página de inicio de sesión si la creación de la cuenta fue exitosa
-        () => navigate("/login", { relative: true });
+        
       } else {
         // Maneja los errores aquí
         console.error("Error al crear la cuenta:", response.data);
@@ -43,15 +40,16 @@ export const CrearCuenta = () => {
 
   return (
     <>
-      <form className="was-validated" style={{ width: "400px" }}>
+      <form className="was-validated" style={{ width: "500px" }}>
         <div
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
         >
           <div className="modal-content shadow bg-body-secondary rounded-3">
-            <div className="modal-header border-bottom-0 bg-body-secondary   border-dark ">
-              <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">
-                Rigístrate
+            <div className="modal-text d-flex border-bottom-0 bg-body-secondary p-5   border-dark ">
+              <Logo/>
+              <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder pt-5">
+                Regístrate
               </h1>
             </div>
 
