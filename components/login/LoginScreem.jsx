@@ -21,6 +21,7 @@ export const LoginScreen = () => {
     const data = Object.fromEntries(new FormData(e.target).entries());
     const matchedUser = users.filter((user) => user.email === data.email)[0];
     if (matchedUser) {
+      console.log(matchedUser);
       onCloseLogin();
       login(matchedUser)
     }

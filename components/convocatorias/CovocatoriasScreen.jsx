@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ConvocatoriaCard } from "./ConvocatoriaCard";
 import axios from 'axios';
 import { ModalContext } from "../../context/ModalContext";
+import { convocatories } from "../../mocks/convocatory";
 
 
 
@@ -20,16 +21,19 @@ export const CovocatoriasScreen = () => {
 
 
     useEffect(() => {
+        setConv(convocatories)
         const obtenerDatos = async () => {
             try {
                 const response = await axios.get('https://tu-servicio.onrender.com/convocatory/');
                 setConv(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Error al obtener los datos:', error);
             }
         };
         console.log("effect loaded");
-        obtenerDatos();
+        // obtenerDatos();
+    
     }, []);
 
 

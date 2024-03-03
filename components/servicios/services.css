@@ -1,0 +1,9 @@
+.service-card {
+    transform: scale(1);
+    transition: 0.2s;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+

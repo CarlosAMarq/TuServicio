@@ -10,8 +10,8 @@ export const useUser = () => {
   const logout = () => {
     setCurrentUser(null);
   };
-  const login = ({ username, password, email, userType }) => {
-    setCurrentUser({ username, password, email, userType });
+  const login = ({ id, username, password, email, userType }) => {
+    setCurrentUser({ id, username, password, email, userType });
   };
 
   return { user, isLogin, logout, login };
