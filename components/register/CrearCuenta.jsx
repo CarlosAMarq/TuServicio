@@ -9,6 +9,20 @@ export const CrearCuenta = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
 
+  const auntenticacion = (event) => {
+   if (password.length <= 8) {
+      
+      console.error("La contraseña debe tener más de 8 caracteres.");
+      event.preventDefault(); 
+      return false; 
+   }
+   else {
+    handleFormSubmit()
+   }
+   
+  };
+  
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -113,7 +127,7 @@ export const CrearCuenta = () => {
               <button
                 className="w-100 btn btn-primary btn-lg mt-5"
                 type="submit"
-                onClick={handleFormSubmit}
+                onClick={auntenticacion}
               >
                 Crear Cuenta
               </button>

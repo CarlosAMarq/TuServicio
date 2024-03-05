@@ -44,13 +44,13 @@ return(
     <>
         <form className="was-validated ">
         <div className="modal modal-sheet position-static d-block "   >
-            <div className="modal-dialog" role="document">
+            <div className="" role="document">
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
-                <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
-                    <Logo/>
-                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
-                    
-                </div>
+                    <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
+                        <Logo/>
+                        <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
+                        
+                    </div>
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
@@ -74,8 +74,8 @@ return(
                 onChange={(e) => setRequisitos(e.target.value)} required></textarea>
                     </div>
                     <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
-                Create
-            </button>    
+                        Create
+                    </button>    
                 </div>
                 </div>
             </div>

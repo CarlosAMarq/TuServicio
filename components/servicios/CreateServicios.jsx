@@ -41,8 +41,8 @@ const CreateServicios = () => {
   return (
     <>
     <form className="was-validated ">
-        <div className="modal modal-sheet position-static d-block p-4 py-md-5 "   id="modalSignin">
-            <div className="modal-dialog" role="document">
+        <div className="modal modal-sheet position-static d-block"   id="modalSignin">
+            <div className="" role="document">
                 
                 <div className="modal-content rounded-4 shadow bg-body-secondary">
                 <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">

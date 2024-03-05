@@ -6,10 +6,7 @@ import { SvgConvocatoria } from "./SvgConvocatoria"
 
 
 
-export const ConvocatoriaCard=({
-    title,
-    expiration,
-})=>{
+export const ConvocatoriaCard=({ title, expiration})=>{
     const handleDelete= async ()=>{
         await axios.delete(`https://tu-servicio.onrender.com/convocatory/`)
         console.log('eliminado exitosamente')
@@ -21,10 +18,10 @@ export const ConvocatoriaCard=({
     return(
         <>
             <div className="col">
-                <div className="card shadow-sm" key="{convocatoria.id}">
+                <div className="card service-card  shadow-sm" key="{convocatoria.id}" style={{cursor:'pointer'}}>
                 <SvgConvocatoria/>
 
-                    <div className="card-body bg-body-secondary text-dark rounded-bottom">
+                    <div className="card-body  text-dark rounded-bottom">
                         <div className="card-info">
                             <h4 className="card-text ">{title}</h4>
                             <time className="card-text">{expiration}</time>
