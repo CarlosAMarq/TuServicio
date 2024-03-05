@@ -35,7 +35,7 @@ export const NavbarAdm = () => {
             className="navbar-brand text-light font-weight-bold navbar-expand-lg"
             to="/"
           >
-            Home
+            Inicio
           </NavLink>
 
           <NavLink

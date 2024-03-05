@@ -68,10 +68,13 @@ return(
                         <label form="floatingPassword">Fecha de vencimiento</label>
                     </div>
                     
-                    <div className="input-group">
-                        <span className="input-group-text">Requisitos</span>
+                    <div className="form-floating mb-3">
                         <textarea className="form-control" value={requisitos}
-                onChange={(e) => setRequisitos(e.target.value)} required></textarea>
+                onChange={(e) => setRequisitos(e.target.value)} 
+                id ="textarea"
+                required></textarea>
+                <label form="textarea">Requisitos</label>
+
                     </div>
                     <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
                         Create

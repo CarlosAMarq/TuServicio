@@ -7,20 +7,14 @@ export const CrearCuenta = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [accountType, setAccountType] = useState("");
 
-  const auntenticacion = (event) => {
-   if (password.length <= 8) {
-      
-      console.error("La contraseña debe tener más de 8 caracteres.");
-      event.preventDefault(); 
-      return false; 
-   }
-   else {
-    handleFormSubmit()
-   }
-   
-  };
+  const validacion = (event) => {
+    
+    
+ };
+  
   
 
   const handleFormSubmit = async (event) => {
@@ -35,10 +29,8 @@ export const CrearCuenta = () => {
     };
 
     try {
-      const response = await axios.post(
-        "https://tu-servicio.onrender.com/appusers/",
-        accountData
-      );
+      const response = await axios.post("https://tu-servicio.onrender.com/appusers/",
+      accountData);
       if (response.status === 200) {
         // Navega a la página de inicio de sesión si la creación de la cuenta fue exitosa
         
@@ -52,9 +44,28 @@ export const CrearCuenta = () => {
     }
   };
 
-  return (
+
+ (() => {
+  
+  'use strict'
+ const forms = document.querySelectorAll('.needs-validation')
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()&&password.length <= 8) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+  return ( 
     <>
-      <form className="was-validated" style={{ width: "500px" }}>
+      <form className="needs-validation bg-light rounded"  style={{ width: "500px" }} noValidate>
         <div
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
@@ -68,7 +79,7 @@ export const CrearCuenta = () => {
             </div>
 
             <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
-              <div className="form-floating mb-3">
+              <div className="form-floating mb-3 has-validation" >
                 <input
                   type="user"
                   className="form-control rounded-3"
@@ -80,33 +91,48 @@ export const CrearCuenta = () => {
                   required
                 />
                 <label form="floatingInput">Username</label>
+                <div className="invalid-feedback">
+                  Por favor escriba su nombre.
+                </div>
               </div>
 
-              <div className="form-floating mb-3">
+              <div className="form-floating imput-group has-validation mb-3">
                 <input
-                  type="email"
-                  className="form-control rounded-3"
-                  id="validationCustomUsername "
-                  placeholder="name@gmail.com "
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                 type="email"
+                 className="form-control rounded-3"
+                 id="validationCustomUsername"
+                 placeholder="name@gmail.com"
+                 name="email"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                 
+                 required
                 />
-                <label form="floatingInput">Email address</label>
+                
+                <label form="floatingInput">Correo</label>
+                <div className="invalid-feedback">
+                  Por favor escriba su Direccion de correo
+                </div>
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-floating imput-group has-validation mb-3">
                 <input
-                  type="password"
-                  className="form-control rounded-3"
-                  id="Password"
-                  placeholder="Password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                 type="password"
+                 className="form-control rounded-3"
+                 id="Password"
+                 placeholder="Password"
+                 name="password"
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
+                 required
+                 pattern=".{8,}"
+                 
                 />
-                <label form="floatingPassword">Password</label>
+                
+                <label form="floatingPassword">Contraseña</label>
+                <div className="invalid-feedback">
+                La contraseña debe tener más de 8 dígitos
+                </div>
               </div>
 
               <label form="country" className="form-label">
@@ -127,7 +153,8 @@ export const CrearCuenta = () => {
               <button
                 className="w-100 btn btn-primary btn-lg mt-5"
                 type="submit"
-                onClick={auntenticacion}
+                onClick={validacion}
+                
               >
                 Crear Cuenta
               </button>

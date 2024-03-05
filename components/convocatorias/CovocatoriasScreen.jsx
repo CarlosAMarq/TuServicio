@@ -8,16 +8,22 @@ import { convocatories } from "../../mocks/convocatory";
 
 export const CovocatoriasScreen = () => {
     const [conv, setConv] = useState([]);
-    const [search, setSearch] = useState([]);
-    const {onOpenCrearConvocatoria} = useContext(ModalContext);
+    const [search, setSearch] = useState();
+    const { onOpenCrearConvocatoria } = useContext(ModalContext);
+    const [filterConv, setFilterConv] = useState([]);
 
 
-    
     const handleSearch = (event) => {
         setSearch(event.target.value);
     };
 
-    const filterConv = conv.filter(convocatory => convocatory.title.includes(search));
+    useEffect(() => {
+        console.log(search);
+        setFilterConv(
+            conv.filter(convocatory => convocatory.title.toLowerCase().includes(search.toLowerCase()))
+         );
+
+    }, [search]);
 
 
     useEffect(() => {
@@ -33,7 +39,7 @@ export const CovocatoriasScreen = () => {
         };
         console.log("effect loaded");
         // obtenerDatos();
-    
+
     }, []);
 
 

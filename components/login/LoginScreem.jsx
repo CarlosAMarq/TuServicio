@@ -21,6 +21,7 @@ export const LoginScreen = () => {
     const data = Object.fromEntries(new FormData(e.target).entries());
     const matchedUser = users.filter((user) => user.email === data.email)[0];
     if (matchedUser) {
+
       console.log(matchedUser);
       onCloseLogin();
       login(matchedUser)
@@ -49,7 +50,7 @@ export const LoginScreen = () => {
                     required
                     name="email"
                   />
-                  <label form="floatingInput">Email address</label>
+                  <label form="floatingInput">Correo</label>
                 </div>
                 <div className="form-floating imput-group has-validation mb-3">
                   <input
@@ -59,13 +60,13 @@ export const LoginScreen = () => {
                     required
                     name="password"
                   />
-                  <label form="floatingPassword">Password</label>
+                  <label form="floatingPassword">Contraseña</label>
                 </div>
                 <button
                   className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
                   type="submit"
                 >
-                  Sign up
+                  Acceder 
                 </button>
                 <small className="text-body-secondary">
                   ¿No tienes cuenta?{" "}

@@ -30,7 +30,7 @@ export const HomeScreen = () => {
               className="btn btn-primary home-btn"
               onClick={onOpenRegister}
             >
-              Get Started{" "}
+              Registrate{" "}
               <span>
                 <IoMdOpen />
               </span>
