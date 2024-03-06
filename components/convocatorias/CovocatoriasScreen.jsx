@@ -10,7 +10,7 @@ export const CovocatoriasScreen = () => {
     const [conv, setConv] = useState([]);
     const [search, setSearch] = useState();
     const { onOpenCrearConvocatoria } = useContext(ModalContext);
-    const [filterConv, setFilterConv] = useState([]);
+    const [filterConv, setFilterConv] = useState(conv);
 
 
     const handleSearch = (event) => {

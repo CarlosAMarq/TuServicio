@@ -4,13 +4,45 @@ import axios from 'axios';
 import Logo from '../Logo';
 
 export const CreateConvocatoria = () => {
-    
-    
-
     const [name, setName] = useState('');
     const [asesores, setAsesores] = useState('');
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [requisitos, setRequisitos] = useState('');
+
+    const validacion = (event) => {
+        event.preventDefault();
+        const form = event.target.closest("form");
+        if(form.checkValidity()) {
+          form.classList.add("was-validated");
+          handleSubmit(event)
+        }
+          else {
+            form.classList.add("was-validated");
+        }
+        
+        
+     };
+      
+    (() => {
+  
+        'use strict'
+       const forms = document.querySelectorAll('.needs-validation')
+      
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()&&password.length <= 8) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            
+      
+            form.classList.add('was-validated')
+          }, false)
+        })
+      })()
+
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -54,18 +86,33 @@ return(
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
-                onChange={(e) => setName(e.target.value)} required/>
+                onChange={(e) => setName(e.target.value)}
+                pattern="[a-zA-Z]+$"
+                required/>
                         <label form="floatingInput">Name</label>
+                        <div className="invalid-feedback">
+                  Por favor escriba su nombre.
+                </div>
                     </div>
+
+
                     <div className="form-floating mb-3">
                         <input type="email" className="form-control rounded-3" id="floatingInput " placeholder="asesores" value={asesores}
                 onChange={(e) => setAsesores(e.target.value)} required/>
                         <label form="floatingInput">Asesores objetivos</label>
+                        <div className="invalid-feedback">
+                  Por favor escriba el Ascesor o Asesores
+                </div>
                     </div>
+
+
                     <div className="form-floating mb-3">
                         <input type="date" className="form-control rounded-3" id="floatingPassword" placeholder="Password" value={fechaVencimiento}
                 onChange={(e) => setFechaVencimiento(e.target.value)} required/>
                         <label form="floatingPassword">Fecha de vencimiento</label>
+                        <div className="invalid-feedback">
+                  Por favor seleccione la fecha
+                </div>
                     </div>
                     
                     <div className="form-floating mb-3">
@@ -74,9 +121,12 @@ return(
                 id ="textarea"
                 required></textarea>
                 <label form="textarea">Requisitos</label>
+                <div className="invalid-feedback">
+                  Por favor escriba los requisitos
+                </div>
 
                     </div>
-                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
+                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={validacion} >
                         Create
                     </button>    
                 </div>

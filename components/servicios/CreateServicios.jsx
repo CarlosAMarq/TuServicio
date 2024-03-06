@@ -5,12 +5,41 @@ import { useUser } from "../../hooks/useUser";
 
 
 const CreateServicios = () => {
-    
-    
     const {user} = useUser()
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
     
+    const validacion = (event) => {
+        event.preventDefault();
+        const form = event.target.closest("form");
+        if(form.checkValidity()) {
+          form.classList.add("was-validated");
+          handleSubmit(event)
+        }
+          else {
+            form.classList.add("was-validated");
+        }
+        
+        
+     };
+      
+    (() => {
+  
+        'use strict'
+       const forms = document.querySelectorAll('.needs-validation')
+      
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()&&password.length <= 8) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            
+      
+            form.classList.add('was-validated')
+          }, false)
+        })
+      })()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -18,7 +47,7 @@ const CreateServicios = () => {
         const serviciosData = {
             title,
             description,
-            advicer_id: user.username,
+            id: user.id
         };
         console.log(serviciosData);
 
@@ -44,8 +73,8 @@ const CreateServicios = () => {
         <div className="modal modal-sheet position-static d-block"   id="modalSignin">
             <div className="" role="document">
                 
-                <div className="modal-content rounded-4 shadow bg-body-secondary">
-                <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
+                <div className="modal-content rounded shadow bg-body-secondary">
+                <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded  border-dark ">
                     <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
                     
                 </div>
@@ -53,20 +82,33 @@ const CreateServicios = () => {
                 
                 <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
                     <div className="form-floating mb-3">
-                        <input type="user" className="form-control rounded-3"   value={title}
+                        <input type="user" className="form-control rounded-3"
+                           value={title}
+                           pattern="[A-Za-z]+$"
                 onChange={(e) => setTitle(e.target.value)} required/>
                         <label form="floatingInput">Titulo</label>
+                        <div className="invalid-feedback">
+                  Por favor escriba el Titulo
+                </div>
                     </div>
 
-                    <div className="input-group">
-                        <span className="input-group-text">Descripcion</span>
-                        <textarea className="form-control" value={description}
-                onChange={(e) => setDescription(e.target.value)} required></textarea>
+                    <div className="form-floating mb-3">
+                    <textarea className="form-control" value={description}
+                        onChange={(e) => setDescription(e.target.value)} 
+                        id ="texarea"
+                        required
+                        pattern='[a-zA-Z0-9.,]'>
+                    </textarea>
+                        <label form="texarea">Requisitos</label>
+                        <div className="invalid-feedback">
+                    Por favor escriba una descripcion
+                    </div>
                     </div>
                     
                     
                     
-                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={handleSubmit} >
+                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit"
+                     onClick={validacion} >
                         Create
                     </button>                    
                 </div>

@@ -41,7 +41,7 @@ export const ServiciosScreen = () => {
     setSearch(event.target.value);
   };
 
-  const filterServ = datos.filter((serv) => serv.title.includes(serch));
+  const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraAsesor = () => {
     if (user.userType === "advicer")

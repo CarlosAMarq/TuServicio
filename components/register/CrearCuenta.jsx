@@ -11,13 +11,22 @@ export const CrearCuenta = () => {
   const [accountType, setAccountType] = useState("");
 
   const validacion = (event) => {
+    event.preventDefault();
+    const form = event.target.closest("form");
+    if(form.checkValidity()) {
+      form.classList.add("was-validated");
+      handleFormsumit(event)
+    }
+      else {
+        form.classList.add("was-validated");
+    }
     
     
  };
   
   
 
-  const handleFormSubmit = async (event) => {
+  const handleFormsumit = async (event) => {
     event.preventDefault();
 
     const accountData = {
@@ -65,7 +74,7 @@ export const CrearCuenta = () => {
 
   return ( 
     <>
-      <form className="needs-validation bg-light rounded"  style={{ width: "500px" }} noValidate>
+      <form className="was-validated bg-light rounded"  style={{ width: "500px" }} noValidate>
         <div
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
@@ -89,6 +98,7 @@ export const CrearCuenta = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
+                  pattern="[a-zA-Z]+$"
                 />
                 <label form="floatingInput">Username</label>
                 <div className="invalid-feedback">
@@ -105,7 +115,7 @@ export const CrearCuenta = () => {
                  name="email"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
-                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
                  
                  required
                 />
