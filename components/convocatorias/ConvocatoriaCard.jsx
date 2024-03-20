@@ -1,17 +1,26 @@
 import  axios  from "axios"
 import { SvgConvocatoria } from "./SvgConvocatoria"
-
+import { useUser } from "../../hooks/useUser";
 
 
 
 
 
 export const ConvocatoriaCard=({ title, expiration})=>{
+
+    const {isLogin, user} =useUser()
+
     const handleDelete= async ()=>{
-        await axios.delete(`https://tu-servicio.onrender.com/convocatory/`)
-        console.log('eliminado exitosamente')
+        await axios.delete('https://tu-servicio.onrender.com/convocatory/')
+        
     }
-   
+   const paraAdmin=()=>{
+    if(user.userType === 'admin')
+    return(<div className="btn-group">
+    <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm " onClick={handleDelete}>Eliminar</button>
+    <button type="button" className="btn btn-sm  btn-success text-light shadow-sm">Editar</button>
+</div>)
+   }
        
        
     
@@ -27,10 +36,9 @@ export const ConvocatoriaCard=({ title, expiration})=>{
                             <time className="card-text">{expiration}</time>
                         </div>
 
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm " onClick={handleDelete}>Eliminar</button>
-                            <button type="button" className="btn btn-sm  btn-success text-light shadow-sm">Editar</button>
-                        </div>
+                        {isLogin() ? paraAdmin():(<div/>)
+                            
+                        }
                     </div>
                 </div>
             </div>

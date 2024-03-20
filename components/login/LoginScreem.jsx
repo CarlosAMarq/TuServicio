@@ -4,7 +4,7 @@ import axios from "axios";
 import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { users } from "../../mocks/user";
-
+import Logo from "../Logo";
 export const LoginScreen = () => {
   // const navigate = useNavigate();
   const { login } = useUser();
@@ -35,6 +35,7 @@ export const LoginScreen = () => {
           <div>
             <div className="modal-content rounded-4 shadow ">
               <div className="modal-header p-5 pb-4 border-bottom-0 rounded-4  border-dark ">
+                <Logo/>
                 <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">
                   Tu Servicio
                 </h1>
@@ -59,6 +60,7 @@ export const LoginScreen = () => {
                     placeholder="Password"
                     required
                     name="password"
+                    pattern=".{8,}"
                   />
                   <label form="floatingPassword">Contraseña</label>
                 </div>

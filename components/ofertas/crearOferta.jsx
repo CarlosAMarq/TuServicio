@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom"
 import { useState } from 'react';
 import axios from 'axios';
 import { useUser } from "../../hooks/useUser";
-import Logo from "../Logo";
 
 
 const CreateServicios = () => {
@@ -76,7 +74,6 @@ const CreateServicios = () => {
                 
                 <div className="modal-content rounded shadow ">
                 <div className="modal-header p-5 pb-4 border-bottom-0  rounded  border-dark ">
-                    <Logo/>
                     <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
                     
                 </div>
@@ -91,8 +88,6 @@ const CreateServicios = () => {
                         <label form="floatingInput">Titulo</label>
                         <div className="invalid-feedback">
                   Por favor escriba el Titulo
-                </div><div className="valid-feedback">
-                  Listo
                 </div>
                     </div>
 
@@ -107,9 +102,6 @@ const CreateServicios = () => {
                         <div className="invalid-feedback">
                     Por favor escriba una descripcion
                     </div>
-                    <div className="valid-feedback">
-                  Listo
-                </div>
                     </div>
                     
                     

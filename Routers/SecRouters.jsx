@@ -8,7 +8,7 @@ import { CreateConvocatoria } from "../components/convocatorias/CreateConvocator
 import { CovocatoriasScreen } from "../components/convocatorias/CovocatoriasScreen"
 import CreateServicios from "../components/servicios/CreateServicios"
 import { ServiciosScreen } from "../components/servicios/ServiciosScreem"
-
+import { OfertasScreem } from "../components/ofertas/ofertasScreem"
 
 export const SecRouters = () => {
   <switch>
@@ -22,9 +22,8 @@ export const SecRouters = () => {
             <Route path="/" element={<HomeScreen/>} />
             <Route path="/servicios" element={<ServiciosScreen/>} />
             <Route path="/convocatoria" element={<CovocatoriasScreen/>} />
-            <Route path="/convocatoria/createconvoactoria" element={<CreateConvocatoria/>} />
             <Route path="/cuenta" element={<CuentaScream/>} />
-            <Route path="/createService" element={<CreateServicios/>} />
+            <Route path="/ofertas" element={<OfertasScreem/>} />
         </Routes>
         </div>
     </>

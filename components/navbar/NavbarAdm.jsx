@@ -16,15 +16,7 @@ export const NavbarAdm = () => {
           Convocatorias
         </NavLink>
       );
-    if (user.userType == "user")
-      return (
-        <NavLink
-          className="navbar-brand text-light font-weight-bold navbar-expand-lg"
-          to="/convocatoria"
-        >
-          Ofertas
-        </NavLink>
-      );
+    
   };
 
   return (
@@ -44,6 +36,14 @@ export const NavbarAdm = () => {
           >
             Servicios
           </NavLink>
+
+          <NavLink
+          className="navbar-brand text-light font-weight-bold navbar-expand-lg"
+          to="/ofertas"
+        >
+          Ofertas
+        </NavLink>
+          
 
           {isLogin() && FConvovatoria()}
         </div>

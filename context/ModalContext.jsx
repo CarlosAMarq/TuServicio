@@ -33,6 +33,12 @@ export default function ModalProvider({ children }) {
     onClose:onCloseCrearServicios,
     modalState: modalStateCrearServicios
   }= useDisclosoure();
+
+  const{
+    onOpen: onOpenCrearOfertas,
+    onClose: onCloseCrearOfertas,
+    modalState:modalStateOfertas
+  }=useDisclosoure()
   return (
     <ModalContext.Provider
       value={{ onOpenLogin,
@@ -42,6 +48,8 @@ export default function ModalProvider({ children }) {
         onCloseCrearConvocatoria,
         onOpenCrearConvocatoria,
         onOpenCrearServicios,
+        onOpenCrearOfertas,
+        onCloseCrearOfertas,
         onCloseCrearServicios
               
             }}
@@ -61,6 +69,9 @@ export default function ModalProvider({ children }) {
 
       <Modal state={modalStateCrearServicios} onClose={onCloseCrearServicios}>
             <CreateServicios/>
+      </Modal>
+      <Modal state={modalStateOfertas} onClose={onCloseCrearOfertas}>
+
       </Modal>
 
       

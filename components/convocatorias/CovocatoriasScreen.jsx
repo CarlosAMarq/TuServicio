@@ -3,27 +3,22 @@ import { ConvocatoriaCard } from "./ConvocatoriaCard";
 import axios from 'axios';
 import { ModalContext } from "../../context/ModalContext";
 import { convocatories } from "../../mocks/convocatory";
-
+import { useUser } from "../../hooks/useUser";
 
 
 export const CovocatoriasScreen = () => {
     const [conv, setConv] = useState([]);
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState("");
     const { onOpenCrearConvocatoria } = useContext(ModalContext);
-    const [filterConv, setFilterConv] = useState(conv);
-
+  
+    const {isLogin, user} =useUser()
 
     const handleSearch = (event) => {
         setSearch(event.target.value);
     };
 
-    useEffect(() => {
-        console.log(search);
-        setFilterConv(
-            conv.filter(convocatory => convocatory.title.toLowerCase().includes(search.toLowerCase()))
-         );
-
-    }, [search]);
+  
+   const filterConv = conv.filter(convocatory => convocatory.title.toLowerCase().includes(search.toLowerCase()))
 
 
     useEffect(() => {
@@ -41,6 +36,20 @@ export const CovocatoriasScreen = () => {
         // obtenerDatos();
 
     }, []);
+
+    const paraAdmin =()=>{
+        if(user.userType === 'admin')
+        return(
+    <div>
+        <button className="btn btn-primary "
+                    onClick={onOpenCrearConvocatoria}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                    </svg>
+                </button>
+    </div>)
+
+    }
 
 
     return (
@@ -62,15 +71,13 @@ export const CovocatoriasScreen = () => {
                     value={search}
                     onChange={handleSearch} />
 
+                {
+                    isLogin()?paraAdmin():(<div/>)
+                }
 
 
 
-                <button className="btn btn-primary "
-                    onClick={onOpenCrearConvocatoria}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                    </svg>
-                </button>
+                
             </div>
 
             <div className="album p-5 bg-body-tertiary container">

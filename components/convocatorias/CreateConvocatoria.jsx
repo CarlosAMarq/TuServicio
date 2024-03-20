@@ -77,13 +77,13 @@ return(
         <form className="was-validated ">
         <div className="modal modal-sheet position-static d-block "   >
             <div className="" role="document">
-                <div className="modal-content rounded-4 shadow bg-body-secondary">
-                    <div className="modal-header p-5 pb-4 border-bottom-0 bg-body-secondary rounded-4  border-dark ">
+                <div className="modal-content rounded-4 shadow ">
+                    <div className="modal-header p-5 pb-4 border-bottom-0  rounded-4  border-dark ">
                         <Logo/>
                         <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Convovatoria</h1>
                         
                     </div>
-                <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
+                <div className="modal-body p-5 pt-0  mt-5 ">
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -92,6 +92,9 @@ return(
                         <label form="floatingInput">Name</label>
                         <div className="invalid-feedback">
                   Por favor escriba su nombre.
+                </div>
+                <div className="valid-feedback">
+                  Listo
                 </div>
                     </div>
 
@@ -103,6 +106,9 @@ return(
                         <div className="invalid-feedback">
                   Por favor escriba el Ascesor o Asesores
                 </div>
+                <div className="valid-feedback">
+                  Listo
+                </div>
                     </div>
 
 
@@ -112,6 +118,9 @@ return(
                         <label form="floatingPassword">Fecha de vencimiento</label>
                         <div className="invalid-feedback">
                   Por favor seleccione la fecha
+                </div>
+                <div className="valid-feedback">
+                  Listo
                 </div>
                     </div>
                     
@@ -123,6 +132,9 @@ return(
                 <label form="textarea">Requisitos</label>
                 <div className="invalid-feedback">
                   Por favor escriba los requisitos
+                </div>
+                <div className="valid-feedback">
+                  Listo
                 </div>
 
                     </div>

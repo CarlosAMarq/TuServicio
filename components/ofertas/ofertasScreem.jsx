@@ -1,20 +1,22 @@
 import { useContext, useEffect, useState } from "react";
-import { ServiciosCard } from "./ServiciosCard";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { IoMdAddCircleOutline } from "react-icons/io";
+
 import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { services } from "../../mocks/services";
-import "./services.css";
 
-export const ServiciosScreen = () => {
- 
-  
+
+export const OfertasScreem = () => {
+  const navigate = useNavigate();
+  const handlecreate = () => {
+    navigate("/createService");
+  };
   const { user, isLogin, logout } = useUser();
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
-  const { onOpenCrearServicios } = useContext(ModalContext);
+  const { onOpenCrearOfertas } = useContext(ModalContext);
   useEffect(() => {
     setDatos(services.filter((s) => user == null || user.id == s.advicer_id));
     const obtenerDatos = async () => {
@@ -41,13 +43,13 @@ export const ServiciosScreen = () => {
 
   const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
 
-  const paraAsesor = () => {
-    if (user.userType === "advicer")
+  const paraUser = () => {
+    if (user.userType === "user")
       return (
         <>
           <button
             className="btn btn-primary d-flex"
-            onClick={onOpenCrearServicios}
+            onClick={onOpenCrearOfertas}
           >
             +
           </button>
@@ -62,9 +64,9 @@ export const ServiciosScreen = () => {
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
-                {user?.userType == "advicer"
-                  ? "Mis Servicios"
-                  : "Buscar Servicio"}
+                {user?.userType == "user"
+                  ? "Mis Ofertas"
+                  : "Buscar Ofertas"}
               </h1>
             </div>
           </div>
@@ -81,7 +83,7 @@ export const ServiciosScreen = () => {
           />
 
           {isLogin() ? (
-            paraAsesor()
+            paraUser()
           ) : (
             <div/>
           )}
@@ -90,10 +92,10 @@ export const ServiciosScreen = () => {
         <div className="album pt-5 bg-body-tertiary">
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-              {filterServ &&
-                filterServ.map((advice) => (
-                  <ServiciosCard key={advice.id} {...advice} />
-                ))}
+              {
+
+
+              }
             </div>
           </div>
         </div>

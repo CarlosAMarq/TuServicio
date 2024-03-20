@@ -13,13 +13,7 @@ export const CrearCuenta = () => {
   const validacion = (event) => {
     event.preventDefault();
     const form = event.target.closest("form");
-    if(form.checkValidity()) {
-      form.classList.add("was-validated");
-      handleFormsumit(event)
-    }
-      else {
-        form.classList.add("was-validated");
-    }
+    
     
     
  };
@@ -79,15 +73,15 @@ export const CrearCuenta = () => {
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
         >
-          <div className="modal-content shadow bg-body-secondary rounded-3">
-            <div className="modal-text d-flex border-bottom-0 bg-body-secondary p-5   border-dark ">
+          <div className="modal-content shadow  rounded-3">
+            <div className="modal-text d-flex border-bottom-0  p-5   border-dark ">
               <Logo/>
               <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder pt-5">
                 Regístrate
               </h1>
             </div>
 
-            <div className="modal-body p-5 pt-0 bg-body-secondary mt-5 ">
+            <div className="modal-body p-5 pt-0  mt-5 ">
               <div className="form-floating mb-3 has-validation" >
                 <input
                   type="user"
@@ -104,6 +98,9 @@ export const CrearCuenta = () => {
                 <div className="invalid-feedback">
                   Por favor escriba su nombre.
                 </div>
+                <div className="valid-feedback">
+                  Listo
+                </div>
               </div>
 
               <div className="form-floating imput-group has-validation mb-3">
@@ -115,7 +112,7 @@ export const CrearCuenta = () => {
                  name="email"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
-                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+.[a-zA-Z]{2,4}$"
                  
                  required
                 />
@@ -123,6 +120,9 @@ export const CrearCuenta = () => {
                 <label form="floatingInput">Correo</label>
                 <div className="invalid-feedback">
                   Por favor escriba su Direccion de correo
+                </div>
+                <div className="valid-feedback">
+                  Listo
                 </div>
               </div>
               <div className="form-floating imput-group has-validation mb-3">
@@ -142,6 +142,9 @@ export const CrearCuenta = () => {
                 <label form="floatingPassword">Contraseña</label>
                 <div className="invalid-feedback">
                 La contraseña debe tener más de 8 dígitos
+                </div>
+                <div className="valid-feedback">
+                  Listo
                 </div>
               </div>
 
