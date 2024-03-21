@@ -15,12 +15,14 @@ export const ServiciosScreen = () => {
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
   const { onOpenCrearServicios } = useContext(ModalContext);
+  
+  
   useEffect(() => {
     setDatos(services.filter((s) => user == null || user.id == s.advicer_id));
     const obtenerDatos = async () => {
       try {
         const response = await axios.get(
-          "https://tu-servicio.onrender.com/advice"
+          "https://tu-servicio.onrender.com/advice/"
         );
         setDatos(response.data);
       } catch (error) {
@@ -28,12 +30,12 @@ export const ServiciosScreen = () => {
       }
     };
     // Descomentar cuando se desee traer los datos del  backend
-    // obtenerDatos();
+    obtenerDatos();
   }, []);
 
-  useEffect(() => {
-    setDatos(services.filter((s) => user == null ||user.userType != 'advicer' ||  user.id == s.advicer_id));
-  }, [user]);
+  
+
+  
 
   const handleSearch = (event) => {
     setSearch(event.target.value);

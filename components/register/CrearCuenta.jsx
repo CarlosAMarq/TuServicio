@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { useState } from "react";
 import Logo from "../Logo";
@@ -7,45 +7,50 @@ export const CrearCuenta = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [accountType, setAccountType] = useState("");
 
-  const validacion = (event) => {
-    event.preventDefault();
-    const form = event.target.closest("form");
-    
-    
-    
- };
-  
-  
 
-  const handleFormsumit = async (event) => {
+  const crearUsuario = async (event) => {
     event.preventDefault();
 
-    const accountData = {
-      id: 30,
+    // validar que la contrasena tiene mas de 8 caracteres
+    if(password<=8){
+      alert('la contrasena debe tener mas de 8 caracteres');
+    }
+
+    // Validar que el nombre de usuario comience con una letra mayúscula
+    const usernameRegex = /^[A-Z]/;
+    if (!usernameRegex.test(username)) {
+        alert('El nombre de usuario debe comenzar con una letra mayúscula.');
+        return;
+    }
+    //validacion de que la contrasena termine en .com o .cu
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
+    if (!regex.test(username)){
+      alert('El correo electrónico debe terminar en .com o .cu');
+      return;
+    }
+
+    const datosUsuario = {
       username: username,
-      email: email,
+      mail: email,
       password: password,
-      accountType: accountType,
+      usertype:accountType
     };
+    console.log(datosUsuario);
 
     try {
-      const response = await axios.post("https://tu-servicio.onrender.com/appusers/",
-      accountData);
-      if (response.status === 200) {
-        // Navega a la página de inicio de sesión si la creación de la cuenta fue exitosa
-        
-      } else {
-        // Maneja los errores aquí
-        console.error("Error al crear la cuenta:", response.data);
-      }
+        const respuesta = await axios.post('https://tu-servicio.onrender.com/appusers/', datosUsuario);
+        if (respuesta.status === 201) {
+            console.log('Usuario creado con éxito');
+        } else {
+            console.error('Error al crear el usuario:', respuesta.status);
+            alert('Error al crear el usuario')
+        }
     } catch (error) {
-      // Maneja los errores aquí
-      console.error("Error al crear la cuenta:", error);
+        console.error('Error al crear el usuario:', error);
     }
-  };
+};
 
 
  (() => {
@@ -55,7 +60,7 @@ export const CrearCuenta = () => {
 
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
-      if (!form.checkValidity()&&password.length <= 8) {
+      if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
       }
@@ -68,7 +73,12 @@ export const CrearCuenta = () => {
 
   return ( 
     <>
-      <form className="was-validated bg-light rounded"  style={{ width: "500px" }} noValidate>
+      <form className="was-validated bg-light rounded"
+        style={{ width: "500px" }} 
+        noValidate
+        onSubmit={crearUsuario}
+        >
+        
         <div
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
@@ -84,7 +94,7 @@ export const CrearCuenta = () => {
             <div className="modal-body p-5 pt-0  mt-5 ">
               <div className="form-floating mb-3 has-validation" >
                 <input
-                  type="user"
+                  type="text"
                   className="form-control rounded-3"
                   id="name"
                   placeholder="name"
@@ -92,7 +102,7 @@ export const CrearCuenta = () => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
-                  pattern="[a-zA-Z]+$"
+                  pattern="^[A-Z][a-zA-Z]*$"
                 />
                 <label form="floatingInput">Username</label>
                 <div className="invalid-feedback">
@@ -112,12 +122,12 @@ export const CrearCuenta = () => {
                  name="email"
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}
-                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+.[a-zA-Z]{2,4}$"
+                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$"
                  
                  required
                 />
                 
-                <label form="floatingInput">Correo</label>
+                <label form="floatingInput" >Correo</label>
                 <div className="invalid-feedback">
                   Por favor escriba su Direccion de correo
                 </div>
@@ -158,6 +168,7 @@ export const CrearCuenta = () => {
                 onChange={(e) => setAccountType(e.target.value)}
                 required
               >
+                <option></option>
                 <option>Usuario</option>
                 <option>Ascesor</option>
                 <option>Adminisrador</option>
@@ -166,7 +177,7 @@ export const CrearCuenta = () => {
               <button
                 className="w-100 btn btn-primary btn-lg mt-5"
                 type="submit"
-                onClick={validacion}
+                
                 
               >
                 Crear Cuenta

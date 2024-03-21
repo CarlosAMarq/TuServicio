@@ -33,7 +33,7 @@ export const CovocatoriasScreen = () => {
             }
         };
         console.log("effect loaded");
-        // obtenerDatos();
+        obtenerDatos();
 
     }, []);
 

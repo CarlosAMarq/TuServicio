@@ -44,11 +44,19 @@ const CreateServicios = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+//validar que el titulo empece con mayuscula
+        const titleRegex = /^[A-Z]/;
+    if (!titleRegex.test(title)) {
+        alert('El titulo debe comenzar con una letra mayúscula.');
+        return;
+    }
 
         const serviciosData = {
-            title,
-            description,
-            id: user.id
+          
+          title: title,
+          description: description,
+          advicer_id: user.id
+            
         };
         console.log(serviciosData);
 
@@ -56,6 +64,7 @@ const CreateServicios = () => {
             const response = await axios.post('https://tu-servicio.onrender.com/advice/', serviciosData);
             if (response.status ===  201) {
                 console.log('se ha creado el servicios con exito')
+                window.location.reload()
             
 
             } else {

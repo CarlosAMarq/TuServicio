@@ -1,16 +1,39 @@
 import { useUser } from "../../hooks/useUser";
+import axios from "axios";
 
-export const ServiciosCard = ({ title, description }) => {
+export const ServiciosCard = ({ id, title, description }) => {
   const { user, isLogin } = useUser();
 
+  const eliminarServicio = async () => {
+    const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este servicio?');
+    if (!confirmacion) {
+      return;}
+
+    try {
+       const response = await axios.delete(`https://tu-servicio.onrender.com/advice/${id}`);
+       if (response.status === 204) {
+         console.log('Servicio eliminado con éxito:', response.data);
+         
+       } else {
+         console.error('Error al eliminar el servicio:', response.data);
+         
+       }
+    } catch (error) {
+       console.error('Error al eliminar el servicio:', error);
+       
+    }
+   };
+
+  
   const paraAsesor = () => {
     if (user.userType === "advicer")
       return (
-        <div className="btn-group">
+        <div className="btn-group pt-5">
           <button
             type="button"
             className="btn btn-sm  btn-danger text-light shadow-sm "
-          >
+            onClick={eliminarServicio}
+            >
             Eliminar
           </button>
           <button

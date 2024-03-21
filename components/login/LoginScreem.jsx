@@ -6,17 +6,25 @@ import { ModalContext } from "../../context/ModalContext";
 import { users } from "../../mocks/user";
 import Logo from "../Logo";
 export const LoginScreen = () => {
-  // const navigate = useNavigate();
+ 
   const { login } = useUser();
   const { onCloseLogin, onOpenRegister } = useContext(ModalContext);
 
+
+  
   const handleChangeForm = () => {
     onCloseLogin();
     onOpenRegister();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
+
+    
+
+
+
+
     // Convert the FormData to JSON
     const data = Object.fromEntries(new FormData(e.target).entries());
     const matchedUser = users.filter((user) => user.email === data.email)[0];
@@ -50,6 +58,8 @@ export const LoginScreen = () => {
                     aria-describedby="inputGroupPrepend"
                     required
                     name="email"
+                    onChange={(e) => 
+                      setEmail(e.target.value)}
                   />
                   <label form="floatingInput">Correo</label>
                 </div>

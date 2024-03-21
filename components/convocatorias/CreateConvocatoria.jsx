@@ -3,25 +3,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import Logo from '../Logo';
 
+
+
 export const CreateConvocatoria = () => {
     const [name, setName] = useState('');
     const [asesores, setAsesores] = useState('');
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [requisitos, setRequisitos] = useState('');
 
-    const validacion = (event) => {
-        event.preventDefault();
-        const form = event.target.closest("form");
-        if(form.checkValidity()) {
-          form.classList.add("was-validated");
-          handleSubmit(event)
-        }
-          else {
-            form.classList.add("was-validated");
-        }
-        
-        
-     };
+    
       
     (() => {
   
@@ -41,11 +31,39 @@ export const CreateConvocatoria = () => {
         })
       })()
 
-
+      const checkAsesorExists = async (asesor) => {//pedido al back de los usuarios
+        try {
+            const response = await axios.get(`https://tu-servicio.onrender.com/appusers/`);
+            response.data.filter(user=>user.mail===asesor)//si existe el asesor
+            return true;
+        
+          } catch (error) {
+            return false;
+        }
+        
+        
+    };
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const asesorExists = await checkAsesorExists(asesores);//validacion de si existe el ascesor
+        if (!asesorExists) {
+            alert('El asesor seleccionado no existe en la base de datos.');
+            return;
+        }
+
+        // Validar que la fecha de vencimiento no sea anterior a la fecha actual
+        const fechaActual = new Date();
+        const fechaVencimientoInput = new Date(fechaVencimiento);
+        if (fechaVencimientoInput < fechaActual) {
+            alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');
+            return;
+        }
+
+        
+
 
         const convocatoriaData = {
             title: name,
@@ -87,7 +105,7 @@ return(
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3" id="floatingInput" placeholder="name" value={name}
                 onChange={(e) => setName(e.target.value)}
-                pattern="[a-zA-Z]+$"
+                
                 required/>
                         <label form="floatingInput">Name</label>
                         <div className="invalid-feedback">
@@ -138,7 +156,8 @@ return(
                 </div>
 
                     </div>
-                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" onClick={validacion} >
+                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit" 
+                    onClick={handleSubmit} >
                         Create
                     </button>    
                 </div>
