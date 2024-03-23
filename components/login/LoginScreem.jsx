@@ -9,8 +9,10 @@ export const LoginScreen = () => {
  
   const { login } = useUser();
   const { onCloseLogin, onOpenRegister } = useContext(ModalContext);
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  
   
   const handleChangeForm = () => {
     onCloseLogin();
@@ -19,21 +21,45 @@ export const LoginScreen = () => {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axios.get("https://tu-servicio.onrender.com/appusers/");
+      const user = response.data.find(u => u.mail===email && u.password===password)
+      
+      if (!user) {
+        alert("Usuario o contraseña incorrectos.");
+      return;}
+      onCloseLogin();
+      login(user)
 
-    
+    } catch (error) {
+      console.error("Error al buscar el usuario:", error);
+      alert("Hubo un error al iniciar sesión. Por favor, inténtalo de nuevo.");
+    }finally {
+      setIsLoading(false);
+    }
+  
 
 
 
 
     // Convert the FormData to JSON
-    const data = Object.fromEntries(new FormData(e.target).entries());
+    /*const data = Object.fromEntries(new FormData(e.target).entries());
     const matchedUser = users.filter((user) => user.email === data.email)[0];
-    if (matchedUser) {
+    */
+
+    //utilizar este codigo para validar contrasenna
+    /*users.find(
+      (user) => user.email === userData.email && user.password === userData.password
+    );*/
+
+
+    /*if (matchedUser) {
 
       console.log(matchedUser);
       onCloseLogin();
       login(matchedUser)
-    }
+    }*/
   };
 
   return (
@@ -71,6 +97,9 @@ export const LoginScreen = () => {
                     required
                     name="password"
                     pattern=".{8,}"
+                    onChange={(e) => 
+                      setPassword(e.target.value)}
+
                   />
                   <label form="floatingPassword">Contraseña</label>
                 </div>
@@ -78,7 +107,7 @@ export const LoginScreen = () => {
                   className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
                   type="submit"
                 >
-                  Acceder 
+                  {isLoading ? 'Accediendo...' : 'Acceder'}
                 </button>
                 <small className="text-body-secondary">
                   ¿No tienes cuenta?{" "}

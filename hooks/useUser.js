@@ -8,10 +8,12 @@ export const useUser = () => {
     return user != null;
   };
   const logout = () => {
+    localStorage.removeItem(user)
     setCurrentUser(null);
   };
-  const login = ({ id, username, password, email, userType }) => {
-    setCurrentUser({ id, username, password, email, userType });
+  const login = ({ id, username, password, email, usertype }) => {
+    localStorage.setItem('user', JSON.stringify({ id, username, password, email, usertype }));
+    setCurrentUser({ id, username, password, email, usertype });
   };
 
   return { user, isLogin, logout, login };

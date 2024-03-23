@@ -50,6 +50,11 @@ const CreateServicios = () => {
         alert('El titulo debe comenzar con una letra mayúscula.');
         return;
     }
+    //no campos vacios 
+    if (!title || !description) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
 
         const serviciosData = {
           
@@ -110,7 +115,7 @@ const CreateServicios = () => {
                         onChange={(e) => setDescription(e.target.value)} 
                         id ="texarea"
                         required
-                        pattern='[a-zA-Z0-9.,]'>
+                        >
                     </textarea>
                         <label form="texarea">Requisitos</label>
                         <div className="invalid-feedback">

@@ -44,7 +44,7 @@ export const ServiciosScreen = () => {
   const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraAsesor = () => {
-    if (user.userType === "advicer")
+    if (user.usertype === "advicer")
       return (
         <>
           <button
@@ -64,7 +64,7 @@ export const ServiciosScreen = () => {
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
-                {user?.userType == "advicer"
+                {user?.usertype == "advicer"
                   ? "Mis Servicios"
                   : "Buscar Servicio"}
               </h1>

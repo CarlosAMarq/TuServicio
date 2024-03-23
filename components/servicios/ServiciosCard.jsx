@@ -5,10 +5,11 @@ export const ServiciosCard = ({ id, title, description }) => {
   const { user, isLogin } = useUser();
 
   const eliminarServicio = async () => {
+    //confirmacion de eliminacion
     const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este servicio?');
     if (!confirmacion) {
       return;}
-
+      //eliminacion de ;a base de datos
     try {
        const response = await axios.delete(`https://tu-servicio.onrender.com/advice/${id}`);
        if (response.status === 204) {
@@ -19,14 +20,15 @@ export const ServiciosCard = ({ id, title, description }) => {
          
        }
     } catch (error) {
-       console.error('Error al eliminar el servicio:', error);
-       
+       console.error('Error al eliminar el servicio:', error); 
     }
    };
 
-  
+   
+
+  //condicional de vista para ascesor
   const paraAsesor = () => {
-    if (user.userType === "advicer")
+    if (user.usertype === "asesor")
       return (
         <div className="btn-group pt-5">
           <button
@@ -45,6 +47,19 @@ export const ServiciosCard = ({ id, title, description }) => {
         </div>
       );
   };
+  //condicional de vista para usuario
+  const paraUsuario = () => {
+    if (user.usertype === "user") {
+      return(
+      <button
+            type="button"
+            className="btn btn-sm  btn-success text-light shadow-sm"
+      >
+            Solicitar
+      </button>)
+
+    }
+  }
 
   return (
     <>
@@ -75,8 +90,8 @@ export const ServiciosCard = ({ id, title, description }) => {
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{description}</p>
             </div>
-
             {isLogin() && paraAsesor()}
+            {isLogin() && paraUsuario()}
           </div>
         </div>
       </div>

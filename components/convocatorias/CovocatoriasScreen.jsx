@@ -38,7 +38,7 @@ export const CovocatoriasScreen = () => {
     }, []);
 
     const paraAdmin =()=>{
-        if(user.userType === 'admin')
+        if(user.usertype === 'admin')
         return(
     <div>
         <button className="btn btn-primary "
@@ -85,6 +85,7 @@ export const CovocatoriasScreen = () => {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                         {filterConv && filterConv.map(convocatory => (
                             <ConvocatoriaCard
+                            
                                 key={convocatory.id}
                                 {...convocatory} />))}
                     </div>

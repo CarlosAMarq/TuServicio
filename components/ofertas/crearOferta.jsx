@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUser } from "../../hooks/useUser";
 
 
-const CreateServicios = () => {
+ export const CreateOfertas = () => {
     const {user} = useUser()
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -40,20 +40,36 @@ const CreateServicios = () => {
         })
       })()
 
+
+
+  
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        //validar que el titulo empece con mayuscula
+        const titleRegex = /^[A-Z]/;
+        if (!titleRegex.test(title)) {
+            alert('El titulo debe comenzar con una letra mayúscula.');
+            return;
+        }
 
-        const serviciosData = {
+        // Asumiendo que tienes campos de título y descripción que son requeridos
+        if (!title || !description) {
+          alert('Por favor, completa todos los campos requeridos.');
+          return;
+        }
+
+        const OfertasData = {
             title,
             description,
             id: user.id
         };
-        console.log(serviciosData);
+        console.log(OfertasData);
 
         try {
-            const response = await axios.post('https://tu-servicio.onrender.com/advice/', serviciosData);
+            const response = await axios.post('https://tu-servicio.onrender.com/advice/', OfertasData);
             if (response.status ===  201) {
-                console.log('se ha creado el servicios con exito')
+                console.log('se ha creado el Ofertas con exito')
             
 
             } else {
@@ -74,7 +90,7 @@ const CreateServicios = () => {
                 
                 <div className="modal-content rounded shadow ">
                 <div className="modal-header p-5 pb-4 border-bottom-0  rounded  border-dark ">
-                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
+                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Ofertas</h1>
                     
                 </div>
                 
@@ -94,13 +110,13 @@ const CreateServicios = () => {
                     <div className="form-floating mb-3">
                     <textarea className="form-control" value={description}
                         onChange={(e) => setDescription(e.target.value)} 
-                        id ="texarea"
+                        id ="texarea2"
                         required
-                        pattern='[a-zA-Z0-9.,]'>
+                        >
                     </textarea>
-                        <label form="texarea">Requisitos</label>
+                        <label form="texarea">Necesidad</label>
                         <div className="invalid-feedback">
-                    Por favor escriba una descripcion
+                    Por favor escriba su necesida
                     </div>
                     </div>
                     
@@ -119,4 +135,3 @@ const CreateServicios = () => {
   )
 }
 
-export default CreateServicios

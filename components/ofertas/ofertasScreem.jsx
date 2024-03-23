@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
-import { services } from "../../mocks/services";
+import { ofertas } from "../../mocks/ofertas";
+import { OfertasCard } from "./OfertaCard";
 
 
 export const OfertasScreem = () => {
@@ -17,8 +18,10 @@ export const OfertasScreem = () => {
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
   const { onOpenCrearOfertas } = useContext(ModalContext);
+  //obtener datod del backend
   useEffect(() => {
-    setDatos(services.filter((s) => user == null || user.id == s.advicer_id));
+    setDatos(ofertas.filter((s) => user == null || user.id == s.user_id));
+    
     const obtenerDatos = async () => {
       try {
         const response = await axios.get(
@@ -34,17 +37,17 @@ export const OfertasScreem = () => {
   }, []);
 
   useEffect(() => {
-    setDatos(services.filter((s) => user == null ||user.userType != 'advicer' ||  user.id == s.advicer_id));
+    setDatos(ofertas.filter((s) => user == null ||user.usertype != 'user' ||  user.id == s.user_id));
   }, [user]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
+  const filterOfertas = datos.filter((ofer) => ofer.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraUser = () => {
-    if (user.userType === "user")
+    if (user.usertype === "user")
       return (
         <>
           <button
@@ -64,7 +67,7 @@ export const OfertasScreem = () => {
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
-                {user?.userType == "user"
+                {user?.usertype == "user"
                   ? "Mis Ofertas"
                   : "Buscar Ofertas"}
               </h1>
@@ -93,6 +96,10 @@ export const OfertasScreem = () => {
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
               {
+                filterOfertas &&
+                 filterOfertas.map(ofer=>(<OfertasCard
+                 key={ofer.id}
+                 {...ofer}/>))
 
 
               }

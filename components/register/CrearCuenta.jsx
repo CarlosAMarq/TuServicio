@@ -30,6 +30,11 @@ export const CrearCuenta = () => {
       alert('El correo electrónico debe terminar en .com o .cu');
       return;
     }
+    // Verifica si los campos requeridos están llenos
+    if (!username || !email || !password || !accountType) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return ;
+    }
 
     const datosUsuario = {
       username: username,

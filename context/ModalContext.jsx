@@ -7,6 +7,8 @@ import CuentaScream from "../components/User/CuentaScream";
 import { CrearCuenta } from "../components/register/CrearCuenta";
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria";
 import CreateServicios from "../components/servicios/CreateServicios";
+import { CreateOfertas } from "../components/ofertas/crearOferta";
+
 export const ModalContext = createContext();
 
 export default function ModalProvider({ children }) {
@@ -71,7 +73,7 @@ export default function ModalProvider({ children }) {
             <CreateServicios/>
       </Modal>
       <Modal state={modalStateOfertas} onClose={onCloseCrearOfertas}>
-
+            <CreateOfertas/>
       </Modal>
 
       

@@ -47,8 +47,9 @@ export const CreateConvocatoria = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const asesorExists = await checkAsesorExists(asesores);//validacion de si existe el ascesor
+        
+      //validacion de si existe el ascesor
+        const asesorExists = await checkAsesorExists(asesores);
         if (!asesorExists) {
             alert('El asesor seleccionado no existe en la base de datos.');
             return;
@@ -62,6 +63,11 @@ export const CreateConvocatoria = () => {
             return;
         }
 
+        // Verifica si los campos requeridos están llenos
+        if (!name || !asesores || !fechaVencimiento || !requisitos) {
+          alert('Por favor, completa todos los campos requeridos.');
+          return false;
+        }
         
 
 

@@ -1,10 +1,10 @@
 import { useUser } from "../../hooks/useUser";
 
-export const ServiciosCard = ({ title, description }) => {
+export const OfertasCard = ({ title, necesidad }) => {
   const { user, isLogin } = useUser();
 
   const paraUser = () => {
-    if (user.userType === "user")
+    if (user.usertype === "user")
       return (
         <div className="btn-group">
           <button
@@ -22,6 +22,17 @@ export const ServiciosCard = ({ title, description }) => {
         </div>
       );
   };
+  const paraAdvicer = () => {
+    if (user.usertype === "asesor") return(
+      <button
+            type="button"
+            className="btn btn-sm  btn-primary text-light shadow-sm"
+          >
+            Solicitar
+          </button>
+    )
+  }
+
 
   return (
     <>
@@ -50,10 +61,11 @@ export const ServiciosCard = ({ title, description }) => {
           <div className="card-body">
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
-              <p className="card-text">{description}</p>
+              <p className="card-text">{necesidad}</p>
             </div>
 
             {isLogin() && paraUser()}
+            {isLogin() && paraAdvicer()}
           </div>
         </div>
       </div>

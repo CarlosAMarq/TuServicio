@@ -7,7 +7,7 @@ export const NavbarAdm = () => {
   const navigate = useNavigate();
   const { user, isLogin, logout } = useUser();
   const FConvovatoria = () => {
-    if (user.userType != "user")
+    if (user.usertype != "user")
       return (
         <NavLink
           className="navbar-brand text-light font-weight-bold navbar-expand-lg"
