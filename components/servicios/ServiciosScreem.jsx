@@ -44,7 +44,7 @@ export const ServiciosScreen = () => {
   const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraAsesor = () => {
-    if (user.usertype === "advicer")
+    if (user.usertype === "asesor")
       return (
         <>
           <button
@@ -82,9 +82,9 @@ export const ServiciosScreen = () => {
             onChange={handleSearch}
           />
 
-          {isLogin() ? (
+          {isLogin() ? 
             paraAsesor()
-          ) : (
+           : (
             <div/>
           )}
         </div>

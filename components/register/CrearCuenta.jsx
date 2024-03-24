@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useState } from "react";
 import Logo from "../Logo";
+import "../Form.css"
+
 
 export const CrearCuenta = () => {
   const [username, setUsername] = useState("");
@@ -78,7 +80,7 @@ export const CrearCuenta = () => {
 
   return ( 
     <>
-      <form className="was-validated bg-light rounded"
+      <form className="was-validated bg-light rounded-4"
         style={{ width: "500px" }} 
         noValidate
         onSubmit={crearUsuario}
@@ -88,10 +90,10 @@ export const CrearCuenta = () => {
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
         >
-          <div className="modal-content shadow  rounded-3">
+          <div className="modal-content shadow  rounded-4">
             <div className="modal-text d-flex border-bottom-0  p-5   border-dark ">
               <Logo/>
-              <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder pt-5">
+              <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder pt-5" id="title">
                 Regístrate
               </h1>
             </div>

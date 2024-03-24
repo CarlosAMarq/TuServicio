@@ -10,6 +10,7 @@ import CreateServicios from "../components/servicios/CreateServicios"
 import { ServiciosScreen } from "../components/servicios/ServiciosScreem"
 import { OfertasScreem } from "../components/ofertas/ofertasScreem"
 import { VisualizarConvocatoria } from "../components/convocatorias/VisualizarConvocatoria"
+import {VisualizarServicio} from "../components/servicios/VisualizarServicios"
 
 export const SecRouters = () => {
   <switch>
@@ -26,6 +27,7 @@ export const SecRouters = () => {
             <Route path="/cuenta" element={<CuentaScream/>} />
             <Route path="/ofertas" element={<OfertasScreem/>} />
             <Route path="/visualizarConvocatoria/:id" element={<VisualizarConvocatoria/>} />
+            <Route path="/visualizarServicio/:id" element={<VisualizarServicio/>} />
         </Routes>
         </div>
     </>

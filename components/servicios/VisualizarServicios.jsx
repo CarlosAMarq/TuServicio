@@ -6,40 +6,43 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosClose } from "react-icons/io";
 
-export const VisualizarConvocatoria = () => {
+export const VisualizarServicio = () => {
   const {user, isLogin}=useUser()
   const { id } = useParams();
-  const [convocatoria, setConvocatoria] = useState([]);
+  const [Servicio, setServicio] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
   const handleClose=()=>{
-    navigate("/convocatoria")
+    navigate("/servicios")
   }
  
  useEffect(() => {
-  const fetchConvocatoria = async () => {
+  const fetchServicio = async () => {
     try {
-      const response = await axios.get(`https://tu-servicio.onrender.com/convocatory/${id}`);
-      setConvocatoria(response.data);
+      const response = await axios.get(`https://tu-servicio.onrender.com/advice/${id}`);
+      setServicio(response.data);
     } catch (error) {
-      console.error('Error al cargar la convocatoria:', error);
+      console.error('Error al cargar la Servicio:', error);
     }
   };
 
-  fetchConvocatoria();
+  fetchServicio();
   }, [id]);
 
-  const updateConvocatoria = async () => {
+
+  //editar el serv
+  const updateServicio = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.put(`https://tu-servicio.onrender.com/convocatory/${id}`, convocatoria);
+      const response = await axios.put(`https://tu-servicio.onrender.com/advice/${id}`, Servicio);
       if (response.status === 200) {
-        setSuccessMessage('Convocatoria actualizada con éxito');
+        setSuccessMessage('Servicio actualizada con éxito');
+        console.log("listo")
         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
       }
     } catch (error) {
-      console.error('Error al actualizar la convocatoria:', error);
+      console.error('Error al actualizar la Servicio:', error);
     } finally {
       setIsLoading(false);
     }
@@ -48,20 +51,20 @@ export const VisualizarConvocatoria = () => {
 //cambiar los valores de los imputs
   const handleChange = (e) => {
   const { name, value } = e.target;
-  setConvocatoria(prevState => ({ ...prevState, [name]: value }));}
+  setServicio(prevState => ({ ...prevState, [name]: value }));}
 
 
- // Verificar si el usuario es administrador
- const isAdmin = user && user.usertype === "admin";
+ // Verificar si el usuario es Asesoristrador
+ const isAsesor = user && user.usertype === "asesor";
 
- const paraAdmin=()=>{
-  if(user.usertype === "admin"){
+ const paraAsesor=()=>{
+  if(user.usertype === "asesor"){
     return(
       <div>
     <button
     type="button"
     className='btn btn-primary d-flex justify-content-center' 
-    onClick={updateConvocatoria} disabled={!isAdmin}
+    onClick={updateServicio} disabled={!isAsesor}
     >
     {isLoading ? 'Guardando...' : 'Guardar'}
     </button>
@@ -83,7 +86,7 @@ export const VisualizarConvocatoria = () => {
                 </button>
                     <div className="modal-header p-5 pb-4 border-bottom-0  rounded-4  border-dark ">
                         <Logo/>
-                        <h1 className=" title fw-bold mb-0 fs-2 fst-italic fw-bolder">Convovatoria</h1>
+                        <h1 className=" title fw-bold mb-0 fs-2 fst-italic fw-bolder">Servicio</h1>
                         
                     </div>
                 <div className="modal-body p-5 pt-0  mt-5 ">
@@ -93,9 +96,9 @@ export const VisualizarConvocatoria = () => {
                           id="floatingInput" 
                           placeholder="name"
                           name='title'
-                          value={convocatoria.title || ''}
+                          value={Servicio.title || ''}
                           onChange={handleChange}
-                          disabled={!isAdmin}
+                          disabled={!isAsesor}
                           required/>
                           
                         <label form="floatingInput">Name</label>
@@ -107,54 +110,16 @@ export const VisualizarConvocatoria = () => {
                 </div>
                     </div>
 
-
-                    <div className="form-floating mb-3">
-                        <input type="email"
-                         className="form-control rounded-3"
-                          id="floatingemail "
-                          placeholder="asesores"
-                          name='targets'
-                          value={convocatoria.targets||''}
-                          onChange={handleChange}
-                          disabled={!isAdmin}
-                          required/>
-                        <label form="floatingemail">Asesores Objetivos</label>
-                        <div className="invalid-feedback">
-                  Por favor escriba el Ascesor o Asesores objetivos.
-                </div>
-                <div className="valid-feedback">
-                  Listo
-                </div>
-                    </div>
-
-
-                    <div className="form-floating mb-3">
-                        <input type="date"
-                         className="form-control rounded-3"
-                          id="floatingPassword"
-                          placeholder="Password"
-                          name='expiration'
-                          value={convocatoria.expiration||''}
-                          onChange={handleChange}
-                          disabled={!isAdmin}
-                          required/>
-                        <label form="floatingPassword">Fecha</label>
-                        <div className="invalid-feedback">
-                  Por favor seleccione la fecha
-                </div>
-                <div className="valid-feedback">
-                  Listo
-                </div>
-                    </div>
+   
                     
                     <div className="form-floating mb-3">
                         <textarea className="form-control"
-                         value={convocatoria.requirements||''}
-                         name='requirements'
+                         value={Servicio.description||''}
+                         name='description'
                         onChange={handleChange} 
                         id ="textarea"
                         required
-                        disabled={!isAdmin}
+                        disabled={!isAsesor}
                         ></textarea>
                 <label form="textarea">Requisitos</label>
                 <div className="invalid-feedback">
@@ -166,7 +131,7 @@ export const VisualizarConvocatoria = () => {
 
                     </div>
                     {
-                      isLogin() && paraAdmin()
+                      isLogin() && paraAsesor()
                     }
                     
                 </div>
@@ -179,5 +144,3 @@ export const VisualizarConvocatoria = () => {
     </>
   )
 }
-
-

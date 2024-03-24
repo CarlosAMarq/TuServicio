@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useUser } from "../../hooks/useUser";
 import Logo from "../Logo";
-
+import "../Form.css"
 
 const CreateServicios = () => {
     const {user} = useUser()
@@ -84,14 +84,14 @@ const CreateServicios = () => {
 
   return (
     <>
-    <form className="was-validated ">
-        <div className="modal modal-sheet position-static d-block"   id="modalSignin">
+    <form className="was-validated rounded-4 ">
+        <div className="modal modal-sheet position-static d-block rounded-4"   id="modalSignin">
             <div className="" role="document">
                 
-                <div className="modal-content rounded shadow ">
-                <div className="modal-header p-5 pb-4 border-bottom-0  rounded  border-dark ">
+                <div className="modal-content rounded-4 shadow ">
+                <div className="modal-header p-5 pb-4 border-bottom-0  rounded-4  border-dark ">
                     <Logo/>
-                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear servicios</h1>
+                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder" id="title">Crear servicios</h1>
                     
                 </div>
                 
@@ -111,7 +111,7 @@ const CreateServicios = () => {
                     </div>
 
                     <div className="form-floating mb-3">
-                    <textarea className="form-control" value={description}
+                    <textarea className="form-control rounded-3" value={description}
                         onChange={(e) => setDescription(e.target.value)} 
                         id ="texarea"
                         required
@@ -128,7 +128,7 @@ const CreateServicios = () => {
                     
                     
                     
-                    <button className="w-100 btn btn-primary btn-lg mt-5" type="submit"
+                    <button className="w-100 btn btn-primary btn-lg mt-5 rounded-3" type="submit"
                      onClick={validacion} >
                         Create
                     </button>                    

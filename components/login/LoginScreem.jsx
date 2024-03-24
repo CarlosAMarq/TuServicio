@@ -5,6 +5,9 @@ import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { users } from "../../mocks/user";
 import Logo from "../Logo";
+import "../Form.css"
+
+
 export const LoginScreen = () => {
  
   const { login } = useUser();
@@ -30,7 +33,9 @@ export const LoginScreen = () => {
         alert("Usuario o contraseña incorrectos.");
       return;}
       onCloseLogin();
-      login(user)
+      login(user);
+      setEmail("")
+      setPassword("")
 
     } catch (error) {
       console.error("Error al buscar el usuario:", error);
@@ -64,13 +69,15 @@ export const LoginScreen = () => {
 
   return (
     <>
+
+<div className="container">
       <form className="was-validated" onSubmit={handleSubmit}>
         <div className="modal modal-sheet position-static d-block">
           <div>
-            <div className="modal-content rounded-4 shadow ">
-              <div className="modal-header p-5 pb-4 border-bottom-0 rounded-4  border-dark ">
+            <div className="modal-content rounded-5 shadow ">
+              <div className="modal-header p-5 pb-4 border-bottom-0 rounded-5  border-dark ">
                 <Logo/>
-                <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">
+                <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder" id="title">
                   Tu Servicio
                 </h1>
               </div>
@@ -79,22 +86,24 @@ export const LoginScreen = () => {
                 <div className="form-floating imput-group has-validation mb-3">
                   <input
                     type="email"
-                    className="form-control rounded-3 "
+                    className="form-control rounded-4 "
                     placeholder="name@example.com"
                     aria-describedby="inputGroupPrepend"
                     required
+                    id="email"
                     name="email"
                     onChange={(e) => 
                       setEmail(e.target.value)}
                   />
                   <label form="floatingInput">Correo</label>
                 </div>
-                <div className="form-floating imput-group has-validation mb-3">
+                <div className="form-floating imput-group has-validation mb-4">
                   <input
                     type="password"
-                    className="form-control rounded-3"
+                    className="form-control rounded-4"
                     placeholder="Password"
                     required
+                    id="password"
                     name="password"
                     pattern=".{8,}"
                     onChange={(e) => 
@@ -104,7 +113,7 @@ export const LoginScreen = () => {
                   <label form="floatingPassword">Contraseña</label>
                 </div>
                 <button
-                  className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                  className="w-100 mb-2 btn btn-lg rounded-3 btn-primary "
                   type="submit"
                 >
                   {isLoading ? 'Accediendo...' : 'Acceder'}
@@ -124,6 +133,8 @@ export const LoginScreen = () => {
           </div>
         </div>
       </form>
+      
+      </div>
     </>
   );
 };
