@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import "./navbar.css";
+import Spinner from "../icon/Spinner";
 export default function NavbarAccount() {
   const { user, isLogin, logout } = useUser();
   const { onOpenLogin } = useContext(ModalContext);
@@ -12,10 +13,11 @@ export default function NavbarAccount() {
   };
 
   console.log(user);
-  
+
   return (
     <div className=" order-3  d-flex justify-content-end">
       <ul className="navbar-nav ml-auto">
+        <Spinner />
         {isLogin() ? (
           <>
             <Link className="nav-item nav-link text-info md-5   ">
