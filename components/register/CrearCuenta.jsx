@@ -26,9 +26,9 @@ export const CrearCuenta = () => {
         alert('El nombre de usuario debe comenzar con una letra mayúscula.');
         return;
     }
-    //validacion de que la contrasena termine en .com o .cu
+    //validacion de que el email termine en .com o .cu
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
-    if (!regex.test(username)){
+    if (!regex.test(email)){
       alert('El correo electrónico debe terminar en .com o .cu');
       return;
     }
