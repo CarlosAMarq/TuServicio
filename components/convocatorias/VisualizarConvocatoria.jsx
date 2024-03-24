@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosClose } from "react-icons/io";
-
+import {SvgConvocatoria} from './SvgConvocatoria'
 
 
 export const VisualizarConvocatoria = () => {
@@ -185,7 +185,7 @@ export const VisualizarConvocatoria = () => {
 
             
          <img  alt="Conv" />
-            
+            <SvgConvocatoria/>
 
 
         </div>
