@@ -1,20 +1,23 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
+import Cookies from "js-cookie";
+
 export const useUser = () => {
-  const { currentUser: user, setCurrentUser } = useContext(GlobalContext);
+  const { currentSesion, setCurrentSesion } = useContext(GlobalContext);
 
   const isLogin = () => {
-    return user != null;
+    return currentSesion != null;
   };
   const logout = () => {
-    localStorage.removeItem(user)
-    setCurrentUser(null);
+    Cookies.remove('auth');
+    setCurrentSesion(null);
   };
-  const login = ({ id, username, password, email, usertype }) => {
-    localStorage.setItem('user', JSON.stringify({ id, username, password, email, usertype }));
-    setCurrentUser({ id, username, password, email, usertype });
+  const login = (data) => {
+    // localStorage.setItem('user', JSON.stringify({ id, username, password, email, usertype }));
+    Cookies.set('auth', data.token);
+    setCurrentSesion(data);
   };
 
-  return { user, isLogin, logout, login };
+  return { user: currentSesion?.user, isLogin, logout, login };
 };

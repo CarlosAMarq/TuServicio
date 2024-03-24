@@ -3,11 +3,14 @@ import PageServices from "./PageServices";
 import { IoMdOpen } from "react-icons/io";
 import Wave from "./Wave";
 import Logo from "../Logo";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ModalContext } from "../../context/ModalContext";
+import { Bounce, toast } from "react-toastify";
+import { useNotification } from "../../hooks/useNotification";
 
 export const HomeScreen = () => {
   const { onOpenRegister } = useContext(ModalContext);
+
   return (
     <>
       <section id="home" className="background-center bg-fixed ">
