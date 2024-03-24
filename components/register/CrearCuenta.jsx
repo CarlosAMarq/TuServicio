@@ -3,9 +3,10 @@ import { useContext, useState } from "react";
 import Logo from "../Logo";
 import "../Form.css";
 import {useUser} from "../../hooks/useUser";
-import { toast } from "react-toastify";
+import {  toast } from 'react-toastify';
 import { toastRejectProps, toastSuccessProps } from "../../global.config";
 import { ModalContext } from "../../context/ModalContext";
+
 
 export const CrearCuenta = () => {
   const {login} = useUser();
@@ -43,9 +44,9 @@ export const CrearCuenta = () => {
 
     const datosUsuario = {
       username: username,
-      email: email,
+      mail: email,
       password: password,
-      usertype: accountType,
+      usertype: accountType
     };
     const notification = toast.loading("Enviando datos...");
     try {

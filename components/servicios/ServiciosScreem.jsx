@@ -7,7 +7,7 @@ import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { services } from "../../mocks/services";
 import "./services.css";
-
+import {  toast } from 'react-toastify';
 export const ServiciosScreen = () => {
  
   
@@ -29,10 +29,9 @@ export const ServiciosScreen = () => {
         console.error("Error al obtener los datos:", error);
       }
     };
-    // Descomentar cuando se desee traer los datos del  backend
     obtenerDatos();
   }, []);
-
+  
   
 
   

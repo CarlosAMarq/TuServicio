@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Logo from '../Logo';
-
+import {  toast } from 'react-toastify';
 
 
 export const CreateConvocatoria = () => {
@@ -51,7 +51,7 @@ export const CreateConvocatoria = () => {
       //validacion de si existe el ascesor
         const asesorExists = await checkAsesorExists(asesores);
         if (!asesorExists) {
-            alert('El asesor seleccionado no existe en la base de datos.');
+            toast('El asesor seleccionado no existe en la base de datos.');
             return;
         }
 
@@ -59,13 +59,13 @@ export const CreateConvocatoria = () => {
         const fechaActual = new Date();
         const fechaVencimientoInput = new Date(fechaVencimiento);
         if (fechaVencimientoInput < fechaActual) {
-            alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');
+            toast('La fecha de vencimiento no puede ser anterior a la fecha actual.');
             return;
         }
 
         // Verifica si los campos requeridos están llenos
         if (!name || !asesores || !fechaVencimiento || !requisitos) {
-          alert('Por favor, completa todos los campos requeridos.');
+          toast('Por favor, completa todos los campos requeridos.');
           return false;
         }
         
