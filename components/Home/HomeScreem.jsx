@@ -47,6 +47,7 @@ export const HomeScreen = () => {
         <Wave />
       </section>
       <PageServices />
+      
     </>
   );
 };

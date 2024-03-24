@@ -2,7 +2,7 @@ import  axios  from "axios"
 import { SvgConvocatoria } from "./SvgConvocatoria"
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from 'react-router-dom';
-
+import "../card.css"
 
 
 
@@ -14,7 +14,8 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
     const handleNavigate=(id)=> navigate(`/visualizarConvocatoria/${id}`)
     
     //eliminar convocatoria
-    const eliminarConv = async () => {
+    const eliminarConv = async (e) => {
+        e.stopPropagation();
         const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar esta convocatoria?');
         if (!confirmacion) {
           return;}
@@ -34,24 +35,24 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
         }
        };
        const paraAdvicer = () => {
-        if (user.usertype === "asesor") return(
+        if (user.usertype === "asesor") return ( 
+          <div className="card-social">
           <button
                 type="button"
                 className="btn btn-sm  btn-primary text-light shadow-sm"
               >
                 Solicitar
               </button>
+              </div>
         )
       }
         const paraAdmin=()=>{
             if(user.usertype === 'admin')
-            return(<div className="btn-group">
+            return(<div className="btn-group card-social ">
             <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm "
              onClick={eliminarConv}
              >Eliminar</button>
-            <button type="button" className="btn btn-sm  btn-success text-light shadow-sm"
-            onClick={()=>handleNavigate(id)}
-            >Visualizar</button>
+            
         </div>)
         }
        
@@ -59,11 +60,12 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
     
     return(
         <> 
-            <div className="col">
-                <div className="card service-card  shadow-sm" key="{convocatoria.id}" style={{cursor:'pointer'}}>
+            <div className="col" onClick={()=>handleNavigate(id)}>
+              
+                <div className="card service-card  shadow-sm bg " key="{convocatoria.id}" style={{cursor:'pointer'}}>
                 <SvgConvocatoria/>
 
-                    <div className="card-body  text-dark rounded-bottom">
+                    <div className="card-body  text-dark rounded-bottom ">
                         <div className="card-info">
                             <h4 className="card-text ">{title}</h4>
                             <time className="card-text">{expiration}</time>

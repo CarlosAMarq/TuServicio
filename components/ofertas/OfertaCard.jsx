@@ -6,7 +6,7 @@ export const OfertasCard = ({ title, necesidad }) => {
   const paraUser = () => {
     if (user.usertype === "user")
       return (
-        <div className="btn-group">
+        <div className="btn-group card-social">
           <button
             type="button"
             className="btn btn-sm  btn-danger text-light shadow-sm "
@@ -24,12 +24,14 @@ export const OfertasCard = ({ title, necesidad }) => {
   };
   const paraAdvicer = () => {
     if (user.usertype === "asesor") return(
+      <div className="card-social">
       <button
             type="button"
             className="btn btn-sm  btn-primary text-light shadow-sm"
           >
             Solicitar
           </button>
+          </div>
     )
   }
 
@@ -58,7 +60,7 @@ export const OfertasCard = ({ title, necesidad }) => {
             </defs>
             <rect width="110%" height="100%" fill="url(#image-pattern)" />
           </svg>
-          <div className="card-body">
+          <div className="card-body p-5">
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{necesidad}</p>

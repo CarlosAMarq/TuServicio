@@ -1,10 +1,18 @@
 import { useUser } from "../../hooks/useUser";
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
+import "../card.css"
 export const ServiciosCard = ({ id, title, description }) => {
   const { user, isLogin } = useUser();
+  const navigate = useNavigate()
+  const handleNavigate=(id)=> navigate(`/visualizarServicio/${id}`)
 
-  const eliminarServicio = async () => {
+  
+
+
+  //eliminar servicio
+  const eliminarServicio = async (e) => {
+    e.stopPropagation();
     //confirmacion de eliminacion
     const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este servicio?');
     if (!confirmacion) {
@@ -30,7 +38,7 @@ export const ServiciosCard = ({ id, title, description }) => {
   const paraAsesor = () => {
     if (user.usertype === "asesor")
       return (
-        <div className="btn-group pt-5">
+        <div className="btn-group card-social">
           <button
             type="button"
             className="btn btn-sm  btn-danger text-light shadow-sm "
@@ -38,12 +46,7 @@ export const ServiciosCard = ({ id, title, description }) => {
             >
             Eliminar
           </button>
-          <button
-            type="button"
-            className="btn btn-sm  btn-success text-light shadow-sm"
-          >
-            Editar
-          </button>
+          
         </div>
       );
   };
@@ -63,8 +66,10 @@ export const ServiciosCard = ({ id, title, description }) => {
 
   return (
     <>
-      <div className="col">
-        <div className="service-card card shadow-sm" key="{servicios.id}" style={{cursor:'pointer'}}>
+      <div className="col card-social__item  " onClick={()=>handleNavigate(id)}>
+        
+        
+        <div className="service-card card shadow-sm bg" key="{servicios.id}" style={{cursor:'pointer'}}>
           <svg
             className="bd-placeholder-img card-img-top"
             width="100%"
@@ -85,7 +90,7 @@ export const ServiciosCard = ({ id, title, description }) => {
             </defs>
             <rect width="110%" height="100%" fill="url(#image-pattern)" />
           </svg>
-          <div className="card-body">
+          <div className="card-body p-5">
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{description}</p>
