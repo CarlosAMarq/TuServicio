@@ -5,11 +5,14 @@ export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
   const [currentSesion, setCurrentSesion] = useState(null);
+  const [isUserLoading, setIsUserLoading] = useState(false)
+
 
   useEffect(() => {
     const auth = async () => {
       const token = Cookies.get("auth");
       if (token) {
+        setIsUserLoading(true);
         const response = await fetch(
           "https://tu-servicio.onrender.com/profile",
           {
@@ -26,13 +29,14 @@ export default function GlobalProvider({ children }) {
           }
         }
       }
+      setIsUserLoading(false);
     };
 
     auth();
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ currentSesion, setCurrentSesion }}>
+    <GlobalContext.Provider value={{ currentSesion, setCurrentSesion, isUserLoading, setIsUserLoading }}>
       {children}
     </GlobalContext.Provider>
   );

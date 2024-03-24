@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import Cookies from "js-cookie";
 
 export const useUser = () => {
-  const { currentSesion, setCurrentSesion } = useContext(GlobalContext);
+  const { currentSesion, setCurrentSesion, isUserLoading, setIsUserLoading } = useContext(GlobalContext);
 
   const isLogin = () => {
     return currentSesion != null;
@@ -19,5 +19,5 @@ export const useUser = () => {
     setCurrentSesion(data);
   };
 
-  return { user: currentSesion?.user, isLogin, logout, login };
+  return { user: currentSesion?.user, isLogin, logout, login, isUserLoading, setIsUserLoading };
 };
