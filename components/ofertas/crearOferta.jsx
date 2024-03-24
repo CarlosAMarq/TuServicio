@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useUser } from "../../hooks/useUser";
-
+import {  toast } from 'react-toastify';
 
  export const CreateOfertas = () => {
     const {user} = useUser()
@@ -49,13 +49,13 @@ import { useUser } from "../../hooks/useUser";
         //validar que el titulo empece con mayuscula
         const titleRegex = /^[A-Z]/;
         if (!titleRegex.test(title)) {
-            alert('El titulo debe comenzar con una letra mayúscula.');
+            toast('El titulo debe comenzar con una letra mayúscula.');
             return;
         }
 
         // Asumiendo que tienes campos de título y descripción que son requeridos
         if (!title || !description) {
-          alert('Por favor, completa todos los campos requeridos.');
+          toast('Por favor, completa todos los campos requeridos.');
           return;
         }
 

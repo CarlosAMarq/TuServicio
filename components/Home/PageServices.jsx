@@ -97,7 +97,7 @@ Se centra en temas relacionados con el personal, como contrataci√≥n, capacitaci√
           <div className="row">
           <div className="col-lg-6 col-md-12 col-xs-12 info">
           <div className="about-wrapper wow fadeInLeft animated" data-wow-delay="0.3s"> 
-             <div>
+          <div>
           <div className="site-heading">
           
           <h2 className="section-title">Creaciones de Ofertas</h2>

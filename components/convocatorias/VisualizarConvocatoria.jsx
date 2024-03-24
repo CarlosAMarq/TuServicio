@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosClose } from "react-icons/io";
 
+
+
 export const VisualizarConvocatoria = () => {
   const {user, isLogin}=useUser()
   const { id } = useParams();
@@ -73,20 +75,22 @@ export const VisualizarConvocatoria = () => {
   return (
     <>
     
-      <form className=" container " style={{padding:"6rem" }}>
-        <div className="modal modal-sheet position-static d-block "   >
-            <div className="" role="document">
-                <div className="modal-content rounded-4 shadow ">
+      <div className='card container border-0'>
+        <div id="b" className=" container row about-area section-padding bg-body-secondary border rounded-5" style={{ margin:"auto"}}>
+          
+          <div className='blob'></div>
+          <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
+            <div  className="site-heading ">
+              <h2 className="section-title" 
+              style={{paddingTop:"3rem",
+                      marginLeft:"4rem",
+                      }}
+              >Convocatorias</h2>
+            </div>
                  
-                <button onClick={handleClose} className="cmodal-close-button">
-                  <IoIosClose size={30} />
-                </button>
-                    <div className="modal-header p-5 pb-4 border-bottom-0  rounded-4  border-dark ">
-                        <Logo/>
-                        <h1 className=" title fw-bold mb-0 fs-2 fst-italic fw-bolder">Convovatoria</h1>
-                        
-                    </div>
-                <div className="modal-body p-5 pt-0  mt-5 ">
+            <form className="p-5">         
+                    
+              <div className="container ">
                     <div className="form-floating mb-3">
                         <input type="text"
                           className="form-control rounded-3"
@@ -164,16 +168,34 @@ export const VisualizarConvocatoria = () => {
                   Listo
                 </div>
 
-                    </div>
+                </div>
                     {
                       isLogin() && paraAdmin()
                     }
-                    
                 </div>
-                </div>
-            </div>
-            </div>
-        </form>
+            </form>        
+          </div>
+
+
+        <div className="col-lg-6 col-md-12 col-xs-12">
+          <button className='btn btn-close d-flex justify-content-end' 
+          style={{marginLeft: "auto",
+                  paddingTop:"7rem",
+                  marginRight:"2rem"}}/>
+
+            
+         <img  alt="Conv" />
+            
+
+
+        </div>
+        
+
+
+
+      </div>
+    </div>      
+        
         
       
     </>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useUser } from "../../hooks/useUser";
 import Logo from "../Logo";
 import "../Form.css"
-
+import {  toast } from 'react-toastify';
 const CreateServicios = () => {
     const {user} = useUser()
     const [title,setTitle] = useState("")
@@ -47,12 +47,12 @@ const CreateServicios = () => {
 //validar que el titulo empece con mayuscula
         const titleRegex = /^[A-Z]/;
     if (!titleRegex.test(title)) {
-        alert('El titulo debe comenzar con una letra mayúscula.');
+        toast('El titulo debe comenzar con una letra mayúscula.');
         return;
     }
     //no campos vacios 
     if (!title || !description) {
-      alert('Por favor, completa todos los campos requeridos.');
+      toast('Por favor, completa todos los campos requeridos.');
       return;
     }
 
