@@ -25,7 +25,7 @@ export const OfertasScreem = () => {
     const obtenerDatos = async () => {
       try {
         const response = await axios.get(
-          "https://tu-servicio.onrender.com/advice"
+          "https://tu-servicio.onrender.com/offers/"
         );
         setDatos(response.data);
       } catch (error) {
@@ -63,7 +63,7 @@ export const OfertasScreem = () => {
   return (
     <>
       <div className="container ">
-        <div className="container pt-5 mt-5 bg-b     ">
+        <div className="container mt-5 pt-5  bg-b     ">
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
@@ -92,8 +92,8 @@ export const OfertasScreem = () => {
           )}
         </div>
 
-        <div className="album pt-5 bg-body-tertiary">
-          <div className="container">
+        <div className="album">
+          <div className="">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
               {
                 filterOfertas &&
