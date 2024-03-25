@@ -36,7 +36,7 @@ export const ServiciosCard = ({ id, title, description }) => {
 
   //condicional de vista para ascesor
   const paraAsesor = () => {
-    if (user.usertype === "asesor")
+    if (user.usertype === "Asesor")
       return (
         <div className="btn-group card-social">
           <button
@@ -52,14 +52,16 @@ export const ServiciosCard = ({ id, title, description }) => {
   };
   //condicional de vista para usuario
   const paraUsuario = () => {
-    if (user.usertype === "user") {
+    if (user.usertype === "Usuario") {
       return(
+        <div className="btn-group card-social">
       <button
             type="button"
             className="btn btn-sm  btn-success text-light shadow-sm"
       >
             Solicitar
-      </button>)
+      </button>
+      </div>)
 
     }
   }

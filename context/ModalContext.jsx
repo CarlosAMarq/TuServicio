@@ -3,7 +3,7 @@ import accounts from "../mocks/accounts.json";
 import Modal from "../components/modal/Modal";
 import { LoginScreen } from "../components/login/LoginScreem";
 import { useDisclosoure } from "../hooks/useDisclosoure";
-import CuentaScream from "../components/User/CuentaScream";
+import CuentaScream from "../components/User/CuentaSceam";
 import { CrearCuenta } from "../components/register/CrearCuenta";
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria";
 import CreateServicios from "../components/servicios/CreateServicios";

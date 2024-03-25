@@ -20,7 +20,6 @@ export const OfertasScreem = () => {
   const { onOpenCrearOfertas } = useContext(ModalContext);
   //obtener datod del backend
   useEffect(() => {
-    setDatos(ofertas.filter((s) => user == null || user.id == s.user_id));
     
     const obtenerDatos = async () => {
       try {
@@ -33,11 +32,11 @@ export const OfertasScreem = () => {
       }
     };
     // Descomentar cuando se desee traer los datos del  backend
-    // obtenerDatos();
+     obtenerDatos();
   }, []);
 
   useEffect(() => {
-    setDatos(ofertas.filter((s) => user == null ||user.usertype != 'user' ||  user.id == s.user_id));
+    setDatos(datos.filter((s) => user == null ||user.usertype != 'Usuario' ||  user.id == s.user_id));
   }, [user]);
 
   const handleSearch = (event) => {
@@ -47,7 +46,7 @@ export const OfertasScreem = () => {
   const filterOfertas = datos.filter((ofer) => ofer.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraUser = () => {
-    if (user.usertype === "user")
+    if (user.usertype === "Usuario")
       return (
         <>
           <button
@@ -67,7 +66,7 @@ export const OfertasScreem = () => {
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
-                {user?.usertype == "user"
+                {user?.usertype == "Usuario"
                   ? "Mis Ofertas"
                   : "Buscar Ofertas"}
               </h1>

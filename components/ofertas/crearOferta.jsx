@@ -7,7 +7,7 @@ import {  toast } from 'react-toastify';
     const {user} = useUser()
     const [title,setTitle] = useState("")
     const [description, setDescription] = useState("")
-    
+    const [targents, setTargets] = useState("")
     const validacion = (event) => {
         event.preventDefault();
         const form = event.target.closest("form");
@@ -54,48 +54,49 @@ import {  toast } from 'react-toastify';
         }
 
         // Asumiendo que tienes campos de título y descripción que son requeridos
-        if (!title || !description) {
+        if (!title || !description || !targents) {
           toast('Por favor, completa todos los campos requeridos.');
           return;
         }
 
         const OfertasData = {
-            title,
-            description,
-            id: user.id
+            title:title,
+            description:description,
+            targets:targents,
+            id_user: user.id
         };
         console.log(OfertasData);
 
         try {
-            const response = await axios.post('https://tu-servicio.onrender.com/advice/', OfertasData);
+            const response = await axios.post('https://tu-servicio.onrender.com/offers/', OfertasData);
             if (response.status ===  201) {
-                console.log('se ha creado el Ofertas con exito')
+                toast('se ha creado el Ofertas con exito')
             
 
-            } else {
+            } else {throw new Error(response.status)
             // Manejar errores de la respuesta
-            console.error('Error al crear el servicio:', response.status);
+            toast('Error al crear el oferta:', response.status);
             }
         } catch (error) {
             // Manejar errores de la solicitud
-            console.error('Error al crear el servicio:', error);
+            toast('Error al crear el servicio:', error);
         }
     };
 
   return (
     <>
     <form className="was-validated ">
-        <div className="modal modal-sheet position-static d-block"   id="modalSignin">
+        <div className="modal modal-sheet position-static d-block rounded-4"   id="modalSignin">
             <div className="" role="document">
                 
                 <div className="modal-content rounded shadow ">
-                <div className="modal-header p-5 pb-4 border-bottom-0  rounded  border-dark ">
-                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder">Crear Ofertas</h1>
+                <div className="modal-header p-5 pb-4 border-bottom-0  rounded-3  border-dark ">
+                    <h1 className="fw-bold mb-0 fs-2 fst-italic fw-bolder p-5">Crear Ofertas</h1>
                     
                 </div>
                 
                 
-                <div className="modal-body p-5 pt-0  mt-5 ">
+                <div className="modal-body p-5 pt-0   ">
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3"
                            value={title}
@@ -105,6 +106,9 @@ import {  toast } from 'react-toastify';
                         <div className="invalid-feedback">
                   Por favor escriba el Titulo
                 </div>
+                <div className="valid-feedback">
+                    Listo
+                    </div>
                     </div>
 
                     <div className="form-floating mb-3">
@@ -117,6 +121,26 @@ import {  toast } from 'react-toastify';
                         <label form="texarea">Necesidad</label>
                         <div className="invalid-feedback">
                     Por favor escriba su necesida
+                    </div>
+                    <div className="valid-feedback">
+                    Listo
+                    </div>
+                    </div>
+
+
+                    <div className="form-floating mb-3">
+                    <textarea className="form-control" value={targents}
+                        onChange={(e) => setTargets(e.target.value)} 
+                        id ="texarea2"
+                        required
+                        >
+                    </textarea>
+                        <label form="texarea">Campos a trabajar</label>
+                        <div className="invalid-feedback">
+                    Por favor escriba su campos
+                    </div>
+                    <div className="valid-feedback">
+                    Listo
                     </div>
                     </div>
                     

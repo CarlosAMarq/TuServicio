@@ -35,8 +35,8 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
         }
        };
        const paraAdvicer = () => {
-        if (user.usertype === "asesor") return ( 
-          <div className="card-social">
+        if (user.usertype === "Asesor") return ( 
+          <div className="btn-group card-social">
           <button
                 type="button"
                 className="btn btn-sm  btn-primary text-light shadow-sm"

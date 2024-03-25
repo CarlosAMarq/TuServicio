@@ -1,10 +1,14 @@
 import { useUser } from "../../hooks/useUser";
+import { useNavigate } from 'react-router-dom';
 
-export const OfertasCard = ({ title, necesidad }) => {
+
+
+export const OfertasCard = ({id, title, necesidad }) => {
   const { user, isLogin } = useUser();
-
+  const navigate = useNavigate()
+  const handleNavigate=(id)=> navigate(`/visualizarOfertas/${id}`)
   const paraUser = () => {
-    if (user.usertype === "user")
+    if (user.usertype === "Usuario")
       return (
         <div className="btn-group card-social">
           <button
@@ -13,18 +17,13 @@ export const OfertasCard = ({ title, necesidad }) => {
           >
             Eliminar
           </button>
-          <button
-            type="button"
-            className="btn btn-sm  btn-success text-light shadow-sm"
-          >
-            Editar
-          </button>
+          
         </div>
       );
   };
   const paraAdvicer = () => {
-    if (user.usertype === "asesor") return(
-      <div className="card-social">
+    if (user.usertype === "Asesor") return(
+      <div className="btn-group card-social">
       <button
             type="button"
             className="btn btn-sm  btn-primary text-light shadow-sm"
@@ -38,7 +37,7 @@ export const OfertasCard = ({ title, necesidad }) => {
 
   return (
     <>
-      <div className="col">
+      <div className="col" onClick={()=>handleNavigate(id)}>
         <div className="service-card card shadow-sm" key="{servicios.id}" style={{cursor:'pointer'}}>
           <svg
             className="bd-placeholder-img card-img-top"

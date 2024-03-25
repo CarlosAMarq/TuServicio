@@ -117,9 +117,9 @@ const CreateServicios = () => {
                         required
                         >
                     </textarea>
-                        <label form="texarea">Requisitos</label>
+                        <label form="texarea">Informacion</label>
                         <div className="invalid-feedback">
-                    Por favor escriba una descripcion
+                    Por favor escriba una informacion
                     </div>
                     <div className="valid-feedback">
                   Listo

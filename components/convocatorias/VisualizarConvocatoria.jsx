@@ -4,9 +4,6 @@ import Logo from '../Logo'
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { IoIosClose } from "react-icons/io";
-import {SvgConvocatoria} from './SvgConvocatoria'
-
 
 export const VisualizarConvocatoria = () => {
   const {user, isLogin}=useUser()
@@ -76,15 +73,17 @@ export const VisualizarConvocatoria = () => {
     <>
     
       <div className='card container border-0'>
-        <div id="b" className=" container row about-area section-padding bg-body-secondary border rounded-5" style={{ margin:"auto"}}>
+        <div id="b" className=" container row about-area section-padding bg-body-tertiary border rounded-5" style={{ margin:"auto",marginTop:"8rem"}}>
           
           <div className='blob'></div>
           <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
             <div  className="site-heading ">
               <h2 className="section-title" 
-              style={{paddingTop:"3rem",
-                      marginLeft:"4rem",
-                      }}
+              style={{paddingTop:"5rem",
+              marginLeft:"4rem",
+              fontSize:"4rem",
+              color: "#797979"
+              }}
               >Convocatorias</h2>
             </div>
                  
@@ -181,16 +180,15 @@ export const VisualizarConvocatoria = () => {
           <button className='btn btn-close d-flex justify-content-end' 
           style={{marginLeft: "auto",
                   paddingTop:"7rem",
-                  marginRight:"2rem"}}/>
-
-            
-         <img  alt="Conv" />
-            <SvgConvocatoria/>
-
+                  marginRight:"2rem"}}
+                  onClick={handleClose}/>
+        
+        
+        <img src="/conv.svg" alt="Convocatoria" />
 
         </div>
         
-
+              
 
 
       </div>

@@ -17,9 +17,13 @@ export default function NavbarAccount() {
   const Account = () => {
     return isLogin() ? (
       <>
-        <Link className="nav-item nav-link text-info md-5   ">
+        <Link className="nav-item nav-link text-info md-5"
+         to="/cuenta">
           {user?.username ?? ""}
         </Link>
+
+
+
         <button className="Btn bg-primary" onClick={logout}>
           <div className="sign">
             <svg viewBox="0 0 512 512">

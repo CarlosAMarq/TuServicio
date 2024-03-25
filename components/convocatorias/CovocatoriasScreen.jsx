@@ -80,7 +80,7 @@ export const CovocatoriasScreen = () => {
                 
             </div>
 
-            <div className="album p-5 bg-body-tertiary container">
+            <div className="album p-5  container">
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                         {filterConv && filterConv.map(convocatory => (

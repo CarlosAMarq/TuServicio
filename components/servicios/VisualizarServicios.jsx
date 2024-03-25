@@ -37,7 +37,7 @@ export const VisualizarServicio = () => {
     try {
       const response = await axios.put(`https://tu-servicio.onrender.com/advice/${id}`, Servicio);
       if (response.status === 200) {
-        setSuccessMessage('Servicio actualizada con éxito');
+        Toast('Servicio actualizada con éxito');
         console.log("listo")
         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
       }
@@ -55,13 +55,16 @@ export const VisualizarServicio = () => {
 
 
  // Verificar si el usuario es Asesoristrador
- const isAsesor = user && user.usertype === "asesor";
+ const isAsesor = user && user.usertype === "Asesor";
 
  const paraAsesor=()=>{
-  if(user.usertype === "asesor"){
+  if(user.usertype === "Asesor"){
     return(
       <div>
-    <button
+    <button style={{marginRight: "auto",
+                  marginTop:"5rem",
+                  marginRight:"2rem"}}
+                  
     type="button"
     className='btn btn-primary d-flex justify-content-center' 
     onClick={updateServicio} disabled={!isAsesor}
@@ -76,20 +79,24 @@ export const VisualizarServicio = () => {
   return (
     <>
     
-      <form className=" container " style={{padding:"6rem" }}>
-        <div className="modal modal-sheet position-static d-block "   >
-            <div className="" role="document">
-                <div className="modal-content rounded-4 shadow ">
+      <div className='card container border-0'>
+        <div id="b" className=" container row about-area section-padding bg-body-tertiary border rounded-5" style={{ margin:"auto",marginTop:"2rem", padding:"3rem"}}>
+          
+          <div className='blob'></div>
+          <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
+            <div  className="site-heading ">
+              <h2 className="section-title" 
+              style={{paddingTop:"5rem",
+                      marginLeft:"4rem",
+                      fontSize:"4rem",
+                      color: "#797979"
+                      }}
+              >Servicios</h2>
+            </div>
                  
-                <button onClick={handleClose} className="cmodal-close-button">
-                  <IoIosClose size={30} />
-                </button>
-                    <div className="modal-header p-5 pb-4 border-bottom-0  rounded-4  border-dark ">
-                        <Logo/>
-                        <h1 className=" title fw-bold mb-0 fs-2 fst-italic fw-bolder">Servicio</h1>
-                        
-                    </div>
-                <div className="modal-body p-5 pt-0  mt-5 ">
+            <form className="p-5" >         
+                    
+              <div className="container " style={{paddingTop:"3rem"}}>
                     <div className="form-floating mb-3">
                         <input type="text"
                           className="form-control rounded-3"
@@ -110,7 +117,8 @@ export const VisualizarServicio = () => {
                 </div>
                     </div>
 
-   
+
+                   
                     
                     <div className="form-floating mb-3">
                         <textarea className="form-control"
@@ -129,16 +137,33 @@ export const VisualizarServicio = () => {
                   Listo
                 </div>
 
-                    </div>
+                </div>
                     {
                       isLogin() && paraAsesor()
                     }
-                    
                 </div>
-                </div>
-            </div>
-            </div>
-        </form>
+            </form>        
+          </div>
+
+
+        <div className="col-lg-6 col-md-12 col-xs-12">
+          <button className='btn btn-close d-flex justify-content-end' 
+          style={{marginLeft: "auto",
+                  paddingTop:"5rem",
+                  marginRight:"2rem"}}
+                  onClick={handleClose}/>
+        
+        
+        <img src="/serv.svg" alt="Servicio" />
+
+        </div>
+        
+              
+
+
+      </div>
+    </div>      
+        
         
       
     </>

@@ -31,10 +31,10 @@ export const CreateConvocatoria = () => {
         })
       })()
 
-      const checkAsesorExists = async (asesor) => {//pedido al back de los usuarios
+      const checkAsesorExists = async (Asesor) => {//pedido al back de los usuarios
         try {
             const response = await axios.get(`https://tu-servicio.onrender.com/appusers/`);
-            response.data.filter(user=>user.mail===asesor)//si existe el asesor
+            response.data.filter(user=>user.mail===Asesor)//si existe el asesor
             return true;
         
           } catch (error) {
@@ -82,15 +82,19 @@ export const CreateConvocatoria = () => {
         try {
             const response = await axios.post('https://tu-servicio.onrender.com/convocatory/', convocatoriaData);
             if (response.status ===  201) {
+              toast("Creada")
                 console.log('se ha creado la convocatoria con exito')
             
 
             } else {
             // Manejar errores de la respuesta
+            throw  new Error(response.status)
+            
             console.error('Error al crear la convocatoria:', response.status);
             }
         } catch (error) {
             // Manejar errores de la solicitud
+            toast("Error al crear la convocatoria")
             console.error('Error al crear la convocatoria:', error);
         }
     };

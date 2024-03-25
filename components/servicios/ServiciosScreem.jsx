@@ -18,7 +18,6 @@ export const ServiciosScreen = () => {
   
   
   useEffect(() => {
-    setDatos(services.filter((s) => user == null || user.id == s.advicer_id));
     const obtenerDatos = async () => {
       try {
         const response = await axios.get(
@@ -31,7 +30,9 @@ export const ServiciosScreen = () => {
     };
     obtenerDatos();
   }, []);
-  
+  useEffect(() => {
+    setDatos(datos.filter((s) => user == null ||user.usertype != 'Asesor' ||  user.id == s.user_id));
+  }, [user]);
   
 
   
@@ -43,7 +44,7 @@ export const ServiciosScreen = () => {
   const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
 
   const paraAsesor = () => {
-    if (user.usertype === "asesor")
+    if (user.usertype === "Asesor")
       return (
         <>
           <button
@@ -88,7 +89,7 @@ export const ServiciosScreen = () => {
           )}
         </div>
 
-        <div className="album pt-5 bg-body-tertiary">
+        <div className="album pt-5 ">
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
               {filterServ &&
