@@ -5,7 +5,7 @@ import Logo from '../Logo'
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import "../visual.css"
 
  export const VisualizarOfertas = () => {
     const {user, isLogin}=useUser()
@@ -36,7 +36,7 @@ import axios from 'axios';
     const updateOfertas = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.put(`https://tu-servicio.onrender.com/offers/${id}`, Servicio);
+        const response = await axios.put(`https://tu-servicio.onrender.com/offers/${id}`, Ofertas);
         if (response.status === 200) {
           setSuccessMessage('Oferta actualizada con éxito');
           console.log("listo")
@@ -62,9 +62,9 @@ import axios from 'axios';
     if(user.usertype === "Usuario"){
       return(
         <div>
-      <button style={{marginRight: "auto",
-                    marginTop:"5rem",
-                    marginRight:"2rem"}}
+      <button style={{boxShadow:"inset 10px 10px 10px rgba(200, 21, 11, 0.315)",
+                        border:"#246dff",
+                        marginLeft:"1rem"}}
                     
       type="button"
       className='btn btn-primary d-flex justify-content-center' 
@@ -82,10 +82,10 @@ import axios from 'axios';
     <>
     
     <div className='card container border-0'>
-      <div id="b" className=" container row about-area section-padding bg-body-tertiary border rounded-5" style={{ margin:"auto",marginTop:"2rem", padding:"3rem"}}>
+      <div id="b" className=" container row about-area section-padding " style={{ margin:"auto",marginTop:"2rem", padding:"3rem"}}>
         
         <div className='blob'></div>
-        <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
+        <div  className=" col-lg-6 col-md-12 col-xs-12 info bg-body-tertiary ">
           <div  className="site-heading ">
             <h2 className="section-title" 
             style={{paddingTop:"5rem",
@@ -96,12 +96,12 @@ import axios from 'axios';
             >Ofertas</h2>
           </div>
                
-          <form className="p-5" >         
+          <form className="form p-5" >         
                   
             <div className="container " style={{paddingTop:"3rem"}}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-3 input-block">
                       <input type="text"
-                        className="form-control rounded-3"
+                        className="input form-control rounded-3"
                         id="floatingInput" 
                         placeholder="name"
                         name='title'
@@ -122,8 +122,8 @@ import axios from 'axios';
 
                  
                   
-                  <div className="form-floating mb-5" style={{margin:"auto"}}>
-                      <textarea className="form-control"
+                  <div className="form-floating mb-5 input-block" style={{margin:"auto"}}>
+                      <textarea className="input form-control"
                        value={Ofertas.description||''}
                        name='description'
                       onChange={handleChange} 
@@ -139,8 +139,8 @@ import axios from 'axios';
                 Listo
               </div>
 
-              <div className="form-floating mt-3">
-                      <textarea className="form-control"
+              <div className="form-floating mt-3 input-block">
+                      <textarea className=" input form-control"
                        value={Ofertas.targets||''}
                        name='description'
                       onChange={handleChange} 

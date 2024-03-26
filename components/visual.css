@@ -1,0 +1,92 @@
+.card{
+  display: flex;
+  max-width: 99%;
+  max-height: 99%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 2rem;
+  background-color: #ffffff25;
+  border-radius: 15px;
+  overflow: hidden;
+
+}
+.left {
+  width: 66%;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  backdrop-filter: blur(20px);
+  position: relative;
+  
+}
+
+.form::before {
+  position: absolute;
+  content: "";
+  width: 40%;
+  height: 40%;
+  right: 1%;
+  z-index: -1;
+  background: radial-gradient(
+    circle,
+    rgb(155, 230, 220) 20%,
+    rgb(141, 162, 237) 60%,
+
+    rgb(140, 190, 205) 100%
+  );
+  filter: blur(70px);
+  border-radius: 50%;
+}
+.input:focus + label,
+.input:valid + label {
+  transform: translateY(-120%) scale(0.9);
+  transition: all 0.4s;
+}
+.input {
+  background: rgba(253, 253, 253, 0);
+  outline: none;
+  border: 1px solid rgba(255, 0, 0, 0);
+  border-radius: 0.5rem;
+  padding: 10px;
+  margin: auto;
+  width: 100%;
+  display: block;
+  color: #425981;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+.input-block {
+  position: relative;
+}
+label {
+  position: absolute;
+  left: 15%;
+  top: 37%;
+  pointer-events: none;
+  color: gray;
+
+  
+}
+.input {
+  box-shadow: inset 4px 4px 4px rgba(165, 163, 163, 0.315),
+    4px 4px 4px rgba(218, 218, 218, 0.13);
+}
+textarea::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo del track */
+ }
+ textarea::-webkit-scrollbar-thumb {
+  background: #888; /* Color del thumb */
+ }
+ textarea {
+  scrollbar-width: thin; /* Ancho del scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Color del thumb y del track */
+ }
+ textarea::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del thumb al pasar el mouse */
+ }

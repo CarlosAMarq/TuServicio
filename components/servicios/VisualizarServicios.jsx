@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosClose } from "react-icons/io";
+import "../visual.css"
+
 
 export const VisualizarServicio = () => {
   const {user, isLogin}=useUser()
@@ -61,9 +63,10 @@ export const VisualizarServicio = () => {
   if(user.usertype === "Asesor"){
     return(
       <div>
-    <button style={{marginRight: "auto",
-                  marginTop:"5rem",
-                  marginRight:"2rem"}}
+    <button style={{boxShadow:"inset 10px 10px 10px rgba(165, 163, 163, 0.315),10px 10px 10px rgba(240, 103, 83, 0.315)",
+                                border:"#246dff",
+                                marginLeft:"1rem",
+                                backgroundColor:"#10329f"}}
                   
     type="button"
     className='btn btn-primary d-flex justify-content-center' 
@@ -79,11 +82,11 @@ export const VisualizarServicio = () => {
   return (
     <>
     
-      <div className='card container border-0'>
-        <div id="b" className=" container row about-area section-padding bg-body-tertiary border rounded-5" style={{ margin:"auto",marginTop:"2rem", padding:"3rem"}}>
+      <div className='card  border-0'>
+        <div id="b" className=" container row about-area section-padding " style={{ margin:"auto",marginTop:"3rem", padding:"3rem"}}>
           
           <div className='blob'></div>
-          <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
+          <div  className=" col-lg-6 col-md-12 col-xs-12 info bg-body-tertiary ">
             <div  className="site-heading ">
               <h2 className="section-title" 
               style={{paddingTop:"5rem",
@@ -94,12 +97,12 @@ export const VisualizarServicio = () => {
               >Servicios</h2>
             </div>
                  
-            <form className="p-5" >         
+            <form className="form p-5" >         
                     
               <div className="container " style={{paddingTop:"3rem"}}>
-                    <div className="form-floating mb-3">
+                    <div className="form-floating mb-3 input-block">
                         <input type="text"
-                          className="form-control rounded-3"
+                          className="input form-control rounded-3"
                           id="floatingInput" 
                           placeholder="name"
                           name='title'
@@ -120,8 +123,9 @@ export const VisualizarServicio = () => {
 
                    
                     
-                    <div className="form-floating mb-3">
-                        <textarea className="form-control"
+                    <div className="form-floating mb-3 input-block">
+                        <textarea className="input form-control"
+                        style={{scrollbarColor:"#c5d6ff"}}
                          value={Servicio.description||''}
                          name='description'
                         onChange={handleChange} 
@@ -146,7 +150,7 @@ export const VisualizarServicio = () => {
           </div>
 
 
-        <div className="col-lg-6 col-md-12 col-xs-12">
+        <div className="col-lg-6 col-md-12 col-xs-12 ">
           <button className='btn btn-close d-flex justify-content-end' 
           style={{marginLeft: "auto",
                   paddingTop:"5rem",

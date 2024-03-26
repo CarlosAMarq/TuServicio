@@ -186,8 +186,8 @@ export const CrearCuenta = () => {
               >
                 <option></option>
                 <option>Usuario</option>
-                <option>Ascesor</option>
-                <option>Admin</option>
+                <option>Asesor</option>
+                <option>Administrador</option>
               </select>
               <div className="invalid-feedback"></div>
               <button

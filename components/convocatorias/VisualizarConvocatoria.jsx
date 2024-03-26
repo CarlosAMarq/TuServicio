@@ -4,7 +4,7 @@ import Logo from '../Logo'
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import "../visual.css"
 export const VisualizarConvocatoria = () => {
   const {user, isLogin}=useUser()
   const { id } = useParams();
@@ -58,6 +58,9 @@ export const VisualizarConvocatoria = () => {
     return(
       <div>
     <button
+    style={{boxShadow:"inset 10px 10px 10px rgba(200, 21, 11, 0.315)",
+    border:"#246dff",
+    marginLeft:"1rem"}}
     type="button"
     className='btn btn-primary d-flex justify-content-center' 
     onClick={updateConvocatoria} disabled={!isAdmin}
@@ -72,11 +75,11 @@ export const VisualizarConvocatoria = () => {
   return (
     <>
     
-      <div className='card container border-0'>
-        <div id="b" className=" container row about-area section-padding bg-body-tertiary border rounded-5" style={{ margin:"auto",marginTop:"8rem"}}>
+      <div className='card border-0'>
+        <div id="b" className=" container row about-area section-padding  " style={{ marginTop:"8rem"}}>
           
           <div className='blob'></div>
-          <div  className=" col-lg-6 col-md-12 col-xs-12 info ">
+          <div  className=" col-lg-6 col-md-12 col-xs-12 info bg-body-tertiary">
             <div  className="site-heading ">
               <h2 className="section-title" 
               style={{paddingTop:"5rem",
@@ -87,12 +90,12 @@ export const VisualizarConvocatoria = () => {
               >Convocatorias</h2>
             </div>
                  
-            <form className="p-5">         
+            <form className="form p-5">         
                     
               <div className="container ">
-                    <div className="form-floating mb-3">
-                        <input type="text"
-                          className="form-control rounded-3"
+                    <div className="form-floating mb-3 input-block">
+                        <input type=" text"
+                          className="input form-control rounded-3"
                           id="floatingInput" 
                           placeholder="name"
                           name='title'
@@ -111,9 +114,9 @@ export const VisualizarConvocatoria = () => {
                     </div>
 
 
-                    <div className="form-floating mb-3">
-                        <input type="email"
-                         className="form-control rounded-3"
+                    <div className="form-floating mb-3 input-block">
+                        <input type=" email"
+                         className="input form-control rounded-3"
                           id="floatingemail "
                           placeholder="asesores"
                           name='targets'
@@ -131,9 +134,9 @@ export const VisualizarConvocatoria = () => {
                     </div>
 
 
-                    <div className="form-floating mb-3">
+                    <div className="form-floating mb-3 input-block input-block">
                         <input type="date"
-                         className="form-control rounded-3"
+                         className="input form-control rounded-3"
                           id="floatingPassword"
                           placeholder="Password"
                           name='expiration'
@@ -150,8 +153,8 @@ export const VisualizarConvocatoria = () => {
                 </div>
                     </div>
                     
-                    <div className="form-floating mb-3">
-                        <textarea className="form-control"
+                    <div className="form-floating mb-3 input-block">
+                        <textarea className="input form-control"
                          value={convocatoria.requirements||''}
                          name='requirements'
                         onChange={handleChange} 
