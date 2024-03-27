@@ -1,0 +1,30 @@
+.account,
+.account * {
+  /* outline: 2px solid green; */
+}
+
+.account .loading > svg {
+  margin: auto;
+  display: block;
+}
+
+.site-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-block: 10px;
+  gap: 25px;
+}
+
+
+.section-title * {
+  display: block;
+  text-align: center; 
+}
+
+.user-sub {
+  font-size:1.2rem;
+  margin-top: 10px;
+  font-weight: 400;
+}

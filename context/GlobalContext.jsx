@@ -5,8 +5,8 @@ export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
   const [currentSesion, setCurrentSesion] = useState(null);
-  const [isUserLoading, setIsUserLoading] = useState(false)
-
+  const [isUserLoading, setIsUserLoading] = useState(false);
+  let componentLoaded = false;
 
   useEffect(() => {
     const auth = async () => {
@@ -31,12 +31,37 @@ export default function GlobalProvider({ children }) {
       }
       setIsUserLoading(false);
     };
+    const refreshBackned = async () => {
+      const response = await fetch("https://tu-servicio.onrender.com/");
+      const data = await response.json();
+      console.log("Backend refresh:  ", data);
+    };
 
-    auth();
+    const interval = setInterval(async () => {
+      refreshBackned();
+    }, 1000 * 60 * 5);
+
+    if (!componentLoaded) {
+      auth();
+      refreshBackned();
+      componentLoaded = true;
+    }
+    // Desmontar useEffect
+    return () => {
+      setCurrentSesion(null);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ currentSesion, setCurrentSesion, isUserLoading, setIsUserLoading }}>
+    <GlobalContext.Provider
+      value={{
+        currentSesion,
+        setCurrentSesion,
+        isUserLoading,
+        setIsUserLoading,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

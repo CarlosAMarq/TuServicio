@@ -12,8 +12,6 @@ export default function NavbarAccount() {
     onOpenLogin();
   };
 
-  console.log(user);
-
   const Account = () => {
     return isLogin() ? (
       <>
