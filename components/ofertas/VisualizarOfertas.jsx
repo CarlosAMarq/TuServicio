@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../visual.css"
+import {  toast } from 'react-toastify';
 
  export const VisualizarOfertas = () => {
     const {user, isLogin}=useUser()
@@ -41,9 +42,10 @@ import "../visual.css"
           setSuccessMessage('Oferta actualizada con éxito');
           console.log("listo")
           // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
-        }
+        }else throw new Error(response.status)
       } catch (error) {
         console.error('Error al actualizar la Servicio:', error);
+        toast("Error al actualizar los datos")
       } finally {
         setIsLoading(false);
       }
@@ -64,7 +66,8 @@ import "../visual.css"
         <div>
       <button style={{boxShadow:"inset 10px 10px 10px rgba(200, 21, 11, 0.315)",
                         border:"#246dff",
-                        marginLeft:"1rem"}}
+                        marginLeft:"1rem",
+                      marginTop:"1rem"}}
                     
       type="button"
       className='btn btn-primary d-flex justify-content-center' 
@@ -142,7 +145,7 @@ import "../visual.css"
               <div className="form-floating mt-3 input-block">
                       <textarea className=" input form-control"
                        value={Ofertas.targets||''}
-                       name='description'
+                       name='targets'
                       onChange={handleChange} 
                       id ="textarea"
                       required

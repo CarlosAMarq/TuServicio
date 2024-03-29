@@ -21,24 +21,30 @@ export const CrearCuenta = () => {
 
     // validar que la contrasena tiene mas de 8 caracteres
     if (password <= 8) {
-      alert("la contrasena debe tener mas de 8 caracteres");
+      toast("la contrasena debe tener mas de 8 caracteres");
+    }
+    
+    //validar que la el email empiece con minuscula
+    const mailMin=/^[a-z]/
+    if(!mailMin.test(email)){
+      toast("El email no puenen empezar con mayuscula")
     }
 
     // Validar que el nombre de usuario comience con una letra mayúscula
     const usernameRegex = /^[A-Z]/;
     if (!usernameRegex.test(username)) {
-      alert("El nombre de usuario debe comenzar con una letra mayúscula.");
+      toast("El nombre de usuario debe comenzar con una letra mayúscula.");
       return;
     }
     //validacion de que el email termine en .com o .cu
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
     if (!regex.test(email)) {
-      alert("El correo electrónico debe terminar en .com o .cu");
+      toast("El correo electrónico debe terminar en .com o .cu");
       return;
     }
     // Verifica si los campos requeridos están llenos
     if (!username || !email || !password || !accountType) {
-      alert("Por favor, completa todos los campos requeridos.");
+      toast("Por favor, completa todos los campos requeridos.");
       return;
     }
 
@@ -61,10 +67,14 @@ export const CrearCuenta = () => {
         });
         login(respuesta.data);
         onCloseRegister();
-      } else {
+      }
+       else {
         throw new Error ("Error al crear el usuario");
       }
     } catch (error) {
+      if(error.response && error.response.status===400){
+        toast("El nombre de usuario ya existe")
+      }
       toast.update(notification, {
         render: "Error al crear el usuario",
         ...toastRejectProps,

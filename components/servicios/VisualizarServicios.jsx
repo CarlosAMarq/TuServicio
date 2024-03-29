@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { IoIosClose } from "react-icons/io";
 import "../visual.css"
-
+import { toast } from "react-toastify";
 
 export const VisualizarServicio = () => {
   const {user, isLogin}=useUser()
@@ -39,7 +39,7 @@ export const VisualizarServicio = () => {
     try {
       const response = await axios.put(`https://tu-servicio.onrender.com/advice/${id}`, Servicio);
       if (response.status === 200) {
-        Toast('Servicio actualizada con éxito');
+        toast('Servicio actualizada con éxito');
         console.log("listo")
         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
       }

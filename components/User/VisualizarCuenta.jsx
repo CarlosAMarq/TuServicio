@@ -9,27 +9,32 @@ import "../visual.css";
 import "./account.css";
 import Spinner from "../icon/Spinner";
 
+
 const VisualizarCuenta = () => {
   const { user, isLogin, isUserLoading } = useUser();
-  const [usuario, setUsuario] = useState(user);
+  const [usuario, setUsuario] = useState();
   const [showPasswordForm, setShowPasswordForm] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [id,setId] = useState("")
   const navigate = useNavigate();
   const handleClose = () => {
     navigate("/");
   };
 
   useEffect(() => {
-    setUsuario((prev) => ({ ...prev, username: user?.username })); //
-    setUsuario((prev) => ({ ...prev, email: user?.email })); //
+    setUsuario(user)
+    setId((prev)=>({...prev,id:user?.id}))
+
   }, [user]);
 
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);
+    console.error("aqui los datos")
+    console.log(usuario)
     try {
       const response = await axios.put(
-        `https://tu-servicio.onrender.com/offers/${id}`,
+        `https://tu-servicio.onrender.com/appuser/${id}`,
         usuario
       );
       if (response.status === 200) {
@@ -38,7 +43,8 @@ const VisualizarCuenta = () => {
         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
       } else throw new Error(response.status);
     } catch (error) {
-      toast("Error al actualizar la Servicio:", error);
+      toast("Error al actualizar la ususario:", error);
+      console.error("Error al actualizar la ususario:", error)
     } finally {
       setIsLoading(false);
     }
@@ -60,7 +66,7 @@ const VisualizarCuenta = () => {
           id="floatingPassword"
           placeholder="Password"
           name="expiration"
-          value={"user.password" || ""}
+          value={ ""}
           onChange={handleChange}
           required
         />
@@ -127,7 +133,7 @@ const VisualizarCuenta = () => {
                       id="floatingemail "
                       placeholder="asesores"
                       name="email"
-                      value={usuario?.email || ""}
+                      value={usuario?.mail || ""}
                       onChange={handleChange}
                       required
                       disabled
