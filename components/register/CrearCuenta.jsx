@@ -176,7 +176,7 @@ export const CrearCuenta = () => {
 
               
               <select
-                className="form-select"
+                className="form-select country"
                 id="Type"
                 value={accountType}
                 onChange={(e) => setAccountType(e.target.value)}
