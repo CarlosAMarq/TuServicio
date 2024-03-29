@@ -174,9 +174,7 @@ export const CrearCuenta = () => {
                 <div className="valid-feedback">Listo</div>
               </div>
 
-              <label form="country" className="form-label">
-                Tipo de Cuenta
-              </label>
+              
               <select
                 className="form-select"
                 id="Type"
@@ -189,6 +187,9 @@ export const CrearCuenta = () => {
                 <option>Asesor</option>
                 <option>Administrador</option>
               </select>
+              <label form="country" className="form-label">
+                Tipo de Cuenta
+              </label>
               <div className="invalid-feedback"></div>
               <button
                 className="w-100 btn btn-primary btn-lg mt-5"
