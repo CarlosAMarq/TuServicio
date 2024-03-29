@@ -11,10 +11,6 @@
   overflow: hidden;
 
 }
-.left {
-  width: 66%;
-  height: 100%;
-}
 
 .form {
   display: flex;

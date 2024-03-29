@@ -130,6 +130,7 @@ const VisualizarCuenta = () => {
                       value={usuario?.email || ""}
                       onChange={handleChange}
                       required
+                      disabled
                     />
                     <label form="floatingemail">email</label>
                     <div className="invalid-feedback">

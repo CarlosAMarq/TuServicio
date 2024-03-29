@@ -2,7 +2,7 @@
  
  /*Card footer*/
  .card-social {
-margin-bottom: 30px;
+  margin-bottom: 30px;
   transform: translateY(200%);
   display: flex;
   justify-content: space-around;
