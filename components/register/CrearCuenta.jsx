@@ -45,7 +45,7 @@ export const CrearCuenta = () => {
     }
 
     // validar que la contrasena tiene mas de 8 caracteres
-    if (password <= 8) {
+    if (password.length <= 8) {
       toast("la contrasena debe tener mas de 8 caracteres");
       return;
     }
