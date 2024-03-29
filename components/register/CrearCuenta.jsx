@@ -30,6 +30,12 @@ export const CrearCuenta = () => {
       toast("El nombre de usuario debe comenzar con una letra mayúscula.");
       return;
     }
+    //verificar si el usuario contiene  cracteres extrannos
+    const usernamePattern = /^[a-zA-Z0-9-_.]+$/;
+    if (!usernamePattern.test(username)) {
+      toast('El nombre de usuario solo puede contener letras, números, guiones, puntos y guiones bajos.');
+      return;
+    }
 
     //validar que la el email empiece con minuscula
     const mailMin=/^[a-z]/
