@@ -47,7 +47,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
         )
       }
         const paraAdmin=()=>{
-            if(user.usertype === 'admin')
+            if(user.usertype === 'Administrador')
             return(<div className="btn-group card-social ">
             <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm "
              onClick={eliminarConv}

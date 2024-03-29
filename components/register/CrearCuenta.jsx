@@ -18,16 +18,10 @@ export const CrearCuenta = () => {
 
   const crearUsuario = async (event) => {
     event.preventDefault();
-
-    // validar que la contrasena tiene mas de 8 caracteres
-    if (password <= 8) {
-      toast("la contrasena debe tener mas de 8 caracteres");
-    }
-    
-    //validar que la el email empiece con minuscula
-    const mailMin=/^[a-z]/
-    if(!mailMin.test(email)){
-      toast("El email no puenen empezar con mayuscula")
+    // Verifica si los campos requeridos están llenos
+    if (!username || !email || !password || !accountType) {
+      toast("Por favor, completa todos los campos requeridos.");
+      return;
     }
 
     // Validar que el nombre de usuario comience con una letra mayúscula
@@ -36,17 +30,32 @@ export const CrearCuenta = () => {
       toast("El nombre de usuario debe comenzar con una letra mayúscula.");
       return;
     }
+
+    //validar que la el email empiece con minuscula
+    const mailMin=/^[a-z]/
+    if(!mailMin.test(email)){
+      toast("El email no puenen empezar con mayuscula")
+      return;
+    }
+
+    // validar que la contrasena tiene mas de 8 caracteres
+    if (password <= 8) {
+      toast("la contrasena debe tener mas de 8 caracteres");
+      return;
+    }
+    //verifica que existe el @
+    if (!email.includes('@')) {
+     toast('El correo electrónico debe contener un @');
+     return;
+    }
+    
     //validacion de que el email termine en .com o .cu
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
     if (!regex.test(email)) {
       toast("El correo electrónico debe terminar en .com o .cu");
       return;
     }
-    // Verifica si los campos requeridos están llenos
-    if (!username || !email || !password || !accountType) {
-      toast("Por favor, completa todos los campos requeridos.");
-      return;
-    }
+    
 
     const datosUsuario = {
       username: username,
@@ -72,9 +81,6 @@ export const CrearCuenta = () => {
         throw new Error ("Error al crear el usuario");
       }
     } catch (error) {
-      if(error.response && error.response.status===400){
-        toast("El nombre de usuario ya existe")
-      }
       toast.update(notification, {
         render: "Error al crear el usuario",
         ...toastRejectProps,

@@ -2,6 +2,7 @@ import React from "react";
 import Wave from "./Wave";
 import './pageservice.css'
 import {IoMdBook,IoMdAlbums,IoIosCash,IoMdFolderOpen, IoIosDesktop, IoIosIceCream, IoIosAlbums} from 'react-icons/io'
+import Logo from "../Logo";
 export default function PageServices() {
   return (
     <section id="page-service">
