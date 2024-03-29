@@ -9,45 +9,52 @@ import "../visual.css";
 import "./account.css";
 import Spinner from "../icon/Spinner";
 
-
 const VisualizarCuenta = () => {
   const { user, isLogin, isUserLoading } = useUser();
   const [usuario, setUsuario] = useState();
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [id,setId] = useState("")
+  const [id, setId] = useState("");
   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
   const handleClose = () => {
     navigate("/");
   };
 
   useEffect(() => {
-    setUsuario(user)
-    setId((prev)=>({...prev,id:user?.id}))
-
+    setUsuario({
+      ...user,
+      password: "",
+    });
+    setId((prev) => ({ ...prev, id: user?.id }));
   }, [user]);
 
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);
-    console.error("aqui los datos")
-    console.log(usuario)
-    try {
-      const response = await axios.put(
-        `https://tu-servicio.onrender.com/appuser/${id}`,
-        usuario
-      );
-      if (response.status === 200) {
-        toast("usuario actualizado con éxito");
-        console.log("listo");
-        // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
-      } else throw new Error(response.status);
-    } catch (error) {
-      toast("Error al actualizar la ususario:", error);
-      console.error("Error al actualizar la ususario:", error)
-    } finally {
-      setIsLoading(false);
+    console.error("aqui los datos");
+    const body = {
+      username: user.username, 
+      password: user.password, 
+      newuser: usuario.username,
+      newpassword: usuario.password
     }
+    // try {
+    //   const response = await axios.put(
+    //     `https://tu-servicio.onrender.com/appuser/${id}`,
+    //     usuario
+    //   );
+    //   if (response.status === 200) {
+    //     toast("usuario actualizado con éxito");
+    //     console.log("listo");
+    //     // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
+    //   } else throw new Error(response.status);
+    // } catch (error) {
+    //   toast("Error al actualizar la ususario:", error);
+    //   console.error("Error al actualizar la ususario:", error)
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   //cambiar los valores de los imputs
@@ -55,18 +62,17 @@ const VisualizarCuenta = () => {
     const { name, value } = e.target;
     setUsuario((prevState) => ({ ...prevState, [name]: value }));
   };
-  console.log(user);
   //cambiar contrasena
   const SetPassword = () => {
     return (
       <div className="form-floating mb-3 input-block">
         <input
-          type="text"
+          type="password"
           className="input form-control rounded-3"
           id="floatingPassword"
           placeholder="Password"
-          name="expiration"
-          value={ ""}
+          name="password"
+          value={usuario?.password}
           onChange={handleChange}
           required
         />
@@ -133,10 +139,11 @@ const VisualizarCuenta = () => {
                       id="floatingemail "
                       placeholder="asesores"
                       name="email"
-                      value={usuario?.mail || ""}
+                      value={user?.email || ""}
                       onChange={handleChange}
                       required
                       disabled
+                      style={{ opacity: 0.7 }}
                     />
                     <label form="floatingemail">email</label>
                     <div className="invalid-feedback">
@@ -145,7 +152,25 @@ const VisualizarCuenta = () => {
                     <div className="valid-feedback">Listo</div>
                   </div>
 
-                  {showPasswordForm && <SetPassword />}
+                  {showPasswordForm && (
+                    <div className="form-floating mb-3 input-block">
+                      <input
+                        type="password"
+                        className="input form-control rounded-3"
+                        id="floatingPassword"
+                        placeholder="Password"
+                        name="password"
+                        value={usuario?.password}
+                        onChange={handleChange}
+                        required
+                      />
+                      <label form="floatingPassword">Contrasena</label>
+                      <div className="invalid-feedback">
+                        Por favor seleccione la fecha
+                      </div>
+                      <div className="valid-feedback">Listo</div>
+                    </div>
+                  )}
 
                   <div className=" d-flex ">
                     <button
