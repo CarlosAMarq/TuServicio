@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import accounts from "../mocks/accounts.json";
 import Modal from "../components/modal/Modal";
 import { LoginScreen } from "../components/login/LoginScreem";
@@ -7,10 +7,13 @@ import { CrearCuenta } from "../components/register/CrearCuenta";
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria";
 import CreateServicios from "../components/servicios/CreateServicios";
 import { CreateOfertas } from "../components/ofertas/crearOferta";
+import Dialog from "../components/modal/Dialog";
 
 export const ModalContext = createContext();
 
 export default function ModalProvider({ children }) {
+  const [dialog, setDialog] = useState();
+
   const {
     onOpen: onOpenLogin,
     onClose: onCloseLogin,
@@ -24,25 +27,34 @@ export default function ModalProvider({ children }) {
   } = useDisclosoure();
 
   const {
-    onOpen:onOpenCrearConvocatoria,
-    onClose:onCloseCrearConvocatoria,
-    modalState: modalStateCrearConvocatoria
-
-  }= useDisclosoure();
+    onOpen: onOpenCrearConvocatoria,
+    onClose: onCloseCrearConvocatoria,
+    modalState: modalStateCrearConvocatoria,
+  } = useDisclosoure();
   const {
-    onOpen:onOpenCrearServicios,
-    onClose:onCloseCrearServicios,
-    modalState: modalStateCrearServicios
-  }= useDisclosoure();
+    onOpen: onOpenDialog,
+    onClose: onCloseDialog,
+    modalState: modalStateDialog,
+  } = useDisclosoure();
+  const {
+    onOpen: onOpenCrearServicios,
+    onClose: onCloseCrearServicios,
+    modalState: modalStateCrearServicios,
+  } = useDisclosoure();
 
-  const{
+  const {
     onOpen: onOpenCrearOfertas,
     onClose: onCloseCrearOfertas,
-    modalState:modalStateOfertas
-  }=useDisclosoure()
+    modalState: modalStateOfertas,
+  } = useDisclosoure();
+
+  useEffect(() => {
+    
+  }, []);
   return (
     <ModalContext.Provider
-      value={{ onOpenLogin,
+      value={{
+        onOpenLogin,
         onOpenRegister,
         onCloseLogin,
         onCloseRegister,
@@ -51,9 +63,11 @@ export default function ModalProvider({ children }) {
         onOpenCrearServicios,
         onOpenCrearOfertas,
         onCloseCrearOfertas,
-        onCloseCrearServicios
-              
-            }}
+        onCloseCrearServicios,
+        onOpenDialog,
+        onCloseDialog,
+        setDialog
+      }}
     >
       {children}
       <Modal state={modalState} onClose={onCloseLogin}>
@@ -64,18 +78,30 @@ export default function ModalProvider({ children }) {
         <CrearCuenta />
       </Modal>
 
-      <Modal state={modalStateCrearConvocatoria} onClose={onCloseCrearConvocatoria}>
-        <CreateConvocatoria/>
+      <Modal
+        state={modalStateCrearConvocatoria}
+        onClose={onCloseCrearConvocatoria}
+      >
+        <CreateConvocatoria />
       </Modal>
 
       <Modal state={modalStateCrearServicios} onClose={onCloseCrearServicios}>
-            <CreateServicios/>
+        <CreateServicios />
       </Modal>
       <Modal state={modalStateOfertas} onClose={onCloseCrearOfertas}>
-            <CreateOfertas/>
+        <CreateOfertas />
       </Modal>
-
-      
+      {dialog && (
+        <Modal state={modalStateDialog} onClose={onCloseDialog}>
+          <Dialog
+            title={dialog.title}
+            description={dialog.description}
+            type={dialog.type}
+            onConfirm={dialog.onConfirm}
+            onClose={onCloseDialog}
+          />
+        </Modal>
+      )}
     </ModalContext.Provider>
   );
 }
