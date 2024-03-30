@@ -31,11 +31,12 @@ export const CreateConvocatoria = () => {
         })
       })()
 
-      const checkAsesorExists = async (Asesor) => {//pedido al back de los usuarios
+      const checkAsesorExists = async (asesores) => {//pedido al back de los usuarios
         try {
-            const response = await axios.get(`https://tu-servicio.onrender.com/appusers/`);
-            response.data.filter(user=>user.mail===Asesor)//si existe el asesor
-            return true;
+            const response = await axios.get(`https://tu-servicio.onrender.com/appuser/`);
+            const p=response.data.filter(user=>user.username==asesores)//si existe el asesor
+            console.log(p)
+            return p.length>0;
         
           } catch (error) {
             return false;
@@ -47,6 +48,13 @@ export const CreateConvocatoria = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // Verifica si los campos requeridos están llenos
+        if (!name || !asesores || !fechaVencimiento || !requisitos) {
+          toast('Por favor, completa todos los campos requeridos.');
+          return false;
+        }
+
+        console.log(asesores)
         
       //validacion de si existe el ascesor
         const asesorExists = await checkAsesorExists(asesores);
@@ -63,11 +71,7 @@ export const CreateConvocatoria = () => {
             return;
         }
 
-        // Verifica si los campos requeridos están llenos
-        if (!name || !asesores || !fechaVencimiento || !requisitos) {
-          toast('Por favor, completa todos los campos requeridos.');
-          return false;
-        }
+        
         
 
 
@@ -128,7 +132,7 @@ return(
 
 
                     <div className="form-floating mb-3">
-                        <input type="email" className="form-control rounded-3" id="floatingInput " placeholder="asesores" value={asesores}
+                        <input type="text" className="form-control rounded-3" id="floatingInput " placeholder="asesores" value={asesores}
                 onChange={(e) => setAsesores(e.target.value)} required/>
                         <label form="floatingInput">Asesores objetivos</label>
                         <div className="invalid-feedback">
