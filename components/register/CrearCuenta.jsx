@@ -92,7 +92,7 @@ export const CrearCuenta = () => {
 
     const datosUsuario = {
       username: username,
-      mail: email,
+      email: email,
       password: password,
       usertype: accountType,
     };

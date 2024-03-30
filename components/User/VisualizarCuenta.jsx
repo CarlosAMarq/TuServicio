@@ -10,7 +10,7 @@ import "./account.css";
 import Spinner from "../icon/Spinner";
 
 const VisualizarCuenta = () => {
-  const { user, isLogin, isUserLoading } = useUser();
+  const { user, isLogin, isUserLoading, login, setIsUserLoading } = useUser();
   const [usuario, setUsuario] = useState();
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,6 @@ const VisualizarCuenta = () => {
     setUsuario((prev) => ({ ...prev, username: user?.username }));
     setId((prev) => ({ ...prev, id: user?.id }));
   }, [user]);
-
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);
@@ -37,10 +36,9 @@ const VisualizarCuenta = () => {
     const body = {
       username: user.username,
       password: user.password,
-      newuser: usuario.username,
-      newpassword: usuario.password,
+      newusername: usuario.username != user.username ? usuario.username : undefined,
+      newpassword: usuario.password != "" ? usuario.password : user.password,
     };
-    console.log(body);
     const response = await fetch(
       `https://tu-servicio.onrender.com/appuser/edit/`,
       {
@@ -61,8 +59,19 @@ const VisualizarCuenta = () => {
         closeOnClick: true,
       });
 
-    }
-    else {
+      // const response = await axios.get("https://tu-servicio.onrender.com/appusers/");
+      setIsUserLoading(true);
+      const response = await fetch("https://tu-servicio.onrender.com/login", {
+        body: JSON.stringify({ username: body.newusername ?? user.username, password: body.newpassword ?? user.password }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      });
+      let data = await response.json();
+      console.log(data);
+      data.user.password = body.newpassword;
+      login(data);
+      setIsUserLoading(false);
+    } else {
       toast.update(notification, {
         render: data.error,
         type: "error",
@@ -70,8 +79,7 @@ const VisualizarCuenta = () => {
         autoClose: true,
         closeOnClick: true,
       });
-    } 
-    console.log(data);
+    }
     // if (response.status === 201) {
 
     //   // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
@@ -108,7 +116,6 @@ const VisualizarCuenta = () => {
       </div>
     );
   };
-
   return (
     <>
       <div className="card container border-0">

@@ -32,7 +32,8 @@ export const LoginScreen = () => {
         method: "POST",
       });
       if (response.status != 200) throw new Error("Error durante validacion");
-      const data = await response.json();
+      let data = await response.json();
+      data.user.password = password;
       login(data);
       onCloseLogin();
       toast.update(notification, {

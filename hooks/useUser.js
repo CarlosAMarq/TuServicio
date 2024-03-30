@@ -16,6 +16,7 @@ export const useUser = () => {
   const login = (data) => {
     // localStorage.setItem('user', JSON.stringify({ id, username, password, email, usertype }));
     Cookies.set('auth', data.token);
+    console.log(data)
     setCurrentSesion(data);
   };
 
