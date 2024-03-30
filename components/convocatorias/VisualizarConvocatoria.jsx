@@ -187,7 +187,7 @@ export const VisualizarConvocatoria = () => {
                   onClick={handleClose}/>
         
         
-        <img src="/conv.svg" alt="Convocatoria" />
+        <img src="/TuServicio/conv.svg" alt="Convocatoria" />
 
         </div>
         

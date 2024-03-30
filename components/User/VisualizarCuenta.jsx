@@ -26,35 +26,39 @@ const VisualizarCuenta = () => {
       ...user,
       password: "",
     });
+    setUsuario((prev) => ({...prev, username: user?.username}))
     setId((prev) => ({ ...prev, id: user?.id }));
   }, [user]);
 
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);
-    console.error("aqui los datos");
+    
     const body = {
       username: user.username, 
       password: user.password, 
       newuser: usuario.username,
       newpassword: usuario.password
     }
-    // try {
-    //   const response = await axios.put(
-    //     `https://tu-servicio.onrender.com/appuser/${id}`,
-    //     usuario
-    //   );
-    //   if (response.status === 200) {
-    //     toast("usuario actualizado con éxito");
-    //     console.log("listo");
-    //     // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
-    //   } else throw new Error(response.status);
-    // } catch (error) {
-    //   toast("Error al actualizar la ususario:", error);
-    //   console.error("Error al actualizar la ususario:", error)
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    console.log(body)
+    try {
+       const response = await axios.post(
+         `https://tu-servicio.onrender.com/appuser/edit`,
+         body
+       );
+       if (response.status === 201) {
+         toast("usuario actualizado con éxito");
+         
+         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
+       } else {
+        console.log(response.data.error)
+        ;}
+     } catch (error) {
+       toast("Error al actualizar la ususario:", error);
+       
+     } finally {
+       setIsLoading(false);
+     }
   };
 
   //cambiar los valores de los imputs
@@ -89,12 +93,12 @@ const VisualizarCuenta = () => {
         <div
           id="b"
           className="account container row about-area section-padding  "
-          style={{ margin: "auto", marginTop: "9rem" }}
+          style={{ margin: "auto", marginTop: "7rem" }}
         >
           <div className=" col-lg-6 col-md-12 col-xs-12 info bg-body-tertiary ">
             <div className="site-heading ">
               <img
-                src="/perfil.svg"
+                src="/TuServicio/perfil.svg"
                 alt="Convocatoria"
                 style={{ aspectRatio: 1, width: "250px" }}
               />
@@ -139,7 +143,7 @@ const VisualizarCuenta = () => {
                       id="floatingemail "
                       placeholder="asesores"
                       name="email"
-                      value={user?.email || ""}
+                      value={user?.email}
                       onChange={handleChange}
                       required
                       disabled
@@ -222,7 +226,7 @@ const VisualizarCuenta = () => {
               onClick={handleClose}
             />
 
-            <img src="/info.svg" alt="Convocatoria" />
+            <img src="/TuServicio/info.svg" alt="Convocatoria" />
           </div>
         </div>
       </div>

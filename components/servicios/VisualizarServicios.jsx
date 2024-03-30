@@ -158,7 +158,7 @@ export const VisualizarServicio = () => {
                   onClick={handleClose}/>
         
         
-        <img src="/serv.svg" alt="Servicio" />
+        <img src="/TuServicio/serv.svg" alt="Servicio" />
 
         </div>
         
