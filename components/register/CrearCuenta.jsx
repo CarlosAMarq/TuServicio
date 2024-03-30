@@ -17,6 +17,33 @@ export const CrearCuenta = () => {
 
   const crearUsuario = async (event) => {
     event.preventDefault();
+
+
+    // Agrega la clase 'was-validated' a los formularios
+ const forms = document.querySelectorAll(".needs-validation");
+ Array.from(forms).forEach((form) => {
+    form.classList.add("was-validated");
+ });
+    (() => {
+      "use strict";
+      const forms = document.querySelectorAll(".needs-validation");
+  
+      Array.from(forms).forEach((form) => {
+        form.addEventListener(
+          "submit",
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+  
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    })();
+
     // Verifica si los campos requeridos están llenos
     if (!username || !email || !password || !accountType) {
       toast("Por favor, completa todos los campos requeridos.");
@@ -93,30 +120,12 @@ export const CrearCuenta = () => {
     }
   };
 
-  (() => {
-    "use strict";
-    const forms = document.querySelectorAll(".needs-validation");
-
-    Array.from(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  })();
+  
 
   return (
     <>
       <form
-        className="was-validated bg-light rounded-4"
+        className="need-validation bg-light rounded-4"
         style={{ width: "500px" }}
         noValidate
         onSubmit={crearUsuario}
@@ -195,7 +204,7 @@ export const CrearCuenta = () => {
                 <div className="valid-feedback">Listo</div>
               </div>
 
-              <div className="form-floating imput-group has-validation mb-3">
+              <div className="form-floating imput-group  mb-3">
                 <select
                   className="form-select country"
                   id="Type"
@@ -207,7 +216,7 @@ export const CrearCuenta = () => {
                   <option></option>
                   <option>Usuario</option>
                   <option>Asesor</option>
-                  <option>Administrador</option>
+                  
                 </select>
                 <label form="country" className="form-label">
                   Tipo de Cuenta

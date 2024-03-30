@@ -102,7 +102,7 @@ export const CreateConvocatoria = () => {
 return(
 
     <>
-        <form className="was-validated ">
+        <form className="need-validation ">
         <div className="modal modal-sheet position-static d-block "   >
             <div className="" role="document">
                 <div className="modal-content rounded-4 shadow ">

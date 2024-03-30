@@ -16,7 +16,7 @@ export default function NavbarAccount() {
     return isLogin() ? (
       <>
         <Link className="nav-item nav-link text-info md-5"
-         to="/cuenta">
+         to="/TuServicio/cuenta">
           {user?.username ?? ""}
         </Link>
 

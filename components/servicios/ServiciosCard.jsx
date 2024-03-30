@@ -5,7 +5,7 @@ import "../card.css"
 export const ServiciosCard = ({ id, title, description }) => {
   const { user, isLogin } = useUser();
   const navigate = useNavigate()
-  const handleNavigate=(id)=> navigate(`/visualizarServicio/${id}`)
+  const handleNavigate=(id)=> navigate(`/TuServicio/visualizarServicio/${id}`)
 
   
 

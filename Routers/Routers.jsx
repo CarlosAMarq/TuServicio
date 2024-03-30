@@ -10,7 +10,7 @@ export const AppRouter=()=>{
         <BrowserRouter>
         
         <Routes>
-            <Route path="/*" element={<SecRouters/>} />
+            <Route path="/TuServicio/*" element={<SecRouters/>} />
         </Routes>
         </BrowserRouter>
     )

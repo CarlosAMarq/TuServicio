@@ -11,7 +11,7 @@ export const NavbarAdm = () => {
       return (
         <NavLink
           className="navbar-brand text-light font-weight-bold navbar-expand-lg"
-          to="/convocatoria"
+          to="/TuServicio/convocatoria"
         >
           Convocatorias
         </NavLink>
@@ -25,21 +25,21 @@ export const NavbarAdm = () => {
         <div className="navbar-nav ">
           <NavLink
             className="navbar-brand text-light font-weight-bold navbar-expand-lg"
-            to="/"
+            to="/TuServicio/"
           >
             Inicio
           </NavLink>
 
           <NavLink
             className="navbar-brand text-light font-weight-bold navbar-expand-lg "
-            to="/servicios"
+            to="/TuServicio/servicios"
           >
             Servicios
           </NavLink>
 
           <NavLink
           className="navbar-brand text-light font-weight-bold navbar-expand-lg"
-          to="/ofertas"
+          to="/TuServicio/ofertas"
         >
           Ofertas
         </NavLink>
