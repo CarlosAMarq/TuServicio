@@ -26,39 +26,61 @@ const VisualizarCuenta = () => {
       ...user,
       password: "",
     });
-    setUsuario((prev) => ({...prev, username: user?.username}))
+    setUsuario((prev) => ({ ...prev, username: user?.username }));
     setId((prev) => ({ ...prev, id: user?.id }));
   }, [user]);
 
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);
-    
+    const notification = toast.loading("Enviando datos");
     const body = {
-      username: user.username, 
-      password: user.password, 
+      username: user.username,
+      password: user.password,
       newuser: usuario.username,
-      newpassword: usuario.password
+      newpassword: usuario.password,
+    };
+    console.log(body);
+    const response = await fetch(
+      `https://tu-servicio.onrender.com/appuser/edit/`,
+      {
+        body: JSON.stringify(body),
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (!data.error) {
+      toast.update(notification, {
+        render: "Datos actualizados con éxito",
+        type: "success",
+        isLoading: false,
+        autoClose: true,
+        closeOnClick: true,
+      });
+
     }
-    console.log(body)
-    try {
-       const response = await axios.post(
-         `https://tu-servicio.onrender.com/appuser/edit`,
-         body
-       );
-       if (response.status === 201) {
-         toast("usuario actualizado con éxito");
-         
-         // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
-       } else {
-        console.log(response.data.error)
-        ;}
-     } catch (error) {
-       toast("Error al actualizar la ususario:", error);
-       
-     } finally {
-       setIsLoading(false);
-     }
+    else {
+      toast.update(notification, {
+        render: data.error,
+        type: "error",
+        isLoading: false,
+        autoClose: true,
+        closeOnClick: true,
+      });
+    } 
+    console.log(data);
+    // if (response.status === 201) {
+
+    //   // Aquí puedes actualizar el estado local con los datos actualizados si es necesario
+    // } else {
+    //   console.log(response.data);
+    //   toast("Error al actualizar la ususario:", error);
+    // }
+
+    setIsLoading(false);
   };
 
   //cambiar los valores de los imputs
