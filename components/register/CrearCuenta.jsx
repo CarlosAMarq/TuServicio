@@ -146,7 +146,7 @@ export const CrearCuenta = () => {
             </div>
 
             <div className="modal-body p-5 pt-0  mt-5 ">
-              <div className="form-floating mb-3 has-validation">
+              <div className="form-floating mb-3 ">
                 <input
                   type="text"
                   className="form-control rounded-3"
@@ -165,7 +165,7 @@ export const CrearCuenta = () => {
                 <div className="valid-feedback">Listo</div>
               </div>
 
-              <div className="form-floating imput-group has-validation mb-3">
+              <div className="form-floating imput-group  mb-3">
                 <input
                   type="email"
                   className="form-control rounded-3"
@@ -184,7 +184,7 @@ export const CrearCuenta = () => {
                 </div>
                 <div className="valid-feedback">Listo</div>
               </div>
-              <div className="form-floating imput-group has-validation mb-3">
+              <div className="form-floating imput-group  mb-3">
                 <input
                   type="password"
                   className="form-control rounded-3"
