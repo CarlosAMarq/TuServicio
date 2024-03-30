@@ -82,7 +82,7 @@ export const ServiciosCard = ({ id, title, description, setDatos }) => {
         <div className="btn-group card-social">
           <button
             type="button"
-            className="btn btn-sm  btn-success text-light shadow-sm"
+            className="btn btn-sm  btn-successbtn-success text-light shadow-sm"
           >
             Solicitar
           </button>

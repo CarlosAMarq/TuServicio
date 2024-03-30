@@ -39,7 +39,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
           <div className="btn-group card-social">
           <button
                 type="button"
-                className="btn btn-sm  btn-primary text-light shadow-sm"
+                className="btn btn-sm  btn-success text-light shadow-sm"
               >
                 Solicitar
               </button>

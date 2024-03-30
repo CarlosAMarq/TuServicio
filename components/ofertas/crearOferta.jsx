@@ -13,8 +13,10 @@ export const CreateOfertas = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [targents, setTargets] = useState("");
+
+
   const validacion = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const form = event.target.closest("form");
     if (form.checkValidity()) {
       form.classList.add("was-validated");
@@ -52,12 +54,7 @@ export const CreateOfertas = () => {
       toast("Por favor, completa todos los campos requeridos.");
       return;
     }
-    //validar que el titulo empece con mayuscula
-    const titleRegex = /^[A-Z]/;
-    if (!titleRegex.test(title)) {
-      toast("El titulo debe comenzar con una letra mayúscula.");
-      return;
-    }
+    
 
     const OfertasData = {
       title: title,

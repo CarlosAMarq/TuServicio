@@ -44,12 +44,7 @@ const CreateServicios = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //validar que el titulo empece con mayuscula
-    const titleRegex = /^[A-Z]/;
-    if (!titleRegex.test(title)) {
-      toast("El titulo debe comenzar con una letra mayúscula.");
-      return;
-    }
+    
     //no campos vacios
     if (!title || !description) {
       toast("Por favor, completa todos los campos requeridos.");

@@ -13,7 +13,7 @@ export const VisualizarConvocatoria = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
   const handleClose=()=>{
-    navigate("/convocatoria")
+    navigate("/TuServicio/convocatoria")
   }
  
  useEffect(() => {
