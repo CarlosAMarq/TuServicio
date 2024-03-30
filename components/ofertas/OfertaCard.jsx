@@ -7,7 +7,7 @@ export const OfertasCard = ({id, title, necesidad }) => {
   const navigate = useNavigate()
   const handleNavigate=(id)=> navigate(`/TuServicio/visualizarOfertas/${id}`)
   const paraUser = () => {
-    if (user.usertype === "Usuario")
+    if (user.usertype === "Usuario"||user.usertype === "admin")
       return (
         <div className="btn-group card-social">
           <button
@@ -81,7 +81,7 @@ export const OfertasCard = ({id, title, necesidad }) => {
             </defs>
             <rect width="110%" height="100%" fill="url(#image-pattern)" />
           </svg>
-          <div className="card-body p-5">
+          <div className="card-body p-5"  style={{width:"100%", height:"100%"}}>
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{necesidad}</p>

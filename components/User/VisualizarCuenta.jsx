@@ -18,7 +18,7 @@ const VisualizarCuenta = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const handleClose = () => {
-    navigate("/");
+    navigate("/TuServicio/");
   };
 
   useEffect(() => {

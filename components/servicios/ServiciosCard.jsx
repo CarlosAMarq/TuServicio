@@ -36,7 +36,7 @@ export const ServiciosCard = ({ id, title, description }) => {
 
   //condicional de vista para ascesor
   const paraAsesor = () => {
-    if (user.usertype === "Asesor")
+    if (user.usertype === "Asesor"|| user.usertype === "admin")
       return (
         <div className="btn-group card-social">
           <button
@@ -92,7 +92,7 @@ export const ServiciosCard = ({ id, title, description }) => {
             </defs>
             <rect width="110%" height="100%" fill="url(#image-pattern)" />
           </svg>
-          <div className="card-body p-5">
+          <div className="card-body p-5"  style={{width:"100%", height:"100%"}}>
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{description}</p>

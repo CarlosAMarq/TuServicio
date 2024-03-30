@@ -16,7 +16,7 @@ import {  toast } from 'react-toastify';
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate()
     const handleClose=()=>{
-      navigate("/Ofertas")
+      navigate("/TuServicio/Ofertas")
     }
    
    useEffect(() => {

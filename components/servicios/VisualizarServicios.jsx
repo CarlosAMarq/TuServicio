@@ -16,7 +16,7 @@ export const VisualizarServicio = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
   const handleClose=()=>{
-    navigate("/servicios")
+    navigate("/TuServicio/servicios")
   }
  
  useEffect(() => {

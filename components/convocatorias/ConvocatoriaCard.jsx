@@ -65,7 +65,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
                 <div className="card service-card  shadow-sm bg " key="{convocatoria.id}" style={{cursor:'pointer'}}>
                 <SvgConvocatoria/>
 
-                    <div className="card-body  text-dark rounded-bottom ">
+                    <div className="card-body  text-dark rounded-bottom " style={{width:"100%", height:"100%"}}>
                         <div className="card-info">
                             <h4 className="card-text ">{title}</h4>
                             <time className="card-text">{expiration}</time>
