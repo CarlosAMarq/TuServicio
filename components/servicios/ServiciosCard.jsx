@@ -6,12 +6,15 @@ import { useDialog } from "../../hooks/useDisclosoure";
 import { toast } from "react-toastify";
 import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
+
+
 export const ServiciosCard = ({ id, title, description, setDatos }) => {
   const { user, isLogin } = useUser();
   const { onOpen } = useDialog();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { updateToast } = useNotification();
+  
   const handleNavigate = (id) => {
     if (loading) return;
     navigate(`/TuServicio/visualizarServicio/${id}`);
@@ -22,13 +25,14 @@ export const ServiciosCard = ({ id, title, description, setDatos }) => {
     //confirmacion de eliminacion
     const noti = toast.loading("Eliminando...");
     setLoading(true);
+
     try {
       const response = await axios.delete(
         `https://tu-servicio.onrender.com/advice/${id}`
       );
       if (response.status === 204) {
         console.log("Servicio eliminado con éxito:", response.data);
-        setDatos((prev) => prev.filter((item) => item.id !== id));
+        setDatos((prev) => prev.filter((item) => item.id != id));
         updateToast({
           toast: noti,
           message: `Servicio ${title} eliminado con éxito`,

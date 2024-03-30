@@ -21,6 +21,8 @@ const VisualizarCuenta = () => {
     navigate("/TuServicio/");
   };
 
+
+
   useEffect(() => {
     setUsuario({
       ...user,
@@ -29,6 +31,14 @@ const VisualizarCuenta = () => {
     setUsuario((prev) => ({ ...prev, username: user?.username }));
     setId((prev) => ({ ...prev, id: user?.id }));
   }, [user]);
+
+
+  useEffect(() => {
+    if (!isLogin()) {
+      handleClose();
+    }
+ }, [isLogin]); // Cambia 'user' por 'isLogin'
+
   //editar el user
   const updateUsuario = async () => {
     setIsLoading(true);

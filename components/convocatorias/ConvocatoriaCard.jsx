@@ -3,30 +3,44 @@ import { SvgConvocatoria } from "./SvgConvocatoria"
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from 'react-router-dom';
 import "../card.css"
-
+import { useDialog } from "../../hooks/useDisclosoure";
+import { useNotification } from "../../hooks/useNotification";
+import { toast } from "react-toastify";
 
 
 export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
-
-    const {isLogin, user} =useUser()
-    const navigate = useNavigate()
+  const { onOpen } = useDialog();
+  const {isLogin, user} =useUser()
+  const navigate = useNavigate()
+  const { updateToast } = useNotification();
 
     const handleNavigate=(id)=> navigate(`/TuServicio/visualizarConvocatoria/${id}`)
     
     //eliminar convocatoria
     const eliminarConv = async (e) => {
-        e.stopPropagation();
-        const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar esta convocatoria?');
-        if (!confirmacion) {
-          return;}
-    
+        //e.stopPropagation();
+        const noti = toast.loading("Eliminando...");
         try {
            const response = await axios.delete(`https://tu-servicio.onrender.com/convocatory/${id}`);
            if (response.status === 204) {
              console.log('Eliminado con éxito:', response.data);
-             
+             toast.update(noti, {
+              render: `Convocatoria ${title} eliminada con éxito`,
+              closeOnClick: true,
+              isLoading: false,
+              autoClose: true,
+              type: "success",
+        });
+        setDatos((prev) => prev.filter((item) => item.id != id));
            } else {
-             console.error('Error al eliminar', response.data);
+            toast.update(noti, {
+              render: `Ocurrio un error eliminado  ${title}`,
+              closeOnClick: true,
+              autoClose: true,
+              isLoading: false,
+              type: "error",
+            });
+            
              
            }
         } catch (error) {
@@ -34,6 +48,17 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
            
         }
        };
+
+       const handleDelete = (e) => {
+        e.stopPropagation();
+    
+        onOpen({
+          title: `Elminar ${title}`,
+          description: `¿Seguro que desea eliminar ${title}`,
+          type: "delete",
+          onConfirm: eliminarConv,
+        });
+      };
        const paraAdvicer = () => {
         if (user.usertype === "Asesor") return ( 
           <div className="btn-group card-social">
@@ -50,7 +75,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
             if(user.usertype === 'admin')
             return(<div className="btn-group card-social ">
             <button type="button" className="btn btn-sm  btn-danger text-light shadow-sm "
-             onClick={eliminarConv}
+             onClick={handleDelete}
              >Eliminar</button>
             
         </div>)

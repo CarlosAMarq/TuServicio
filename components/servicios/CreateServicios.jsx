@@ -110,7 +110,7 @@ const CreateServicios = () => {
                     type="user"
                     className="form-control rounded-3"
                     value={title}
-                    pattern="[A-Za-z]+$"
+  
                     onChange={(e) => setTitle(e.target.value)}
                     required
                   />
