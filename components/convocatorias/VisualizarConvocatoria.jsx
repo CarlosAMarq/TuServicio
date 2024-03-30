@@ -51,10 +51,10 @@ export const VisualizarConvocatoria = () => {
 
 
  // Verificar si el usuario es administrador
- const isAdmin = user && user.usertype === "Administrador";
+ const isAdmin = user && user.usertype === "admin";
 
  const paraAdmin=()=>{
-  if(user.usertype === "Administrador"){
+  if(user.usertype === "admin"){
     return(
       <div>
     <button

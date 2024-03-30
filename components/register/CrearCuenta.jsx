@@ -14,7 +14,7 @@ export const CrearCuenta = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
   const { onCloseRegister } = useContext(ModalContext);
-
+  const[Mensaje,setMensaje] =useState("");
   const crearUsuario = async (event) => {
     event.preventDefault();
 
@@ -44,9 +44,11 @@ export const CrearCuenta = () => {
       });
     })();
 
+    const form =event.target;
+
     // Verifica si los campos requeridos están llenos
     if (!username || !email || !password || !accountType) {
-      toast("Por favor, completa todos los campos requeridos.");
+      toast("Por favor, complete los capos requeridos");
       return;
     }
 
@@ -118,8 +120,8 @@ export const CrearCuenta = () => {
         ...toastRejectProps,
       });
     }
-  };
-
+    
+  } 
   
 
   return (
@@ -135,7 +137,7 @@ export const CrearCuenta = () => {
           id="modalSignin"
         >
           <div className="modal-content shadow  rounded-4">
-            <div className="modal-text d-flex border-bottom-0  px-5   border-dark ">
+            <div className="modal-text d-flex border-bottom-0  px-5 border-dark ">
               <Logo size={"0.75"} />
               <h1
                 className="fw-bold mb-0 fs-2 fst-italic fw-bolder pt-5"
@@ -160,7 +162,7 @@ export const CrearCuenta = () => {
                 />
                 <label form="floatingInput">Username</label>
                 <div className="invalid-feedback">
-                  Por favor escriba su nombre.
+                  {Mensaje}
                 </div>
                 <div className="valid-feedback">Listo</div>
               </div>

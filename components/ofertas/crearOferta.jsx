@@ -46,6 +46,12 @@ import {  toast } from 'react-toastify';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
+        // Asumiendo que tienes campos de título y descripción que son requeridos
+        if (!title || !description || !targents) {
+          toast('Por favor, completa todos los campos requeridos.');
+          return;
+        }
         //validar que el titulo empece con mayuscula
         const titleRegex = /^[A-Z]/;
         if (!titleRegex.test(title)) {
@@ -54,11 +60,7 @@ import {  toast } from 'react-toastify';
         }
 
 
-        // Asumiendo que tienes campos de título y descripción que son requeridos
-        if (!title || !description || !targents) {
-          toast('Por favor, completa todos los campos requeridos.');
-          return;
-        }
+        
 
         const OfertasData = {
             title:title,
