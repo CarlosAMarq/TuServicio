@@ -140,7 +140,7 @@ const VisualizarCuenta = () => {
                 }}
               >
                 <span>{user?.username ?? "Usuario"}</span>
-                <span className="user-sub">Administrador</span>
+                <span className="user-sub">{user?.usertype}</span>
               </h2>
             </div>
             {!isUserLoading ? (
