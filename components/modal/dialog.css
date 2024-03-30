@@ -6,6 +6,9 @@
     display: flex;
     flex-direction: column;
 }
+.dialog > h4 {
+    margin-right: 40px;
+}
 .dialog > p {
     margin-top: 20px;
 }

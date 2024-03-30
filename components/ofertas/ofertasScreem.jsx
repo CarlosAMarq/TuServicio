@@ -8,6 +8,8 @@ import { ModalContext } from "../../context/ModalContext";
 import { ofertas } from "../../mocks/ofertas";
 import { OfertasCard } from "./OfertaCard";
 import Loading from "../Loading";
+import { useNotification } from "../../hooks/useNotification";
+import { toast } from "react-toastify";
 
 export const OfertasScreem = () => {
   const navigate = useNavigate();
@@ -17,8 +19,9 @@ export const OfertasScreem = () => {
   const { user, isLogin, logout } = useUser();
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
-  const { onOpenCrearOfertas } = useContext(ModalContext);
+  const { onOpenCrearOfertas, modalStateOfertas } = useContext(ModalContext);
   const [laoding, setLaoding] = useState(true);
+
   //obtener datod del backend
   const obtenerDatos = async () => {
     setLaoding(true);
@@ -27,9 +30,11 @@ export const OfertasScreem = () => {
         "https://tu-servicio.onrender.com/offers/"
       );
       setLaoding(false);
+      
       return response.data;
     } catch (error) {
       console.error("Error al obtener los datos:", error);
+      
       setLaoding(false);
     }
   };
@@ -39,6 +44,8 @@ export const OfertasScreem = () => {
 
   useEffect(() => {
     const loadData = async () => {
+      if (modalStateOfertas == 'open') return;
+
       const data = await obtenerDatos();
       if (isLogin() && user.usertype == "Usuario") {
         setDatos(data.filter((s) => s.id_user == user.id));
@@ -47,7 +54,7 @@ export const OfertasScreem = () => {
     };
 
     loadData();
-  }, [user]);
+  }, [user, modalStateOfertas]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -104,7 +111,12 @@ export const OfertasScreem = () => {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                   {filterOfertas &&
                     filterOfertas.map((ofer) => (
-                      <OfertasCard key={ofer.id} {...ofer} />
+                      <OfertasCard
+                        key={ofer.id}
+                        {...ofer}
+                        setDatos={setDatos}
+                        datos={datos}
+                      />
                     ))}
                 </div>
               </div>

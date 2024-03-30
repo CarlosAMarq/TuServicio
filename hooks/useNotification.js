@@ -4,5 +4,16 @@ export const useNotification = () => {
     return toast[type](msg);
   };
 
-  return { notify };
+  const updateToast = ({toast:notifiaction, message, type}) => {
+    toast.update(notifiaction, {
+      render: message,
+      closeOnClick: true,
+      autoClose: true,
+      isLoading: false,
+      type: type,
+    });
+  }
+    
+
+  return { notify, updateToast };
 };

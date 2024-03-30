@@ -48,7 +48,7 @@ export const ServiciosScreen = () => {
     setSearch(event.target.value);
   };
 
-  const filterServ = datos.filter((serv) =>
+  const filterServ = datos?.filter((serv) =>
     serv.title.toLowerCase().includes(serch.toLowerCase())
   );
 
@@ -103,7 +103,7 @@ export const ServiciosScreen = () => {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                   {filterServ &&
                     filterServ.map((advice) => (
-                      <ServiciosCard key={advice.id} {...advice} />
+                      <ServiciosCard key={advice.id} {...advice} setDatos={setDatos}/>
                     ))}
                 </div>
               </div>

@@ -5,8 +5,6 @@ import Wave from "./Wave";
 import Logo from "../Logo";
 import { useContext, useEffect } from "react";
 import { ModalContext } from "../../context/ModalContext";
-import { Bounce, toast } from "react-toastify";
-import { useNotification } from "../../hooks/useNotification";
 
 export const HomeScreen = () => {
   const { onOpenRegister } = useContext(ModalContext);
@@ -50,7 +48,6 @@ export const HomeScreen = () => {
         <Wave />
       </section>
       <PageServices />
-      
     </>
   );
 };

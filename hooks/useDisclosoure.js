@@ -6,8 +6,6 @@ export const useDisclosoure = () => {
   const [modalState, setModalState] = useState("closed");
   const {user} = useUser()
 
-  console.log(user);
-
   const onOpen = () => {
     setModalState("open");
     document.body.classList.add('no-scroll')
@@ -20,14 +18,16 @@ export const useDisclosoure = () => {
 };
 
 export const useDialog = () => {
-  const {setDialog} = useContext(ModalContext);
+  const {setDialog, onOpenDialog} = useContext(ModalContext);
 
   const onOpen = ({
     title,
     description,
     onConfirm,
+    type
   }) => {
-    setDialog({title,description, onConfirm});
+    setDialog({title,description, onConfirm, type});
+    onOpenDialog();
   };
 
   return { onOpen };

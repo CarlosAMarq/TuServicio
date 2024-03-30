@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import accounts from "../mocks/accounts.json";
 import Modal from "../components/modal/Modal";
 import { LoginScreen } from "../components/login/LoginScreem";
-import { useDisclosoure } from "../hooks/useDisclosoure";
+import { useDialog, useDisclosoure } from "../hooks/useDisclosoure";
 import { CrearCuenta } from "../components/register/CrearCuenta";
 import { CreateConvocatoria } from "../components/convocatorias/CreateConvocatoria";
 import CreateServicios from "../components/servicios/CreateServicios";
@@ -48,9 +48,7 @@ export default function ModalProvider({ children }) {
     modalState: modalStateOfertas,
   } = useDisclosoure();
 
-  useEffect(() => {
-    
-  }, []);
+
   return (
     <ModalContext.Provider
       value={{
@@ -63,6 +61,7 @@ export default function ModalProvider({ children }) {
         onOpenCrearServicios,
         onOpenCrearOfertas,
         onCloseCrearOfertas,
+        modalStateOfertas,
         onCloseCrearServicios,
         onOpenDialog,
         onCloseDialog,
