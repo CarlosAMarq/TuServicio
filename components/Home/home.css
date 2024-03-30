@@ -2,6 +2,7 @@
   background: linear-gradient(#000000d5, #0000008f),
     url("/landing.png");
   background-attachment: fixed;
+  background-size: cover;
   width: 100%;
   height: calc(100vh + 150px);
   display: flex;
