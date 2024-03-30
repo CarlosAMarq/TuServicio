@@ -84,7 +84,7 @@ const CreateServicios = () => {
 
   return (
     <>
-    <form className="was-validated rounded-4 ">
+    <form className="need-validation rounded-4 ">
         <div className="modal modal-sheet position-static d-block rounded-4"   id="modalSignin">
             <div className="" role="document">
                 

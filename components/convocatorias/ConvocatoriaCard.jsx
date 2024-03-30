@@ -11,7 +11,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
     const {isLogin, user} =useUser()
     const navigate = useNavigate()
 
-    const handleNavigate=(id)=> navigate(`/visualizarConvocatoria/${id}`)
+    const handleNavigate=(id)=> navigate(`/TuServicio/visualizarConvocatoria/${id}`)
     
     //eliminar convocatoria
     const eliminarConv = async (e) => {

@@ -9,7 +9,7 @@ export default function Navbar({ children }) {
       <div className="brand flex">
         <NavLink
           className="navbar-brand text-light font-weight-bold navbar-expand-lg "
-          to="/"
+          to="/TuServicio/"
           style={{ fontSize: "1.7rem" }}
         >
           <div className="flex gap-2" style={{ maxHeight: "50px" }}>

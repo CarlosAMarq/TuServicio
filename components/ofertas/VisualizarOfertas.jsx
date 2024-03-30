@@ -178,7 +178,7 @@ import {  toast } from 'react-toastify';
                 onClick={handleClose}/>
       
       
-      <img src="/ofertas.svg" alt="Ofertas" />
+      <img src="/TuServicio/ofertas.svg" alt="Ofertas" />
 
       </div>
       

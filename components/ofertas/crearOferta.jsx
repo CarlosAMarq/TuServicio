@@ -53,6 +53,7 @@ import {  toast } from 'react-toastify';
             return;
         }
 
+
         // Asumiendo que tienes campos de título y descripción que son requeridos
         if (!title || !description || !targents) {
           toast('Por favor, completa todos los campos requeridos.');
@@ -85,7 +86,7 @@ import {  toast } from 'react-toastify';
 
   return (
     <>
-    <form className="was-validated ">
+    <form className="need-validation ">
         <div className="modal modal-sheet position-static d-block rounded-4"   id="modalSignin">
             <div className="" role="document">
                 
@@ -100,7 +101,7 @@ import {  toast } from 'react-toastify';
                     <div className="form-floating mb-3">
                         <input type="user" className="form-control rounded-3"
                            value={title}
-                           pattern="[A-Za-z]+$"
+                           pattern="[A-Za-z0-9 ]+$"
                 onChange={(e) => setTitle(e.target.value)} required/>
                         <label form="floatingInput">Titulo</label>
                         <div className="invalid-feedback">

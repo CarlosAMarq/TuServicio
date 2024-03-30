@@ -1,12 +1,11 @@
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from 'react-router-dom';
-
-
+import  axios  from "axios"
 
 export const OfertasCard = ({id, title, necesidad }) => {
   const { user, isLogin } = useUser();
   const navigate = useNavigate()
-  const handleNavigate=(id)=> navigate(`/visualizarOfertas/${id}`)
+  const handleNavigate=(id)=> navigate(`/TuServicio/visualizarOfertas/${id}`)
   const paraUser = () => {
     if (user.usertype === "Usuario")
       return (
@@ -14,6 +13,7 @@ export const OfertasCard = ({id, title, necesidad }) => {
           <button
             type="button"
             className="btn btn-sm  btn-danger text-light shadow-sm "
+            onClick={eliminarOfertas}
           >
             Eliminar
           </button>
@@ -34,11 +34,33 @@ export const OfertasCard = ({id, title, necesidad }) => {
     )
   }
 
+  const eliminarOfertas = async (e) => {
+    e.stopPropagation();
+    //confirmacion de eliminacion
+    const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este Ofertas?');
+    if (!confirmacion) {
+      return;}
+      //eliminacion de ;a base de datos
+    try {
+       const response = await axios.delete(`https://tu-servicio.onrender.com/offers/${id}`);
+       if (response.status === 204) {
+         console.log('Oferta eliminado con éxito:', response.data);
+         
+       } else {
+         console.error('Error al eliminar la oferta:', response.data);
+         
+       }
+    } catch (error) {
+       console.error('Error al eliminar oferta:', error); 
+    }
+    
+   };
+
 
   return (
     <>
       <div className="col" onClick={()=>handleNavigate(id)}>
-        <div className="service-card card shadow-sm" key="{servicios.id}" style={{cursor:'pointer'}}>
+        <div className="service-card card shadow-sm" key="{ofertas.id}" style={{cursor:'pointer'}}>
           <svg
             className="bd-placeholder-img card-img-top"
             width="100%"
