@@ -35,13 +35,10 @@ export const ServiciosScreen = () => {
 
   useEffect(() => {
     const loadServices = async () => {
-      if (user) {
-        console.log(user);
-        const data = await obtenerDatos();
-        if (user.usertype == "Asesor")
-          setDatos(data.filter((serv) => serv.advicer_id == user.id));
-        else setDatos(data);
-      }
+      const data = await obtenerDatos();
+      if (isLogin() && user.usertype == "Asesor")
+        setDatos(data.filter((serv) => serv.advicer_id == user.id));
+      else setDatos(data);
     };
 
     loadServices();
@@ -85,7 +82,7 @@ export const ServiciosScreen = () => {
         </div>
 
         {loading ? (
-          <Loading/>
+          <Loading />
         ) : (
           <>
             <div className="d-flex container" role="search">

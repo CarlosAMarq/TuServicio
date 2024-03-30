@@ -39,13 +39,11 @@ export const OfertasScreem = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      if (user) {
-        const data = await obtenerDatos();
-        if (user.usertype == "Usuario") {
-          setDatos(data.filter((s) => s.id_user == user.id));
-          // console.log(datos.filter(s => s.id_user == user.id))
-        } else setDatos(data);
-      }
+      const data = await obtenerDatos();
+      if (isLogin() && user.usertype == "Usuario") {
+        setDatos(data.filter((s) => s.id_user == user.id));
+        // console.log(datos.filter(s => s.id_user == user.id))
+      } else setDatos(data);
     };
 
     loadData();
