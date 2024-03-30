@@ -9,6 +9,7 @@ import { ModalContext } from "../../context/ModalContext";
 import { services } from "../../mocks/services";
 import "./services.css";
 import { toast } from "react-toastify";
+import Loading from "../Loading";
 export const ServiciosScreen = () => {
   const { user, isLogin, logout } = useUser();
   const [datos, setDatos] = useState([]);
@@ -84,9 +85,7 @@ export const ServiciosScreen = () => {
         </div>
 
         {loading ? (
-          <div className="c-center" style={{ height: "300px" }}>
-            <Spinner size={100} color={"#0d6efd"} />
-          </div>
+          <Loading/>
         ) : (
           <>
             <div className="d-flex container" role="search">

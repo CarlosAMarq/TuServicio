@@ -7,7 +7,7 @@ import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { ofertas } from "../../mocks/ofertas";
 import { OfertasCard } from "./OfertaCard";
-
+import Loading from "../Loading";
 
 export const OfertasScreem = () => {
   const navigate = useNavigate();
@@ -18,32 +18,46 @@ export const OfertasScreem = () => {
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
   const { onOpenCrearOfertas } = useContext(ModalContext);
+  const [laoding, setLaoding] = useState(true);
   //obtener datod del backend
+  const obtenerDatos = async () => {
+    setLaoding(true);
+    try {
+      const response = await axios.get(
+        "https://tu-servicio.onrender.com/offers/"
+      );
+      setLaoding(false);
+      return response.data;
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+      setLaoding(false);
+    }
+  };
   useEffect(() => {
-    
-    const obtenerDatos = async () => {
-      try {
-        const response = await axios.get(
-          "https://tu-servicio.onrender.com/offers/"
-        );
-        setDatos(response.data);
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
-      }
-    };
     // Descomentar cuando se desee traer los datos del  backend
-     obtenerDatos();
   }, []);
 
   useEffect(() => {
-    setDatos(datos.filter((s) => user == null ||user.usertype != 'Usuario' ||  user.id == s.user_id));
+    const loadData = async () => {
+      if (user) {
+        const data = await obtenerDatos();
+        if (user.usertype == "Usuario") {
+          setDatos(data.filter((s) => s.id_user == user.id));
+          // console.log(datos.filter(s => s.id_user == user.id))
+        } else setDatos(data);
+      }
+    };
+
+    loadData();
   }, [user]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filterOfertas = datos.filter((ofer) => ofer.title.toLowerCase().includes(serch.toLowerCase()));
+  const filterOfertas = datos.filter((ofer) =>
+    ofer.title.toLowerCase().includes(serch.toLowerCase())
+  );
 
   const paraUser = () => {
     if (user.usertype === "Usuario")
@@ -66,45 +80,41 @@ export const OfertasScreem = () => {
           <div className="">
             <div className="container ">
               <h1 className="text-dark fw-bold display-5 ">
-                {user?.usertype == "Usuario"
-                  ? "Mis Ofertas"
-                  : "Buscar Ofertas"}
+                {user?.usertype == "Usuario" ? "Mis Ofertas" : "Buscar Ofertas"}
               </h1>
             </div>
           </div>
         </div>
 
-        <div className="d-flex container" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            value={serch}
-            onChange={handleSearch}
-          />
+        {!laoding ? (
+          <>
+            <div className="d-flex container" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={serch}
+                onChange={handleSearch}
+              />
 
-          {isLogin() ? (
-            paraUser()
-          ) : (
-            <div/>
-          )}
-        </div>
-
-        <div className="album">
-          <div className="">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-              {
-                filterOfertas &&
-                 filterOfertas.map(ofer=>(<OfertasCard
-                 key={ofer.id}
-                 {...ofer}/>))
-
-
-              }
+              {isLogin() ? paraUser() : <div />}
             </div>
-          </div>
-        </div>
+
+            <div className="album">
+              <div className="">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+                  {filterOfertas &&
+                    filterOfertas.map((ofer) => (
+                      <OfertasCard key={ofer.id} {...ofer} />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <Loading />
+        )}
       </div>
     </>
   );

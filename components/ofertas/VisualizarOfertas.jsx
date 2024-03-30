@@ -30,6 +30,7 @@ import {  toast } from 'react-toastify';
     };
   
     fetchOfertas();
+    console.log(id)
     }, [id]);
   
   
