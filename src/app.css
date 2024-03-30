@@ -122,3 +122,9 @@ html {
 .logo-animated:hover::before {
   background-color: white;
 }
+
+.c-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

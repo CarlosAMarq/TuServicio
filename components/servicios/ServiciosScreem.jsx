@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ServiciosCard } from "./ServiciosCard";
+import Spinner from "../../components/icon/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
@@ -7,41 +8,51 @@ import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import { services } from "../../mocks/services";
 import "./services.css";
-import {  toast } from 'react-toastify';
+import { toast } from "react-toastify";
 export const ServiciosScreen = () => {
- 
-  
   const { user, isLogin, logout } = useUser();
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   const { onOpenCrearServicios } = useContext(ModalContext);
-  
-  
+
+  const obtenerDatos = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "https://tu-servicio.onrender.com/advice/"
+      );
+      setLoading(false);
+
+      return response.data;
+    } catch (error) {
+      setLoading(false);
+
+      console.error("Error al obtener los datos:", error);
+    }
+  };
+
   useEffect(() => {
-    const obtenerDatos = async () => {
-      try {
-        const response = await axios.get(
-          "https://tu-servicio.onrender.com/advice/"
-        );
-        setDatos(response.data);
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
+    const loadServices = async () => {
+      if (user) {
+        console.log(user);
+        const data = await obtenerDatos();
+        if (user.usertype == "Asesor")
+          setDatos(data.filter((serv) => serv.advicer_id == user.id));
+        else setDatos(data);
       }
     };
-    obtenerDatos();
-  }, []);
-  useEffect(() => {
-    setDatos(datos.filter((s) => user == null ||user.usertype != 'Asesor' ||  user.id == s.user_id));
-  }, [user]);
-  
 
-  
+    loadServices();
+  }, [user]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filterServ = datos.filter((serv) => serv.title.toLowerCase().includes(serch.toLowerCase()));
+  const filterServ = datos.filter((serv) =>
+    serv.title.toLowerCase().includes(serch.toLowerCase())
+  );
 
   const paraAsesor = () => {
     if (user.usertype === "Asesor")
@@ -72,33 +83,37 @@ export const ServiciosScreen = () => {
           </div>
         </div>
 
-        <div className="d-flex container" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            value={serch}
-            onChange={handleSearch}
-          />
-
-          {isLogin() ? 
-            paraAsesor()
-           : (
-            <div/>
-          )}
-        </div>
-
-        <div className="album pt-5 ">
-          <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-              {filterServ &&
-                filterServ.map((advice) => (
-                  <ServiciosCard key={advice.id} {...advice} />
-                ))}
-            </div>
+        {loading ? (
+          <div className="c-center" style={{ height: "300px" }}>
+            <Spinner size={100} color={"#0d6efd"} />
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="d-flex container" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={serch}
+                onChange={handleSearch}
+              />
+
+              {isLogin() ? paraAsesor() : <div />}
+            </div>
+
+            <div className="album pt-5 ">
+              <div className="container">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+                  {filterServ &&
+                    filterServ.map((advice) => (
+                      <ServiciosCard key={advice.id} {...advice} />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
