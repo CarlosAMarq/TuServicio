@@ -14,84 +14,74 @@ export const CrearCuenta = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
   const { onCloseRegister } = useContext(ModalContext);
-  const[Mensaje,setMensaje] =useState("");
+  
+//cosnt de las validaciones
+  const[camp,setCamp]=useState(false)
+  const[malinic,setMalini] = useState(false);
+  const[malcar,setMalcar]=useState(false)
+  const[emailMin,setEmailMin] = useState(false);
+  const[maxCar,setMaxCar] = useState(false);
+  const[contA,setContA]= useState(false)
+  const [term,setTerm] = useState(false);
+
+
   const crearUsuario = async (event) => {
     event.preventDefault();
+    const form = event.target;
+ form.classList.add('was-validated');
+    
 
-
-    // Agrega la clase 'was-validated' a los formularios
- const forms = document.querySelectorAll(".needs-validation");
- Array.from(forms).forEach((form) => {
-    form.classList.add("was-validated");
- });
-    (() => {
-      "use strict";
-      const forms = document.querySelectorAll(".needs-validation");
-  
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          "submit",
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-  
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-    })();
-
-    const form =event.target;
+    
 
     // Verifica si los campos requeridos están llenos
     if (!username || !email || !password || !accountType) {
-      toast("Por favor, complete los capos requeridos");
+      setCamp(true)
       return;
-    }
+    }else setCamp(false)
 
     // Validar que el nombre de usuario comience con una letra mayúscula
     const usernameRegex = /^[A-Z]/;
     if (!usernameRegex.test(username)) {
-      toast("El nombre de usuario debe comenzar con una letra mayúscula.");
+      setMalini(true)
       return;
-    }
+    }else setMalini(false)
+
     //verificar si el usuario contiene  cracteres extrannos
     const usernamePattern = /^[a-zA-Z0-9-_.]+$/;
     if (!usernamePattern.test(username)) {
-      toast(
-        "El nombre de usuario solo puede contener letras, números, guiones, puntos y guiones bajos."
-      );
-      return;
-    }
+      setMalcar(true)
+      return
+    }else setMalcar(false)
 
     //validar que la el email empiece con minuscula
     const mailMin = /^[a-z]/;
     if (!mailMin.test(email)) {
-      toast("El email no puenen empezar con mayuscula");
+      setEmailMin(true)
       return;
-    }
+    }else setEmailMin(false)
 
-    // validar que la contrasena tiene mas de 8 caracteres
-    if (password.length <= 8) {
-      toast("la contrasena debe tener mas de 8 caracteres");
-      return;
-    }
     //verifica que existe el @
     if (!email.includes("@")) {
-      toast("El correo electrónico debe contener un @");
+      setContA(true)
       return;
-    }
+    } else setContA(false)
 
     //validacion de que el email termine en .com o .cu
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
     if (!regex.test(email)) {
-      toast("El correo electrónico debe terminar en .com o .cu");
+      setTerm(true)
       return;
-    }
+    }else setTerm(false)
 
+    // validar que la contrasena tiene mas de 8 caracteres
+    if (password.length <= 8) {
+      setMaxCar(true)
+      return;
+    }else setMaxCar(false)
+
+
+    
+    
     const datosUsuario = {
       username: username,
       email: email,
@@ -127,7 +117,7 @@ export const CrearCuenta = () => {
   return (
     <>
       <form
-        className="need-validation bg-light rounded-4"
+        className="need-validacion bg-light rounded-4"
         style={{ width: "500px" }}
         noValidate
         onSubmit={crearUsuario}
@@ -147,6 +137,11 @@ export const CrearCuenta = () => {
               </h1>
             </div>
 
+
+
+
+
+
             <div className="modal-body p-5 pt-0  mt-5 ">
               <div className="form-floating mb-3 ">
                 <input
@@ -161,11 +156,16 @@ export const CrearCuenta = () => {
                   pattern="^[A-Z][a-zA-Z]*$"
                 />
                 <label form="floatingInput">Username</label>
-                <div className="invalid-feedback">
-                  {Mensaje}
-                </div>
+                {camp && <div className="invalid-feedback">Por favor complete el campo</div>}
+                {malinic && <div className="invalid-feedback">El nombre debe empezar con mayuscula</div>}
+                {malcar && <div className="invalid-feedback">El nombre solo puede contener _-.*</div>}
                 <div className="valid-feedback">Listo</div>
+
               </div>
+
+
+
+
 
               <div className="form-floating imput-group  mb-3">
                 <input
@@ -181,10 +181,18 @@ export const CrearCuenta = () => {
                 />
 
                 <label form="floatingInput">Correo</label>
-                <div className="invalid-feedback">
-                  Por favor escriba su Direccion de correo
-                </div>
+                {camp && <div className="invalid-feedback">Por favor complete el campo</div>}
+                {emailMin && <div className="invalid-feedback">El email no puenen empezar con mayuscula</div>}
+                {contA && <div className="invalid-feedback">El correo electrónico debe contener un @</div>}
+                {term && <div className="invalid-feedback">El correo electrónico debe terminar en .com o .cu</div>}
                 <div className="valid-feedback">Listo</div>
+
+
+
+
+
+
+
               </div>
               <div className="form-floating imput-group  mb-3">
                 <input
@@ -200,10 +208,17 @@ export const CrearCuenta = () => {
                 />
 
                 <label form="floatingPassword">Contraseña</label>
-                <div className="invalid-feedback">
-                  La contraseña debe tener más de 8 dígitos
-                </div>
+                {camp && <div className="invalid-feedback">Por favor complete el campo</div>}
+                {maxCar && <div className="invalid-feedback">la contrasena debe tener mas de 8 caracteres</div>}
+                
                 <div className="valid-feedback">Listo</div>
+
+
+
+
+
+
+
               </div>
 
               <div className="form-floating imput-group  mb-3">
@@ -223,8 +238,16 @@ export const CrearCuenta = () => {
                 <label form="country" className="form-label">
                   Tipo de Cuenta
                 </label>
-                <div className="invalid-feedback">Seleccione el tipo de usuario</div>
+                {camp && <div className="invalid-feedback">Por favor complete el campo</div>}
+
               </div>
+
+
+
+
+
+
+
 
               <button
                 className="w-100 btn btn-primary btn-lg mt-5"
