@@ -9,11 +9,11 @@ export const CreateOfertas = () => {
   const { user } = useUser();
   const { updateToast } = useNotification();
   const { onCloseCrearOfertas } = useContext(ModalContext);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [targents, setTargets] = useState("");
-
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
 
   const validacion = (event) => {
     event.preventDefault()
@@ -25,7 +25,7 @@ export const CreateOfertas = () => {
       form.classList.add("was-validated");
     }
   };
-
+  
   (() => {
     "use strict";
     const forms = document.querySelectorAll(".needs-validation");
@@ -46,14 +46,17 @@ export const CreateOfertas = () => {
     });
   })();
 
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Asumiendo que tienes campos de título y descripción que son requeridos
     if (!title || !description || !targents) {
-      toast("Por favor, completa todos los campos requeridos.");
+      setError(true)
+      setErrorMessage("Por favor, completa todos los campos requeridos.");
       return;
-    }
+    }else setError(false)
     
 
     const OfertasData = {
@@ -117,9 +120,9 @@ export const CreateOfertas = () => {
                     required
                   />
                   <label form="floatingInput">Titulo</label>
-                  <div className="invalid-feedback">
-                    Por favor escriba el Titulo
-                  </div>
+                  {error &&<div className="invalid-feedback">
+                  {errorMessage}
+                  </div>}
                   <div className="valid-feedback">Listo</div>
                 </div>
 
@@ -132,9 +135,9 @@ export const CreateOfertas = () => {
                     required
                   ></textarea>
                   <label form="texarea">Necesidad</label>
-                  <div className="invalid-feedback">
-                    Por favor escriba su necesida
-                  </div>
+                  {error&&<div className="invalid-feedback">
+                  {errorMessage}
+                  </div>}
                   <div className="valid-feedback">Listo</div>
                 </div>
 
@@ -147,9 +150,9 @@ export const CreateOfertas = () => {
                     required
                   ></textarea>
                   <label form="texarea">Campos a trabajar</label>
-                  <div className="invalid-feedback">
-                    Por favor escriba su campos
-                  </div>
+                  {error&&<div className="invalid-feedback">
+                   {errorMessage}
+                  </div>}
                   <div className="valid-feedback">Listo</div>
                 </div>
 
