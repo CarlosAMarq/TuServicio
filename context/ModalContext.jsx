@@ -8,11 +8,16 @@ import { CreateConvocatoria } from "../components/convocatorias/CreateConvocator
 import CreateServicios from "../components/servicios/CreateServicios";
 import { CreateOfertas } from "../components/ofertas/crearOferta";
 import Dialog from "../components/modal/Dialog";
+import UserView from "../components/User/UserView";
+import { getUserByName } from "../libs/getUser";
+import Message from "../components/modal/Message";
 
 export const ModalContext = createContext();
 
 export default function ModalProvider({ children }) {
   const [dialog, setDialog] = useState();
+  const [userViewData, setUserViewData] = useState();
+  const [messageData, setMessageData] = useState({ title: "Title" });
 
   const {
     onOpen: onOpenLogin,
@@ -48,6 +53,44 @@ export default function ModalProvider({ children }) {
     modalState: modalStateOfertas,
   } = useDisclosoure();
 
+  const {
+    onOpen: onOpenUserView,
+    onClose: onCloseUserView,
+    modalState: modalStateUserView,
+  } = useDisclosoure();
+
+  const {
+    onOpen: onOpenMessage,
+    onClose: onCloseMessage,
+    modalState: modalStateMessage,
+  } = useDisclosoure();
+
+  // useEffect(() => {
+  //   onOpenMessage();
+  // }, []);
+
+  const openUserViewAsync = async (username) => {
+    setUserViewData(null);
+    onOpenUserView();
+    const user = await getUserByName(username);
+    setUserViewData(user);
+  };
+
+  const openMessageModal = (
+    toUser,
+    about,
+    description,
+    inAcceptMode = false
+  ) => {
+    console.log(description);
+    setMessageData((prev) => ({
+      toUser,
+      about: about ?? prev.about,
+      description: description ?? prev.description,
+      acceptMode: inAcceptMode,
+    }));
+    onOpenMessage();
+  };
 
   return (
     <ModalContext.Provider
@@ -65,7 +108,15 @@ export default function ModalProvider({ children }) {
         onCloseCrearServicios,
         onOpenDialog,
         onCloseDialog,
-        setDialog
+        setDialog,
+        onOpenUserView,
+        onCloseUserView,
+        userViewData,
+        setUserViewData,
+        openUserViewAsync,
+        messageData,
+        openMessageModal,
+        setMessageData,
       }}
     >
       {children}
@@ -101,6 +152,12 @@ export default function ModalProvider({ children }) {
           />
         </Modal>
       )}
+      <Modal state={modalStateUserView} onClose={onCloseUserView}>
+        <UserView />
+      </Modal>
+      <Modal state={modalStateMessage} onClose={onCloseMessage}>
+        <Message />
+      </Modal>
     </ModalContext.Provider>
   );
 }

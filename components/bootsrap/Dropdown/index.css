@@ -1,0 +1,39 @@
+.cdropdown {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  text-align: left;
+  padding-left: 5px;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.cdropdown:focus {
+  outline: 4px solid #86b6fe94;
+  border: 2px solid #86b7fe;
+}
+
+.was-selected {
+  font-weight: bolder;
+}
+
+.selector {
+  width: 100%;
+}
+.selector p {
+  margin: 0;
+  color: #6d6d6d;
+  font-size: 0.8rem;
+}
+
+.placeholder {
+    color: rgb(60, 60, 60);
+    background-color: white;
+    cursor: pointer;
+}
+.placeholder * {
+    color: black;
+    background-color: white;
+}

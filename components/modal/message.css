@@ -1,0 +1,27 @@
+.message {
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.message h2 {
+    text-align: left;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+}
+
+.form-body {
+    margin-top: 40px;
+}
+
+.message input {
+    padding: 5px;
+    border-radius: 10px;
+}

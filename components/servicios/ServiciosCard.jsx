@@ -5,16 +5,17 @@ import "../card.css";
 import { useDialog } from "../../hooks/useDisclosoure";
 import { toast } from "react-toastify";
 import { useNotification } from "../../hooks/useNotification";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ModalContext } from "../../context/ModalContext";
 
-
-export const ServiciosCard = ({ id, title, description, setDatos }) => {
+export const ServiciosCard = ({ id, title, description, setDatos, owner }) => {
   const { user, isLogin } = useUser();
   const { onOpen } = useDialog();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { updateToast } = useNotification();
-  
+  const {openUserViewAsync, setMessageData} = useContext(ModalContext);
+
   const handleNavigate = (id) => {
     if (loading) return;
     navigate(`/TuServicio/visualizarServicio/${id}`);
@@ -95,6 +96,15 @@ export const ServiciosCard = ({ id, title, description, setDatos }) => {
     }
   };
 
+  const handleUserClick = (e) => {
+    e.stopPropagation();
+    openUserViewAsync(owner.username);
+    setMessageData((prev) => ({
+      ...prev,
+      about: `Acerca de tu anuncio ${title}`,
+    }));
+  };
+
   return (
     <>
       <div
@@ -133,6 +143,9 @@ export const ServiciosCard = ({ id, title, description, setDatos }) => {
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{description}</p>
+              <p className="card-text" onClick={handleUserClick}>
+                @{owner.username}
+              </p>
             </div>
             {isLogin() && paraAsesor()}
             {isLogin() && paraUsuario()}

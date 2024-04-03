@@ -4,23 +4,76 @@ import { useUser } from "../../hooks/useUser";
 import { ModalContext } from "../../context/ModalContext";
 import "./navbar.css";
 import Spinner from "../icon/Spinner";
+import MessageIcon from "../icon/MessageIcon";
+import { GlobalContext } from "../../context/GlobalContext";
 export default function NavbarAccount() {
   const { user, isLogin, logout, isUserLoading } = useUser();
-  const { onOpenLogin } = useContext(ModalContext);
+  const { onOpenLogin, openMessageModal } = useContext(ModalContext);
+  const { messages } = useContext(GlobalContext);
+  // const messages = [
+  //   {
+  //     toUser: {
+  //       username: "pepe",
+  //     },
+  //     about: "Hola",
+  //     description: "Bla bla bla",
+  //   },
+  //   {
+  //     toUser: {
+  //       username: "pepe",
+  //     },
+  //     about: "Hola",
+  //     description: "Bla bla bla",
+  //   },
+  //   {
+  //     toUser: {
+  //       username: "pepe",
+  //     },
+  //     about: "Hola",
+  //     description: "Bla bla bla",
+  //   },
+  // ];
 
   const handleLoginButton = () => {
     onOpenLogin();
   };
 
+  const handleMessageBody = (e) => {
+    const messageBody = document.querySelector(".messages-body");
+    messageBody.classList.toggle("messages-active");
+  };
+  // console.log(messages)
+
   const Account = () => {
     return isLogin() ? (
       <>
-        <Link className="nav-item nav-link text-info md-5"
-         to="/TuServicio/cuenta">
+        <Link
+          className="nav-item nav-link text-info md-5"
+          to="/TuServicio/cuenta"
+        >
           {user?.username ?? ""}
         </Link>
-
-
+        <div className="message-icon c-center" onClick={handleMessageBody}>
+          <MessageIcon />
+          {messages?.length > 0 && <div className="notificaction-count">{messages?.length}</div>}
+          <div className="messages-body">
+            {messages && messages.map((message, key) => (
+              <div
+                key={key}
+                onClick={() =>
+                  openMessageModal(
+                    message.from_user,
+                    message.about,
+                    message.description,
+                    true
+                  )
+                }
+              >
+                {message.about}
+              </div>
+            ))}
+          </div>
+        </div>
 
         <button className="Btn bg-primary" onClick={logout}>
           <div className="sign">
@@ -44,16 +97,14 @@ export default function NavbarAccount() {
           <div className="text">Login</div>
         </button>
       </>
-    )
-  }
-
+    );
+  };
 
   return (
     <div className=" order-3  d-flex justify-content-end">
       <ul className="navbar-nav ml-auto">
         {isUserLoading && <Spinner />}
-        {!isUserLoading && <Account/>}
-        
+        {!isUserLoading && <Account />}
       </ul>
     </div>
   );

@@ -10,6 +10,7 @@ import { OfertasCard } from "./OfertaCard";
 import Loading from "../Loading";
 import { useNotification } from "../../hooks/useNotification";
 import { toast } from "react-toastify";
+import { getAllUser, getUserById, getUserByName, getUserFromArray } from "../../libs/getUser";
 
 export const OfertasScreem = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const OfertasScreem = () => {
   const [serch, setSearch] = useState("");
   const { onOpenCrearOfertas, modalStateOfertas } = useContext(ModalContext);
   const [laoding, setLaoding] = useState(true);
+  const [allUser, setAllUser] = useState([])
 
   //obtener datod del backend
   const obtenerDatos = async () => {
@@ -30,6 +32,9 @@ export const OfertasScreem = () => {
         "https://tu-servicio.onrender.com/offers/"
       );
       setLaoding(false);
+
+      const users = await getAllUser();
+      setAllUser(users);
       
       return response.data;
     } catch (error) {
@@ -40,6 +45,7 @@ export const OfertasScreem = () => {
   };
   useEffect(() => {
     // Descomentar cuando se desee traer los datos del  backend
+    // getUserByName("pan");
   }, []);
 
   useEffect(() => {
@@ -56,11 +62,12 @@ export const OfertasScreem = () => {
     loadData();
   }, [user, modalStateOfertas]);
 
+
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filterOfertas = datos.filter((ofer) =>
+  const filterOfertas = datos?.filter((ofer) =>
     ofer.title.toLowerCase().includes(serch.toLowerCase())
   );
 
@@ -116,6 +123,7 @@ export const OfertasScreem = () => {
                         {...ofer}
                         setDatos={setDatos}
                         datos={datos}
+                        owner={getUserFromArray(allUser, 'id',  ofer.id_user)}
                       />
                     ))}
                 </div>

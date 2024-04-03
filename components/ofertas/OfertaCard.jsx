@@ -3,13 +3,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDialog } from "../../hooks/useDisclosoure";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ModalContext } from "../../context/ModalContext";
 
-export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
+export const OfertasCard = ({
+  id,
+  title,
+  necesidad,
+  setDatos,
+  datos,
+  owner,
+}) => {
   const { user, isLogin } = useUser();
   const { onOpen } = useDialog();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { openUserViewAsync, setMessageData, openMessageModal } = useContext(ModalContext);
+
   const handleNavigate = (id) => {
     if (isLoading) return;
     navigate(`/TuServicio/visualizarOfertas/${id}`);
@@ -36,6 +46,10 @@ export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
           <button
             type="button"
             className="btn btn-sm  btn-success text-light shadow-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              openMessageModal(owner, "Acerca de tu anuncio " + title);
+            }}
           >
             Solicitar
           </button>
@@ -67,7 +81,7 @@ export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
           autoClose: true,
           type: "success",
         });
-        setDatos((prev) => prev.filter(o => o.id != id));
+        setDatos((prev) => prev.filter((o) => o.id != id));
         // console.log("Oferta eliminado con éxito:", response.data);
       } else {
         // console.error("Error al eliminar la oferta:", response.data);
@@ -89,8 +103,8 @@ export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
     }
     setIsLoading(false);
   };
-  
-  console.log(datos.filter(o => o.id != id))
+
+  // console.log(datos.filter(o => o.id != id))
 
   const handleDeleteButton = (e) => {
     e.stopPropagation();
@@ -100,6 +114,15 @@ export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
       type: "delete",
       description: "Estas seguro que desea eliminar la oferta " + title,
     });
+  };
+
+  const handleUserClick = (e) => {
+    e.stopPropagation();
+    openUserViewAsync(owner.username);
+    setMessageData((prev) => ({
+      ...prev,
+      about: `Acerca de tu anuncio ${title}`,
+    }));
   };
 
   return (
@@ -137,6 +160,9 @@ export const OfertasCard = ({ id, title, necesidad, setDatos, datos }) => {
             <div className="card-info">
               <h4 className="card-text ">{title}</h4>
               <p className="card-text">{necesidad}</p>
+              <p className="card-text" onClick={handleUserClick}>
+                @{owner.username}
+              </p>
             </div>
 
             {isLogin() && paraUser()}

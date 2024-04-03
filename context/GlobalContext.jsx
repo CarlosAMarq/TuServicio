@@ -1,11 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import accounts from "../mocks/accounts.json";
 import Cookies from "js-cookie";
+import { API_URL } from "../global.config";
 export const GlobalContext = createContext();
 
 export default function GlobalProvider({ children }) {
   const [currentSesion, setCurrentSesion] = useState(null);
   const [isUserLoading, setIsUserLoading] = useState(false);
+  const [messages, setMessages] = useState(false);
   let componentLoaded = false;
 
   useEffect(() => {
@@ -26,9 +28,14 @@ export default function GlobalProvider({ children }) {
           const user = await response.json();
           if (user) {
             setCurrentSesion({ user, token });
+            const messageResponse = await fetch(API_URL + "messages");
+            const messageData = await messageResponse.json();
+            console.log(user, messageData);
+            setMessages(messageData.filter((m) => m.to_user == user.id));
           }
         }
       }
+
       setIsUserLoading(false);
     };
     const refreshBackned = async () => {
@@ -46,6 +53,7 @@ export default function GlobalProvider({ children }) {
       refreshBackned();
       componentLoaded = true;
     }
+
     // Desmontar useEffect
     return () => {
       setCurrentSesion(null);
@@ -60,6 +68,7 @@ export default function GlobalProvider({ children }) {
         setCurrentSesion,
         isUserLoading,
         setIsUserLoading,
+        messages,
       }}
     >
       {children}

@@ -4,6 +4,8 @@ import { useUser } from "../../hooks/useUser";
 import { toast } from "react-toastify";
 import { useNotification } from "../../hooks/useNotification";
 import { ModalContext } from "../../context/ModalContext";
+import Dropdown from "../bootsrap/Dropdown/Dropdown";
+import { options } from "../../global.config";
 
 export const CreateOfertas = () => {
   const { user } = useUser();
@@ -13,10 +15,11 @@ export const CreateOfertas = () => {
   const [description, setDescription] = useState("");
   const [targents, setTargets] = useState("");
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  const [selected, setSelected] = useState("");
 
   const validacion = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const form = event.target.closest("form");
     if (form.checkValidity()) {
       form.classList.add("was-validated");
@@ -25,7 +28,7 @@ export const CreateOfertas = () => {
       form.classList.add("was-validated");
     }
   };
-  
+
   (() => {
     "use strict";
     const forms = document.querySelectorAll(".needs-validation");
@@ -46,23 +49,20 @@ export const CreateOfertas = () => {
     });
   })();
 
-  
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Asumiendo que tienes campos de título y descripción que son requeridos
-    if (!title || !description || !targents) {
-      setError(true)
+    if (!title || !description) {
+      setError(true);
       setErrorMessage("Por favor, completa todos los campos requeridos.");
       return;
-    }else setError(false)
-    
+    } else setError(false);
 
     const OfertasData = {
       title: title,
       description: description,
-      targets: targents,
+      targets: selected != "" ? selected : options.works[options.works.length - 1],
       id_user: user.id,
     };
     const noti = toast.loading("Enviando datos...");
@@ -96,7 +96,7 @@ export const CreateOfertas = () => {
 
   return (
     <>
-      <form className="need-validation ">
+      <form className="need-validation" style={{ width: "400px" }}>
         <div
           className="modal modal-sheet position-static d-block rounded-4"
           id="modalSignin"
@@ -120,9 +120,9 @@ export const CreateOfertas = () => {
                     required
                   />
                   <label form="floatingInput">Titulo</label>
-                  {error &&<div className="invalid-feedback">
-                  {errorMessage}
-                  </div>}
+                  {error && (
+                    <div className="invalid-feedback">{errorMessage}</div>
+                  )}
                   <div className="valid-feedback">Listo</div>
                 </div>
 
@@ -134,27 +134,14 @@ export const CreateOfertas = () => {
                     id="texarea2"
                     required
                   ></textarea>
-                  <label form="texarea">Necesidad</label>
-                  {error&&<div className="invalid-feedback">
-                  {errorMessage}
-                  </div>}
+                  <label form="texarea">Descripción</label>
+                  {error && (
+                    <div className="invalid-feedback">{errorMessage}</div>
+                  )}
                   <div className="valid-feedback">Listo</div>
                 </div>
 
-                <div className="form-floating mb-3">
-                  <textarea
-                    className="form-control"
-                    value={targents}
-                    onChange={(e) => setTargets(e.target.value)}
-                    id="texarea2"
-                    required
-                  ></textarea>
-                  <label form="texarea">Campos a trabajar</label>
-                  {error&&<div className="invalid-feedback">
-                   {errorMessage}
-                  </div>}
-                  <div className="valid-feedback">Listo</div>
-                </div>
+                <Dropdown selected={selected} setSelected={setSelected} options={options.works}  title='Asesores Objetivos'/>
 
                 <button
                   className="w-100 btn btn-primary btn-lg mt-5"

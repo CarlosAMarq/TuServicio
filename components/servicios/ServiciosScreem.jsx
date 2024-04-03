@@ -10,12 +10,14 @@ import { services } from "../../mocks/services";
 import "./services.css";
 import { toast } from "react-toastify";
 import Loading from "../Loading";
+import { getAllUser, getUserFromArray } from "../../libs/getUser";
 export const ServiciosScreen = () => {
   const { user, isLogin, logout } = useUser();
   const [datos, setDatos] = useState([]);
   const [serch, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const { onOpenCrearServicios } = useContext(ModalContext);
+  const [allUser, setAllUser] = useState([]);
 
   const obtenerDatos = async () => {
     setLoading(true);
@@ -23,6 +25,8 @@ export const ServiciosScreen = () => {
       const response = await axios.get(
         "https://tu-servicio.onrender.com/advice/"
       );
+      const users = await getAllUser();
+      setAllUser(users);
       setLoading(false);
 
       return response.data;
@@ -103,7 +107,12 @@ export const ServiciosScreen = () => {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                   {filterServ &&
                     filterServ.map((advice) => (
-                      <ServiciosCard key={advice.id} {...advice} setDatos={setDatos}/>
+                      <ServiciosCard
+                        key={advice.id}
+                        {...advice}
+                        setDatos={setDatos}
+                        owner={getUserFromArray(allUser, 'id',  advice.advicer_id)}
+                      />
                     ))}
                 </div>
               </div>
