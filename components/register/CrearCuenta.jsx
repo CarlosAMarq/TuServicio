@@ -43,41 +43,45 @@ export const CrearCuenta = () => {
     const usernameRegex = /^[A-Z]/;
     if (!usernameRegex.test(username)) {
       setMalini(true)
-      return;
+      
     }else setMalini(false)
 
     //verificar si el usuario contiene  cracteres extrannos
     const usernamePattern = /^[a-zA-Z0-9-_.]+$/;
     if (!usernamePattern.test(username)) {
       setMalcar(true)
-      return
+      
     }else setMalcar(false)
 
     //validar que la el email empiece con minuscula
     const mailMin = /^[a-z]/;
     if (!mailMin.test(email)) {
       setEmailMin(true)
-      return;
+      
     }else setEmailMin(false)
 
     //verifica que existe el @
     if (!email.includes("@")) {
       setContA(true)
-      return;
+      
     } else setContA(false)
 
     //validacion de que el email termine en .com o .cu
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|cu)$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9]+\.(com|cu)$/;
     if (!regex.test(email)) {
       setTerm(true)
-      return;
+      
     }else setTerm(false)
 
     // validar que la contrasena tiene mas de 8 caracteres
     if (password.length <= 8) {
       setMaxCar(true)
-      return;
+      
     }else setMaxCar(false)
+
+    if(camp || malinic || malcar || emailMin|| contA || term || maxCar){
+      return;
+    }
 
 
     

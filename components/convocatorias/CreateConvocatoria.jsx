@@ -11,8 +11,14 @@ export const CreateConvocatoria = () => {
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [requisitos, setRequisitos] = useState('');
 
+    //variables de validaviones
+    const [campV,SetCampV]= useState(false)
+    const [existAsesores, setExistAsesores] = useState(false);
+    const [fecha, setFecha] = useState(false);
+
     
-      
+
+
     (() => {
   
         'use strict'
@@ -30,6 +36,7 @@ export const CreateConvocatoria = () => {
           }, false)
         })
       })()
+
 
       const checkAsesorExists = async (asesores) => {//pedido al back de los usuarios
         try {
@@ -50,28 +57,31 @@ export const CreateConvocatoria = () => {
         event.preventDefault();
         // Verifica si los campos requeridos están llenos
         if (!name || !asesores || !fechaVencimiento || !requisitos) {
+          SetCampV(true)
           toast('Por favor, completa todos los campos requeridos.');
-          return false;
-        }
+          return;
+        }else SetCampV(false)
 
         console.log(asesores)
         
       //validacion de si existe el ascesor
         const asesorExists = await checkAsesorExists(asesores);
         if (!asesorExists) {
-            toast('El asesor seleccionado no existe en la base de datos.');
-            return;
-        }
+          setExistAsesores(true);
+            
+        }else setExistAsesores(false)
 
         // Validar que la fecha de vencimiento no sea anterior a la fecha actual
         const fechaActual = new Date();
         const fechaVencimientoInput = new Date(fechaVencimiento);
         if (fechaVencimientoInput < fechaActual) {
-            toast('La fecha de vencimiento no puede ser anterior a la fecha actual.');
-            return;
-        }
+          setFecha(true)  
+        }else setFecha(false)
 
-        
+        //parada de las validaviones
+        if(asesorExists || fecha){
+          return;
+        }
         
 
 
@@ -122,9 +132,9 @@ return(
                 
                 required/>
                         <label form="floatingInput">Name</label>
-                        <div className="invalid-feedback">
+                       {campV && <div className="invalid-feedback">
                   Por favor escriba su nombre.
-                </div>
+                </div>}
                 <div className="valid-feedback">
                   Listo
                 </div>
@@ -135,9 +145,10 @@ return(
                         <input type="text" className="form-control rounded-3" id="floatingInput " placeholder="asesores" value={asesores}
                 onChange={(e) => setAsesores(e.target.value)} required/>
                         <label form="floatingInput">Asesores objetivos</label>
-                        <div className="invalid-feedback">
+                        {campV && <div className="invalid-feedback">
                   Por favor escriba el Ascesor o Asesores
-                </div>
+                </div>}
+                { existAsesores && <div className="invalid-feedback">El asesor seleccionado no existe en la base de datos.</div>}
                 <div className="valid-feedback">
                   Listo
                 </div>
@@ -148,9 +159,10 @@ return(
                         <input type="date" className="form-control rounded-3" id="floatingPassword" placeholder="Password" value={fechaVencimiento}
                 onChange={(e) => setFechaVencimiento(e.target.value)} required/>
                         <label form="floatingPassword">Fecha de vencimiento</label>
-                        <div className="invalid-feedback">
+                        {campV && <div className="invalid-feedback">
                   Por favor seleccione la fecha
-                </div>
+                </div>}
+                {fecha && <div className="invalid-feedback">La fecha de vencimiento no puede ser anterior a la fecha actual.</div>}
                 <div className="valid-feedback">
                   Listo
                 </div>
@@ -162,9 +174,9 @@ return(
                 id ="textarea"
                 required></textarea>
                 <label form="textarea">Requisitos</label>
-                <div className="invalid-feedback">
+                {campV && <div className="invalid-feedback">
                   Por favor escriba los requisitos
-                </div>
+                </div>}
                 <div className="valid-feedback">
                   Listo
                 </div>
