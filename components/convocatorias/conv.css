@@ -1,0 +1,8 @@
+/* Añade este CSS en tu archivo de estilos o dentro de un <style> en tu componente */
+.is-invalid {
+    border-color: #dc3545 !important; /* Cambia el color del borde a rojo cuando hay un error */
+}
+
+.is-valid {
+    border-color: #28a745 !important; /* Cambia el color del borde a verde cuando el campo es válido */
+}

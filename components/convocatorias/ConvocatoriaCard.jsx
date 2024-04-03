@@ -31,6 +31,7 @@ export const ConvocatoriaCard=({id, title,targets, expiration,requirements})=>{
               autoClose: true,
               type: "success",
         });
+        window.location.reload();
         setDatos((prev) => prev.filter((item) => item.id != id));
            } else {
             toast.update(noti, {

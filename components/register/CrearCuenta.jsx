@@ -121,7 +121,7 @@ export const CrearCuenta = () => {
   return (
     <>
       <form
-        className="need-validacion bg-light rounded-4"
+        className="need-validation bg-light rounded-4"
         style={{ width: "500px" }}
         noValidate
         onSubmit={crearUsuario}
