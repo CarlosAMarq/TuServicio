@@ -1,11 +1,18 @@
 import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useUser } from "../../hooks/useUser";
 
 export const NavbarAdm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, isLogin, logout } = useUser();
+
+  function useIsCurrentRoute(routePath) {
+    const location = useLocation();
+    return location.pathname === "/TuServicio/" + routePath;
+  }
+
   const FConvovatoria = () => {
     if (user?.usertype != "Usuario")
       return (
@@ -13,10 +20,11 @@ export const NavbarAdm = () => {
           className="navbar-brand text-light font-weight-bold navbar-expand-lg"
           to="/TuServicio/convocatoria"
         >
-          Convocatorias
+          <p className={useIsCurrentRoute("convocatoria") ? "current-link" : "link"}>
+            Convocatorias
+          </p>
         </NavLink>
       );
-    
   };
 
   return (
@@ -27,23 +35,34 @@ export const NavbarAdm = () => {
             className="navbar-brand text-light font-weight-bold navbar-expand-lg"
             to="/TuServicio/"
           >
-            Inicio
+            <p className={useIsCurrentRoute("") ? "current-link" : "link"}>
+              Inicio
+            </p>
           </NavLink>
 
           <NavLink
             className="navbar-brand text-light font-weight-bold navbar-expand-lg "
             to="/TuServicio/servicios"
           >
-            Servicios
+            <p
+              className={
+                useIsCurrentRoute("servicios") ? "current-link" : "link"
+              }
+            >
+              Servicios
+            </p>
           </NavLink>
 
           <NavLink
-          className="navbar-brand text-light font-weight-bold navbar-expand-lg"
-          to="/TuServicio/ofertas"
-        >
-          Ofertas
-        </NavLink>
-          
+            className="navbar-brand text-light font-weight-bold navbar-expand-lg"
+            to="/TuServicio/ofertas"
+          >
+            <p
+              className={useIsCurrentRoute("ofertas") ? "current-link" : "link"}
+            >
+              Ofertas
+            </p>
+          </NavLink>
 
           {isLogin() && FConvovatoria()}
         </div>
